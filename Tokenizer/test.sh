@@ -90,7 +90,10 @@ fi
 
 actual=$(./tokenizer "\b\le" "ShE sells sEa shells by the sEa shorE\\")
 
-expect="ShE ss sEa shsy the sEa shorE"
+expect="ShE s
+s sEa sh
+s by th
+ sEa shorE"
 
 if [ "$actual" == "$expect" ]; then
   echo "passed 9"
