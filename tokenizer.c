@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Tokenizer struct */
+/* Tokenizer struct asjkhdbaskjdbn */
 typedef struct TokenizerT_ {
 	int token_index; // This keeps track of the token that this object is on for the nextToken feature */
 	char** tokens;   // filled in by TKCreate; a list of the tokens to be iterated through
