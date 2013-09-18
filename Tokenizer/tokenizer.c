@@ -23,6 +23,68 @@ char* brk(char* s1, char* s2) {
 	return NULL;
 }
 
+/*
+ * The current implementation, escapeChar, is not quite right.
+ * What's supposed to happen is in the case where \a through \r
+ * are encountered without them being the seperator, '\a' transforms
+ * to "[0x07]", which is the ASCII hex representation of '\a', NOT 'a'.
+ * In the case where \a through \r ARE the seperators, we should just
+ * tokenize with them, no hex stuff. I'm not sure if you knew this.
+ *
+ * The assignment has been pushed back an I have class at 2:50,
+ * so I'll do this afterwards.
+ */
+char * escapeWithSeparators(char * replaceIn, char * separators) {
+	int i, j = 0;
+	char* ret = malloc(strlen(replaceIn) + 1);
+	char * temp;
+	memset(ret, 0, strlen(replaceIn) + 1);
+
+	for(i=0;i<strlen(replaceIn);i++) {
+		if(replaceIn[i] != '\\') {
+			ret[j] = replaceIn[i];
+			j++;
+			continue;
+		}
+		switch(replaceIn[i+1]) {
+			case 'n': /* line feed, value 0A */
+				ret[j] = 'A';
+
+				break;
+			case 't': /* horizontal tab, value 09 */
+				ret[j] = '9';
+
+				break;
+			case 'v': /* vertical tab, value 0B */
+				ret[j] = 'B';
+
+				break;
+			case 'b': /* backspace, value 08 */
+				ret[j] = '8';
+				break;
+			case 'r': /* carriage return, value 0D */
+				ret[j] = 'D';
+				break;
+			case 'f': /* form feed, value 0C */
+				ret[j] = 'C';
+				break;
+			case '\\':
+				ret[j] = '?';
+				break;
+			case 'a': /* bell, value 07 */
+				ret[j] = '7';
+				break;
+			case '\"':
+				ret[j] = '?';
+				break;
+			default:
+				ret[j] = '0';
+		}
+		j++; i++;
+	}
+	return ret;
+}
+
 /* replace in all escape characters */
 char* escapeChar(char* s){ 
 	int i, j = 0, val;
@@ -127,6 +189,9 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 	memset(tk->tokens,0,strlen(ts)*sizeof(char*));
 
 	ts = escapeChar(ts);
+
+	/*ts = escapeWithSeparators(ts, separators);*/
+
 	separators = escapeChar(separators);	
 	tk->token_index = 0;
 	if(strlen(separators)==0) {
