@@ -4,9 +4,9 @@
 
 /* Tokenizer struct */
 typedef struct TokenizerT_ {
-	int token_index; // This keeps track of the token that this object is on for the nextToken feature */
-	char** tokens;   // filled in by TKCreate; a list of the tokens to be iterated through
-	int num_tok;     // number of tokens
+	int token_index; /* This keeps track of the token that this object is on for the nextToken feature */
+	char** tokens;   /* filled in by TKCreate; a list of the tokens to be iterated through */
+	int num_tok;     /* number of tokens */
 }TokenizerT;
 
 /* Clone of the string.h function strpbrk */
@@ -69,21 +69,21 @@ char* escapeChar(char* s){
 			case '\?':
 				ret[j] = '\?';
 				break;
-			case 'x': // Hexadecimal ascii character - assuming perfect formatting
+			case 'x': /* Hexadecimal ascii character - assuming perfect formatting */
 				val = 0;
-				if( s[i+2] >= 48 && s[i+2] <= 57) { // MSB character is less than A
+				if( s[i+2] >= 48 && s[i+2] <= 57) { /* MSB character is less than A */
 					val += 16 * (s[i+2]-48);	
 				}else{
-					if(s[i+2] < 96) { // uppercase
+					if(s[i+2] < 96) { /* uppercase */
 						val += 16 * (s[i+2]-55);	
 					}else{
 						val += 16 * (s[i+2]-87);
 					}
 				}
-				if( s[i+3] >= 48 && s[i+3] <= 57) { // MSB character is less than A
+				if( s[i+3] >= 48 && s[i+3] <= 57) { /* MSB character is less than A */
 					val += (s[i+3]-48);	
 				}else{
-					if(s[i+3] < 96) { // uppercase
+					if(s[i+3] < 96) { /* uppercase */
 						val += (s[i+3]-55);	
 					}else{
 						val += (s[i+3]-87);
@@ -93,7 +93,7 @@ char* escapeChar(char* s){
 				i+=2;
 				break;
 			default:
-				if(s[i+1] >= 48 && s[i] <= 57) { // octal ascii escape character... assuming perfect format here.
+				if(s[i+1] >= 48 && s[i] <= 57) { /* octal ascii escape character... assuming perfect format here. */
 					ret[j] = (s[i+1]-48)*4 + (s[i+2]-48)*2 + (s[i+3]-48); i+=3;	
 				}else{
 					continue;
@@ -187,11 +187,15 @@ void TKDestroy(TokenizerT *tk) {
  */
 
 char *TKGetNextToken(TokenizerT *tk) {
-	if(tk->token_index==tk->num_tok) {
+	char* ret;
+
+	if(tk->token_index == tk->num_tok) {
 		return NULL;
 	}
-	char* ret = tk->tokens[tk->token_index];
+	
+	ret = tk->tokens[tk->token_index];
 	tk->token_index++;
+  	
   	return ret;
 }
 
@@ -204,6 +208,9 @@ char *TKGetNextToken(TokenizerT *tk) {
  */
 
 int main(int argc, char **argv) {
+	char* token;
+	TokenizerT* tk;
+
 	/* do some error handling on the arguments */
 	if(argc!=3) {
 		fprintf(stderr,"ERROR: Invalid number of arguments.\nExpects format \n\n\t$ tokenizer <delims> <token string>\n");
@@ -211,9 +218,10 @@ int main(int argc, char **argv) {
 	}
 
 	/* loop through the tokens */
-	TokenizerT* tk = TKCreate(argv[1],argv[2]);
+	tk = TKCreate(argv[1],argv[2]);
+	
 	for(;;) {
-		char* token = TKGetNextToken(tk);
+		token = TKGetNextToken(tk);
 		if(token == 0) {
 			/* end of the stream */
 			break;
@@ -221,6 +229,7 @@ int main(int argc, char **argv) {
 		/* got a token, print it out on it's own line */
 		printf("%s\n",token); 
 	}
+	
 	TKDestroy(tk);
 	return 0;
 }
