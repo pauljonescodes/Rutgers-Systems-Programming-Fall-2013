@@ -23,147 +23,6 @@ char* brk(char* s1, char* s2) {
 	return NULL;
 }
 
-char * escapeWithSeparators(char * replaceIn, char * separators) {
-	int i, j = 0;
-	char* ret = malloc(strlen(replaceIn) + 1);
-	memset(ret, 0, strlen(replaceIn) + 1);
-	
-	for(i=0;i<strlen(replaceIn);i++) {
-		if(replaceIn[i] != '\\') {
-			ret[j] = replaceIn[i];
-			j++;
-			continue;
-		}
-		switch(replaceIn[i+1]) {
-			case 'n': /* line feed, value 0A */
-				
-				if (strstr(separators, "\\n") == NULL) {
-					ret = realloc(ret, strlen(ret) + 5);
-					
-					ret[j + 0] = '[';
-					ret[j + 1] = '0';
-					ret[j + 2] = 'x';
-					ret[j + 3] = '0';
-					ret[j + 4] = 'A';
-					ret[j + 5] = ']';
-					
-					j+=5;
-				} else ret[j] = '\n';
-				
-				break;
-			case 't': /* horizontal tab, value 09 */
-				
-				if (strstr(separators, "\\t") == NULL) {
-					ret = realloc(ret, strlen(ret) + 5);
-					
-					ret[j + 0] = '[';
-					ret[j + 1] = '0';
-					ret[j + 2] = 'x';
-					ret[j + 3] = '0';
-					ret[j + 4] = '9';
-					ret[j + 5] = ']';
-					
-					j+=5;
-				}else ret[j] = '\t';
-				
-				break;
-			case 'v': /* vertical tab, value 0B */
-				if (strstr(separators, "\\v") == NULL) {
-				ret = realloc(ret, strlen(ret) + 5);
-				
-				ret[j + 0] = '[';
-				ret[j + 1] = '0';
-				ret[j + 2] = 'x';
-				ret[j + 3] = '0';
-				ret[j + 4] = 'B';
-				ret[j + 5] = ']';
-				
-				j+=5;
-				}else ret[j] = '\v';
-				
-				break;
-			case 'b': /* backspace, value 08 */
-				
-				if (strstr(separators, "\\b") == NULL) {
-				ret = realloc(ret, strlen(ret) + 5);
-				
-				ret[j + 0] = '[';
-				ret[j + 1] = '0';
-				ret[j + 2] = 'x';
-				ret[j + 3] = '0';
-				ret[j + 4] = '8';
-				ret[j + 5] = ']';
-				
-				j+=5;
-				}else ret[j] = '\b';
-				
-				break;
-			case 'r': /* carriage return, value 0D */
-				
-				if (strstr(separators, "\\r") == NULL) {
-				ret = realloc(ret, strlen(ret) + 5);
-				
-				ret[j + 0] = '[';
-				ret[j + 1] = '0';
-				ret[j + 2] = 'x';
-				ret[j + 3] = '0';
-				ret[j + 4] = 'D';
-				ret[j + 5] = ']';
-				
-				j+=5;
-				}else ret[j] = '\r';
-				
-				break;
-			case 'f': /* form feed, value 0C */
-				
-				if (strstr(separators, "\\f") == NULL) {
-				ret = realloc(ret, strlen(ret) + 5);
-				
-				ret[j + 0] = '[';
-				ret[j + 1] = '0';
-				ret[j + 2] = 'x';
-				ret[j + 3] = '0';
-				ret[j + 4] = 'C';
-				ret[j + 5] = ']';
-				
-				j+=5;
-				}else ret[j] = '\f';
-				
-				break;
-			case '\\':
-				ret[j] = '\\';
-				break;
-			case 'a': /* bell, value 07 */
-				
-				if (strstr(separators, "\\a") == NULL) {
-				ret = realloc(ret, strlen(ret) + 5);
-				
-				ret[j + 0] = '[';
-				ret[j + 1] = '0';
-				ret[j + 2] = 'x';
-				ret[j + 3] = '0';
-				ret[j + 4] = '7';
-				ret[j + 5] = ']';
-				
-				j+=5;
-				
-				break;
-				}
-			case '\"':
-				ret[j] = '?';
-				break;
-			default:
-				if(replaceIn[i+1] >= 48 && replaceIn[i] <= 57) { /* octal ascii escape character... assuming perfect format here. */
-					ret[j] = (replaceIn[i+1]-48)*4 + (replaceIn[i+2]-48)*2 + (replaceIn[i+3]-48); i+=3;
-				}else{
-					continue;
-				}
-		}
-		j++; i++;
-	}
-	return ret;
-}
-
 /* replace in all escape characters */
 char* escapeChar(char* s){
 	int i, j = 0, val;
@@ -267,10 +126,7 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 	tk->tokens = malloc(strlen(ts)*sizeof(char*));
 	memset(tk->tokens,0,strlen(ts)*sizeof(char*));
 	
-	/*ts = escapeChar(ts);*/
-	
-	ts = escapeWithSeparators(ts, separators);
-	
+	ts = escapeChar(ts);
 	separators = escapeChar(separators);
 	tk->token_index = 0;
 	if(strlen(separators)==0) {
@@ -371,11 +227,7 @@ int main(int argc, char **argv) {
 			break;
 		}
 		/* got a token, print it out on it's own line */
-		
-		if (strlen(argv[1]) > 0)
-			printf("%s\n",token);
-		else
-			printf("%s ",token);
+		printf("%s\n",token);
 	}
 	
 	TKDestroy(tk);
