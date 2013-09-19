@@ -12,7 +12,7 @@ typedef struct TokenizerT_ {
 /* Clone of the string.h function strpbrk */
 char* brk(char* s1, char* s2) {
 	int i, j;
-
+	
 	for(i=0;i<strlen(s1);i++) {
 		for(j=0;j<strlen(s2);j++) {
 			if(s1[i] == s2[j]) {
@@ -23,23 +23,11 @@ char* brk(char* s1, char* s2) {
 	return NULL;
 }
 
-/*
- * The current implementation, escapeChar, is not quite right.
- * What's supposed to happen is in the case where \a through \r
- * are encountered without them being the seperator, '\a' transforms
- * to "[0x07]", which is the ASCII hex representation of '\a', NOT 'a'.
- * In the case where \a through \r ARE the seperators, we should just
- * tokenize with them, no hex stuff. I'm not sure if you knew this.
- *
- * The assignment has been pushed back an I have class at 2:50,
- * so I'll do this afterwards.
- */
 char * escapeWithSeparators(char * replaceIn, char * separators) {
 	int i, j = 0;
 	char* ret = malloc(strlen(replaceIn) + 1);
-	char * temp;
 	memset(ret, 0, strlen(replaceIn) + 1);
-
+	
 	for(i=0;i<strlen(replaceIn);i++) {
 		if(replaceIn[i] != '\\') {
 			ret[j] = replaceIn[i];
@@ -48,37 +36,128 @@ char * escapeWithSeparators(char * replaceIn, char * separators) {
 		}
 		switch(replaceIn[i+1]) {
 			case 'n': /* line feed, value 0A */
-				ret[j] = 'A';
-
+				
+				if (strstr(separators, "\\n") == NULL) {
+					ret = realloc(ret, strlen(ret) + 5);
+					
+					ret[j + 0] = '[';
+					ret[j + 1] = '0';
+					ret[j + 2] = 'x';
+					ret[j + 3] = '0';
+					ret[j + 4] = 'A';
+					ret[j + 5] = ']';
+					
+					j+=5;
+				} else ret[j] = '\n';
+				
 				break;
 			case 't': /* horizontal tab, value 09 */
-				ret[j] = '9';
-
+				
+				if (strstr(separators, "\\t") == NULL) {
+					ret = realloc(ret, strlen(ret) + 5);
+					
+					ret[j + 0] = '[';
+					ret[j + 1] = '0';
+					ret[j + 2] = 'x';
+					ret[j + 3] = '0';
+					ret[j + 4] = '9';
+					ret[j + 5] = ']';
+					
+					j+=5;
+				}else ret[j] = '\t';
+				
 				break;
 			case 'v': /* vertical tab, value 0B */
-				ret[j] = 'B';
-
+				if (strstr(separators, "\\v") == NULL) {
+				ret = realloc(ret, strlen(ret) + 5);
+				
+				ret[j + 0] = '[';
+				ret[j + 1] = '0';
+				ret[j + 2] = 'x';
+				ret[j + 3] = '0';
+				ret[j + 4] = 'B';
+				ret[j + 5] = ']';
+				
+				j+=5;
+				}else ret[j] = '\v';
+				
 				break;
 			case 'b': /* backspace, value 08 */
-				ret[j] = '8';
+				
+				if (strstr(separators, "\\b") == NULL) {
+				ret = realloc(ret, strlen(ret) + 5);
+				
+				ret[j + 0] = '[';
+				ret[j + 1] = '0';
+				ret[j + 2] = 'x';
+				ret[j + 3] = '0';
+				ret[j + 4] = '8';
+				ret[j + 5] = ']';
+				
+				j+=5;
+				}else ret[j] = '\b';
+				
 				break;
 			case 'r': /* carriage return, value 0D */
-				ret[j] = 'D';
+				
+				if (strstr(separators, "\\r") == NULL) {
+				ret = realloc(ret, strlen(ret) + 5);
+				
+				ret[j + 0] = '[';
+				ret[j + 1] = '0';
+				ret[j + 2] = 'x';
+				ret[j + 3] = '0';
+				ret[j + 4] = 'D';
+				ret[j + 5] = ']';
+				
+				j+=5;
+				}else ret[j] = '\r';
+				
 				break;
 			case 'f': /* form feed, value 0C */
-				ret[j] = 'C';
+				
+				if (strstr(separators, "\\f") == NULL) {
+				ret = realloc(ret, strlen(ret) + 5);
+				
+				ret[j + 0] = '[';
+				ret[j + 1] = '0';
+				ret[j + 2] = 'x';
+				ret[j + 3] = '0';
+				ret[j + 4] = 'C';
+				ret[j + 5] = ']';
+				
+				j+=5;
+				}else ret[j] = '\f';
+				
 				break;
 			case '\\':
-				ret[j] = '?';
+				ret[j] = '\\';
 				break;
 			case 'a': /* bell, value 07 */
-				ret[j] = '7';
+				
+				if (strstr(separators, "\\a") == NULL) {
+				ret = realloc(ret, strlen(ret) + 5);
+				
+				ret[j + 0] = '[';
+				ret[j + 1] = '0';
+				ret[j + 2] = 'x';
+				ret[j + 3] = '0';
+				ret[j + 4] = '7';
+				ret[j + 5] = ']';
+				
+				j+=5;
+				
 				break;
+				}
 			case '\"':
 				ret[j] = '?';
 				break;
 			default:
-				ret[j] = '0';
+				if(replaceIn[i+1] >= 48 && replaceIn[i] <= 57) { /* octal ascii escape character... assuming perfect format here. */
+					ret[j] = (replaceIn[i+1]-48)*4 + (replaceIn[i+2]-48)*2 + (replaceIn[i+3]-48); i+=3;
+				}else{
+					continue;
+				}
 		}
 		j++; i++;
 	}
@@ -86,11 +165,11 @@ char * escapeWithSeparators(char * replaceIn, char * separators) {
 }
 
 /* replace in all escape characters */
-char* escapeChar(char* s){ 
+char* escapeChar(char* s){
 	int i, j = 0, val;
 	char* ret = malloc(strlen(s) + 1);
 	memset(ret, 0, strlen(s) + 1);
-
+	
 	for(i=0;i<strlen(s);i++) {
 		if(s[i] != '\\') {
 			ret[j] = s[i];
@@ -134,19 +213,19 @@ char* escapeChar(char* s){
 			case 'x': /* Hexadecimal ascii character - assuming perfect formatting */
 				val = 0;
 				if( s[i+2] >= 48 && s[i+2] <= 57) { /* MSB character is less than A */
-					val += 16 * (s[i+2]-48);	
+					val += 16 * (s[i+2]-48);
 				}else{
 					if(s[i+2] < 96) { /* uppercase */
-						val += 16 * (s[i+2]-55);	
+						val += 16 * (s[i+2]-55);
 					}else{
 						val += 16 * (s[i+2]-87);
 					}
 				}
 				if( s[i+3] >= 48 && s[i+3] <= 57) { /* MSB character is less than A */
-					val += (s[i+3]-48);	
+					val += (s[i+3]-48);
 				}else{
 					if(s[i+3] < 96) { /* uppercase */
-						val += (s[i+3]-55);	
+						val += (s[i+3]-55);
 					}else{
 						val += (s[i+3]-87);
 					}
@@ -156,7 +235,7 @@ char* escapeChar(char* s){
 				break;
 			default:
 				if(s[i+1] >= 48 && s[i] <= 57) { /* octal ascii escape character... assuming perfect format here. */
-					ret[j] = (s[i+1]-48)*4 + (s[i+2]-48)*2 + (s[i+3]-48); i+=3;	
+					ret[j] = (s[i+1]-48)*4 + (s[i+2]-48)*2 + (s[i+3]-48); i+=3;
 				}else{
 					continue;
 				}
@@ -168,7 +247,7 @@ char* escapeChar(char* s){
 /*
  * TKCreate creates a new TokenizerT object for a given set of separator
  * characters (given as a string) and a token stream (given as a string).
- * 
+ *
  * TKCreate should copy the two arguments so that it is not dependent on
  * them staying immutable after returning.  (In the future, this may change
  * to increase efficiency.)
@@ -179,7 +258,7 @@ char* escapeChar(char* s){
 
 TokenizerT *TKCreate(char *separators, char *ts) {
 	int tok_index = 0;
-
+	
 	/* allocate space and initilize it to 0 before starting */
 	TokenizerT *tk = malloc(sizeof(TokenizerT));
 	memset(tk,0,sizeof(TokenizerT));
@@ -187,12 +266,12 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 	/* allocate memory for the list of tokens */
 	tk->tokens = malloc(strlen(ts)*sizeof(char*));
 	memset(tk->tokens,0,strlen(ts)*sizeof(char*));
-
-	ts = escapeChar(ts);
-
-	/*ts = escapeWithSeparators(ts, separators);*/
-
-	separators = escapeChar(separators);	
+	
+	/*ts = escapeChar(ts);*/
+	
+	ts = escapeWithSeparators(ts, separators);
+	
+	separators = escapeChar(separators);
 	tk->token_index = 0;
 	if(strlen(separators)==0) {
 		separators = " ";
@@ -216,7 +295,7 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 		strncpy(tk->tokens[tok_index],ts,c-ts);
 		tok_index++;
 		ts = c;
-
+		
 	}
 	tk->num_tok = tok_index;
   	return tk;
@@ -231,7 +310,7 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 
 void TKDestroy(TokenizerT *tk) {
 	int i;
-
+	
 	for(i=0;i<tk->num_tok;i++) {
 		free(tk->tokens[i]);
 	}
@@ -253,7 +332,7 @@ void TKDestroy(TokenizerT *tk) {
 
 char *TKGetNextToken(TokenizerT *tk) {
 	char* ret;
-
+	
 	if(tk->token_index == tk->num_tok) {
 		return NULL;
 	}
@@ -275,13 +354,13 @@ char *TKGetNextToken(TokenizerT *tk) {
 int main(int argc, char **argv) {
 	char* token;
 	TokenizerT* tk;
-
+	
 	/* do some error handling on the arguments */
 	if(argc!=3) {
 		fprintf(stderr,"ERROR: Invalid number of arguments.\nExpects format \n\n\t$ tokenizer <delims> <token string>\n");
 		return 1;
 	}
-
+	
 	/* loop through the tokens */
 	tk = TKCreate(argv[1],argv[2]);
 	
@@ -292,9 +371,13 @@ int main(int argc, char **argv) {
 			break;
 		}
 		/* got a token, print it out on it's own line */
-		printf("%s\n",token); 
+		
+		if (strlen(argv[1]) > 0)
+			printf("%s\n",token);
+		else {
+			printf("%s ",token);
 	}
-	
+		
 	TKDestroy(tk);
 	return 0;
 }
