@@ -44,6 +44,10 @@ if [ "$actual" == "$expect" ]; then
   echo "passed 4"
 else
   echo "failed 4"
+  echo "actual: 
+$actual"
+  echo "expect: 
+$expect"
 fi
 
 actual=$(./tokenizer "\n" "")

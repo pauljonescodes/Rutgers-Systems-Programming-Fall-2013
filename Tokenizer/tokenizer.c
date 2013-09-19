@@ -226,8 +226,10 @@ int main(int argc, char **argv) {
 			/* end of the stream */
 			break;
 		}
-		/* got a token, print it out on it's own line */
-		printf("%s\n",token);
+		if (strlen(argv[1]) != 0)
+			printf("%s\n",token);
+		else
+			printf("%s ",token);
 	}
 	
 	TKDestroy(tk);
