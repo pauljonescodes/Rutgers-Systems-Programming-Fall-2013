@@ -374,10 +374,10 @@ int main(int argc, char **argv) {
 		
 		if (strlen(argv[1]) > 0)
 			printf("%s\n",token);
-		else {
+		else
 			printf("%s ",token);
 	}
-		
+	
 	TKDestroy(tk);
 	return 0;
 }
