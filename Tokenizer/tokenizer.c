@@ -210,6 +210,7 @@ char *TKGetNextToken(TokenizerT *tk) {
 int main(int argc, char **argv) {
 	char* token;
 	TokenizerT* tk;
+	int i;
 	
 	/* do some error handling on the arguments */
 	if(argc!=3) {
@@ -220,7 +221,7 @@ int main(int argc, char **argv) {
 	/* loop through the tokens */
 	tk = TKCreate(argv[1],argv[2]);
 	
-	for(;;) {
+	for(i = 0;;) {
 		token = TKGetNextToken(tk);
 		if(token == 0) {
 			/* end of the stream */
@@ -228,8 +229,12 @@ int main(int argc, char **argv) {
 		}
 		if (strlen(argv[1]) != 0)
 			printf("%s\n",token);
-		else
+		else if (i < tk->num_tok - 1)
 			printf("%s ",token);
+		else
+			printf("%s", token);
+
+		i++;
 	}
 	
 	TKDestroy(tk);
