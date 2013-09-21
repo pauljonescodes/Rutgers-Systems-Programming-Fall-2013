@@ -10,5 +10,23 @@
 
 \clearpage
 
+\section{Description}
+
+The program makes sure you have the correct number of arguments.
+Having assured that, it allocates the necessary space and sets it all to zero.
+Then it compares the separators against the current tokens.
+This creates the TokenizerT structure.
+Looping over this structure, every token is printed using TKGetNextToken,
+assuring that a space or newline is printed appropriately.
+Finally, the allocated space is freed.
+
+\section{Features}
+
+Instead of seeing my test cases in a boring txt file, you can
+actually confirm that they all work by running the bash script
+included with this assignment. There are 15 test cases, and the
+script will tell you whether the code passes or fails. If you're
+feeling more old school, you can go in and look at the "actual"
+and "expected" variables to see what the cases are and what I expect.
 
 \end{document}
