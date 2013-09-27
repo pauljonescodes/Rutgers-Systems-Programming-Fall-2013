@@ -1,0 +1,1 @@
+well, shit. I corrupted my file, not much important was there anyway. All the comparator functions are in the example file, I implimented a very simple arraylist and selection sort, but it didn't work. Sorry! I'll work more on it after lab today, please push it.
