@@ -7,10 +7,21 @@
 #include <stdlib.h>
 
 /*
+ * Linked list node.
+ */
+
+typedef struct Node_ {
+	void* dataPtr;
+	Node* next;
+}Node;
+
+/*
  * Sorted list type.  You need to fill in the type as part of your implementation.
  */
-struct SortedList
-{
+struct SortedList {
+	CompareFuncT cf;
+	int numItems;
+	Node* head;
 };
 typedef struct SortedList* SortedListPtr;
 
@@ -19,8 +30,10 @@ typedef struct SortedList* SortedListPtr;
  * Iterator type for user to "walk" through the list item by item, from
  * beginning to end.  You need to fill in the type as part of your implementation.
  */
-struct SortedListIterator
-{
+struct SortedListIterator {
+	int numItems;
+	int index;
+	SortedListPtr list;
 };
 typedef struct SortedListIterator* SortedListIteratorPtr;
 
