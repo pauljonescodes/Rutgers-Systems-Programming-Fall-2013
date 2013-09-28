@@ -109,6 +109,27 @@ int SLRemove(SortedListPtr sl, void* o) {
 	return linkedListRemove(sl->head,sl->cf,o);
 }
 
+SortedListIteratorPtr SLCreateIterator(SortedListPtr sl) {
+	SortedListIteratorPtr ret;
+	ret = malloc(sizeof(SortedListIterator));
+	ret->item = sl->head;
+	return ret
+}
+
+void SLDestroyIterator(SortedListIteratorPtr si) {
+	free(si);
+}
+
+void* SLNextItem(SortedListIteratorPtr si) {
+	void* ret = 0;
+	if(si->item == 0) {
+		return ret;
+	}
+	ret = (si->item)->dataPtr;
+	si->item = (si->item)->next;
+	return ret;
+}
+
 int main() {
 		
 }
