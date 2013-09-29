@@ -13,9 +13,11 @@ HEADERS = $(wildcard *.h)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -Wall $(LIBS) -o $@
+	$(CC) $(OBJECTS) $(LIBS) -o $@
+	ar -r libs1.a $@
 
 clean:
 	-rm -f *.o
 	-rm -f $(TARGET)
+	-rm -f libs1.a
 	-rm -f *~
