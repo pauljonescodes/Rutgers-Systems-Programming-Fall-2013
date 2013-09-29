@@ -1,7 +1,7 @@
 TARGET = s1
 LIBS = -lm
 CC = gcc
-CFLAGS =
+CFLAGS =-ansi -pedantic -Wall
 
 default: $(TARGET)
 all: default

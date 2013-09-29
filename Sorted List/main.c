@@ -2,8 +2,8 @@
  * sorted-list.c
  */
 
-#include	<string.h>
-#include	"sorted-list.h"
+#include <string.h>
+#include "sorted-list.h"
 
 int compareInts(void *p1, void *p2) {
 	int i1 = *(int*)p1;
@@ -30,6 +30,7 @@ SortedListPtr SLCreate(CompareFuncT cf) {
 	SortedListPtr sl = malloc(sizeof(struct SortedList));
 	memset(sl,0,sizeof(struct SortedList));
 	sl->cf = cf;
+	return sl;
 }
 
 void destroyLinkedList(Node* head){ 
@@ -47,8 +48,14 @@ void SLDestroy(SortedListPtr sl) {
 }
 
 int linkedListAdd(Node* head, CompareFuncT cf, Node* n) {
-	Node* i=head->next, p=head;
+	Node * i;
+	Node * p;
 	int result;
+
+	i = head->next;
+	p = head;
+	result = 0;
+
 	while(1) {
 		if(i == 0) { /* add to the tail */
 			p->next = n;
@@ -56,11 +63,13 @@ int linkedListAdd(Node* head, CompareFuncT cf, Node* n) {
 		}
 		if((cf)(i->dataPtr,n->dataPtr) < 0) {
 			p->next = n;
-			n->next = i;:
+			n->next = i;
 		}
 		p=i;
 		i=i->next;
 	}
+
+	return result;
 }
 
 int SLInsert(SortedListPtr sl, void* o) {
@@ -84,9 +93,15 @@ int SLInsert(SortedListPtr sl, void* o) {
 	return linkedListAdd(sl->head,sl->cf,n);
 }
 
-int linkedListRemove(Node* head, CompareFuncT cf, void* o) {
-	Node* i=head->next, p=head;
+int linkedListRemove(Node* head, CompareFuncT cf, Node* n) {
+	Node * i;
+	Node * p;
 	int result;
+
+	i=head->next;
+	p=head;
+	result = 0;
+
 	while(1) {
 		if(i == 0) {
 			return 0;
@@ -99,10 +114,12 @@ int linkedListRemove(Node* head, CompareFuncT cf, void* o) {
 		p=i;
 		i=i->next;
 	}
+
+	return result;
 }
 
 int SLRemove(SortedListPtr sl, void* o) {
-	if((cf)((sl->head)->dataPtr,o) == 0) {
+	if((sl->cf)((sl->head)->dataPtr,o) == 0) {
 		sl->head = (sl->head)->next;
 		return 1;
 	}
@@ -111,9 +128,9 @@ int SLRemove(SortedListPtr sl, void* o) {
 
 SortedListIteratorPtr SLCreateIterator(SortedListPtr sl) {
 	SortedListIteratorPtr ret;
-	ret = malloc(sizeof(SortedListIterator));
+	ret = malloc(sizeof(struct SortedListIterator));
 	ret->item = sl->head;
-	return ret
+	return ret;
 }
 
 void SLDestroyIterator(SortedListIteratorPtr si) {
