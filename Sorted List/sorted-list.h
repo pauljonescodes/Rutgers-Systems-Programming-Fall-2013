@@ -12,8 +12,24 @@
 
 typedef struct Node_ {
 	void* dataPtr;
-	Node* next;
+	struct Node_* next;
 }Node;
+
+/*
+ * When your sorted list is used to store objects of some type, since the
+ * type is opaque to you, you will need a comparator function to order
+ * the objects in your sorted list.
+ *
+ * You can expect a comparator function to return -1 if the 1st object is
+ * smaller, 0 if the two objects are equal, and 1 if the 2nd object is
+ * smaller.
+ *
+ * Note that you are not expected to implement any comparator functions.
+ * You will be given a comparator function when a new sorted list is
+ * created.
+ */
+
+typedef int (*CompareFuncT)(void *, void *);
 
 /*
  * Sorted list type.  You need to fill in the type as part of your implementation.
@@ -34,23 +50,6 @@ struct SortedListIterator {
 	Node* item;
 };
 typedef struct SortedListIterator* SortedListIteratorPtr;
-
-
-/*
- * When your sorted list is used to store objects of some type, since the
- * type is opaque to you, you will need a comparator function to order
- * the objects in your sorted list.
- *
- * You can expect a comparator function to return -1 if the 1st object is
- * smaller, 0 if the two objects are equal, and 1 if the 2nd object is
- * smaller.
- *
- * Note that you are not expected to implement any comparator functions.
- * You will be given a comparator function when a new sorted list is
- * created.
- */
-
-typedef int (*CompareFuncT)(void *, void *);
 
 
 /*
