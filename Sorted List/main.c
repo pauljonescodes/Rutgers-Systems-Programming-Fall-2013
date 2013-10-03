@@ -1,9 +1,12 @@
 /*
- * sorted-list.c
+ * main.c
  */
 
-#include <string.h>
-#include "sorted-list.h"
+
+#include 	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+#include	"sorted-list.h"
 
 int compareInts(void *p1, void *p2) {
 	int i1 = *(int*)p1;
@@ -26,128 +29,32 @@ int compareStrings(void *p1, void *p2) {
 	return strcmp(s1, s2);
 }
 
-SortedListPtr SLCreate(CompareFuncT cf) {
-	SortedListPtr sl = malloc(sizeof(struct SortedList));
-	memset(sl,0,sizeof(struct SortedList));
-	sl->cf = cf;
-	return sl;
-}
-
-void destroyLinkedList(Node* head){ 
-	if(head->next == 0) {
-		free(head);
-		return;
-	}
-	destroyLinkedList(head->next);
-	free(head);
-}
-
-void SLDestroy(SortedListPtr sl) {
-	destroyLinkedList(sl->head);
-	free(sl);
-}
-
-int linkedListAdd(Node* head, CompareFuncT cf, Node* n) {
-	Node * i;
-	Node * p;
-	int result;
-
-	i = head->next;
-	p = head;
-	result = 0;
-
-	while(1) {
-		if(i == 0) { /* add to the tail */
-			p->next = n;
-			return 1;
-		}
-		if((cf)(i->dataPtr,n->dataPtr) < 0) {
-			p->next = n;
-			n->next = i;
-		}
-		p=i;
-		i=i->next;
-	}
-
-	return result;
-}
-
-int SLInsert(SortedListPtr sl, void* o) {
-	Node* n = malloc(sizeof(Node));
-	n->next = 0;
-	n->dataPtr = o;
-	sl->numItems++;
-	if(sl->head == 0) { /* there is nothing in the list! */
-		sl->head = n;
-		return 1;
-	}
-	if((sl->cf)((sl->head)->dataPtr,o) < 0) { /* the new item deserves to be king! */
-		n->next = sl->head;
-		sl->head = n;
-		return 1;
-	}
-	if(sl->numItems==2) { /* only one node in the list */
-		(sl->head)->next = n;
-		return 1;
-	}
-	return linkedListAdd(sl->head,sl->cf,n);
-}
-
-int linkedListRemove(Node* head, CompareFuncT cf, Node* n) {
-	Node * i;
-	Node * p;
-	int result;
-
-	i=head->next;
-	p=head;
-	result = 0;
-
-	while(1) {
-		if(i == 0) {
-			return 0;
-		}
-		if((cf)(i->dataPtr,n->dataPtr) < 0) {
-			p->next = i->next;
-			free(i);
-			return 1;
-		}
-		p=i;
-		i=i->next;
-	}
-
-	return result;
-}
-
-int SLRemove(SortedListPtr sl, void* o) {
-	if((sl->cf)((sl->head)->dataPtr,o) == 0) {
-		sl->head = (sl->head)->next;
-		return 1;
-	}
-	return linkedListRemove(sl->head,sl->cf,o);
-}
-
-SortedListIteratorPtr SLCreateIterator(SortedListPtr sl) {
-	SortedListIteratorPtr ret;
-	ret = malloc(sizeof(struct SortedListIterator));
-	ret->item = sl->head;
-	return ret;
-}
-
-void SLDestroyIterator(SortedListIteratorPtr si) {
-	free(si);
-}
-
-void* SLNextItem(SortedListIteratorPtr si) {
-	void* ret = 0;
-	if(si->item == 0) {
-		return ret;
-	}
-	ret = (si->item)->dataPtr;
-	si->item = (si->item)->next;
-	return ret;
-}
-
 int main() {
-		
-		return 0;
+	int x, *p, *v;
+	p = malloc(sizeof(int));
+	SortedListPtr sl = SLCreate(compareInts);
+	SortedListIteratorPtr si, si2;
+	while(scanf("%d",&x)==1) {
+		v = malloc(sizeof(int));
+		*v = x;
+		SLInsert(sl,v);
+	}
+	si = SLCreateIterator(sl);
+	si2 = SLCreateIterator(sl);
+	SLPrint(sl);
+	SLNextItem(si);
+	SLNextItem(si);
+	SLNextItem(si);
+	*p = 6;SLRemove(sl,p);
+	*p = 5;SLRemove(sl,p);
+	*p = 4;SLRemove(sl,p);
+	SLPrint(sl);
+	while(1) {
+		p = SLNextItem(si);
+		if(p == 0) {
+			break;
+		}
+		printf("%d\n",*p);
+	}
+	return 0;
 }

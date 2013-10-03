@@ -7,15 +7,6 @@
 #include <stdlib.h>
 
 /*
- * Linked list node.
- */
-
-typedef struct Node_ {
-	void* dataPtr;
-	struct Node_* next;
-}Node;
-
-/*
  * When your sorted list is used to store objects of some type, since the
  * type is opaque to you, you will need a comparator function to order
  * the objects in your sorted list.
@@ -30,6 +21,19 @@ typedef struct Node_ {
  */
 
 typedef int (*CompareFuncT)(void *, void *);
+
+
+
+
+/*
+ * Linked list node.
+ */
+
+typedef struct Node_ {
+	void* dataPtr;
+	void* next;
+	int refCount;
+}Node;
 
 /*
  * Sorted list type.  You need to fill in the type as part of your implementation.
@@ -50,6 +54,7 @@ struct SortedListIterator {
 	Node* item;
 };
 typedef struct SortedListIterator* SortedListIteratorPtr;
+
 
 
 /*
