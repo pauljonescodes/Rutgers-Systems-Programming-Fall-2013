@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\title{Sorted List Readme}
+\date{\today}
+\author{Paul Jones and Andrew Moore \\ Systems Programming (01:198:214) \\ School of Arts and Sciences \\ Rutgers University}
+
+\begin{document}
+
+\maketitle
+
+\clearpage
+
+\section*{Big-O Analysis}
+
+\subsection*{SLCreate}
+
+This creates the memory for an empty sorted list. The analysis depends on what the
+rest of the OS is doing, as it only allocates memory. 
+
+$$O(1)$$
+
+\subsection*{SLDestroy}
+
+This frees all the memory for a list. The analysis depends on what the
+rest of the OS is doing, as it only frees memory. 
+
+$$O(1)$$
+
+\subsection*{SLInsert}
+
+This inserts an object into the sorted list.
+This is a binary search tree where the worst case is one long branch.
+
+$$O(n)$$
+
+\subsection*{SLRemove}
+
+This removes an object from the sorted list.
+This is a binary search tree where the worst case is one long branch.
+
+$$O(n)$$
+
+\subsection*{SLCreateIterator}
+
+This creates an object that allows the caller to iterate through the list.
+
+$$O(1)$$
+
+\subsection*{SLDestroyIterator}
+
+This frees the memory used for an object that iterates through the list.
+
+$$O(1)$$
+
+\subsection*{SLNextItem}
+
+Returns the next object from an iterator.
+
+$$O(1)$$
+
+\end{document}

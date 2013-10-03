@@ -12,6 +12,7 @@ SortedListPtr SLCreate(CompareFuncT cf) {
 	SortedListPtr sl = malloc(sizeof(struct SortedList));
 	memset(sl,0,sizeof(struct SortedList));
 	sl->cf = cf;
+	return sl;
 }
 
 void destroyLinkedList(Node* head){
@@ -30,9 +31,9 @@ void SLDestroy(SortedListPtr sl) {
 
 int linkedListAdd(Node* head, CompareFuncT cf, Node* n) {
 	Node* i, *p;
+	
 	i = head->next;
 	p = head;
-	int result;
 	while(1) {
 		if(i == 0) { /* add to the tail */
 			p->next = n;
@@ -76,7 +77,7 @@ int linkedListRemove(Node* head, CompareFuncT cf, void* o) {
 	Node* i, *p;
 	i = (Node*)head->next;
 	p = head;
-	int result;
+	
 	while(1) {
 		if(i == 0) {
 			return 0;
