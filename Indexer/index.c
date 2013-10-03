@@ -3,19 +3,28 @@
  * To store input directory
  */
 
+/* A linked list of the contents of a file
+   with both the filename's word and the
+   word's frequency. */
 typedef struct content_word_node {
 	char * word;
 	int frequency;
 	word_node * next;
 } word_node;
 
+/* A linked list representing a file from a directory
+   with pointers to the next file in the
+   directory and the file's contents. */
 typedef struct file_node {
 	char * filename;
 	file_node * next;
 	content_word_node * contents;
 } file_node;
 
+/* Represents the a root node with a linked list
+   of both subdirectories and files. */
 typedef struct directory_node {
+	char * name;
 	directory_node * directories;
 	file_node * files;
 } directory_node;
@@ -24,12 +33,17 @@ typedef struct directory_node {
  * To store output reverse index
  */
 
+/* Represents the content of the output */
 typedef struct output_file_node {
 	char * file_name;
 	int frequency;
 	output_file_node * next;
 } output_file_node;
 
+/* Represents the highest level output
+   node with the word, a pointer to the
+   next word, and the contents of this
+   output word. */
 typedef struct output_word_node {
 	char * word;
 	output_file_node * file;
