@@ -3,6 +3,12 @@
 #include <dirent.h>
 #include <string.h>
 #include <limits.h>
+#include <sys/stat.h>
+
+void process_file(const char *name)
+{
+    printf("%s\n", name);
+}
 
 void get_files_in(const char * root_name)
 {
@@ -10,6 +16,7 @@ void get_files_in(const char * root_name)
     struct dirent * current_entry;
     const char * directory_name;
     char next_root[PATH_MAX];
+    struct stat fileStat;
     
     if ((root = opendir(root_name))) {
         while ((current_entry = readdir(root))) {
@@ -17,9 +24,14 @@ void get_files_in(const char * root_name)
             
             if (strcmp (directory_name, "..") != 0 &&
                 strcmp (directory_name, ".") != 0) {
-                printf ("%s/%s\n", root_name, directory_name);
                 
                 snprintf (next_root, PATH_MAX, "%s/%s", root_name, directory_name);
+                
+                stat(next_root,&fileStat);
+                
+                if (!S_ISDIR(fileStat.st_mode)) {
+                    process_file(next_root);
+                }
                 
                 get_files_in(next_root);
             }
