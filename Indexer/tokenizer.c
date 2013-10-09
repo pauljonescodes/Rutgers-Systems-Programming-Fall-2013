@@ -108,13 +108,14 @@ char* unescape_string(char* string) {
 	int current_position = 0;
 	int unescaped_string_position = 0;
 	unsigned char escape_character = 0;	
-	
+	int hex_count = 0;
+    
 	for(current_position = 0; current_position < strlen(string); current_position++) {	
 			escape_character = *(string + current_position);
 			if(*(string + current_position) == '\\') {
 				if(*(string + current_position + 1) == 'x') {
 					current_position++;
-					int hex_count;
+					
 					escape_character = 0;
 					for(hex_count = 1; hex_count <= MAX_HEX_CHARS; hex_count++) {
 						if(!isxdigit(*(string + current_position + hex_count))) {
@@ -181,11 +182,13 @@ TokenizerT *TKCreate(char *separators, char *ts) {
 	 * 
 	 */
 	 
+    TokenizerT* tokenizer;
+    
 	if(separators == NULL || ts == NULL){
 		return NULL;
 	}
 	
-	TokenizerT* tokenizer = (TokenizerT*)malloc(sizeof(TokenizerT));
+	tokenizer = (TokenizerT*)malloc(sizeof(TokenizerT));
 	
 	if(tokenizer == NULL){
 		return NULL;
@@ -290,37 +293,4 @@ char *TKGetNextToken(TokenizerT *tk) {
 	strncpy(token, token_start, tk->current_position - token_start);
 	token[(tk->current_position - tk->copied_string)] = '\0';
 	return token;
-}
-
-/*
- * main will have two string arguments (in argv[1] and argv[2]).
- * The first string contains the separator characters.
- * The second string contains the tokens.
- * Print out the tokens in the second string in left-to-right order.
- * Each token should be printed on a separate line.
- */
-
-int main(int argc, char **argv) {
-	
-	if(argc != 3){
-		printf("Error: invalid number of arguments\n");
-		return -1;
-	}
-	
-	TokenizerT* tokenizer = TKCreate(argv[1], argv[2]);
-	
-	if(tokenizer == NULL) {
-		printf("Error: unable to create tokenizer\n");
-	}
-	
-	char* token = NULL;
-	
-	while((token = TKGetNextToken(tokenizer)) != NULL) {
-		printf("%s\n", token);
-		free(token);
-	}
-	
-	TKDestroy(tokenizer);
-
-	return 0;
 }

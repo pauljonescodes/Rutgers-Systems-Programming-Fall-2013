@@ -33,22 +33,14 @@ int main() {
 	int x, *p, *v;
 	p = malloc(sizeof(int));
 	SortedListPtr sl = SLCreate(compareInts);
-	SortedListIteratorPtr si, si2;
+	SortedListIteratorPtr si;
 	while(scanf("%d",&x)==1) {
 		v = malloc(sizeof(int));
 		*v = x;
 		SLInsert(sl,v);
 	}
+	
 	si = SLCreateIterator(sl);
-	si2 = SLCreateIterator(sl);
-	SLPrint(sl);
-	SLNextItem(si);
-	SLNextItem(si);
-	SLNextItem(si);
-	*p = 6;SLRemove(sl,p);
-	*p = 5;SLRemove(sl,p);
-	*p = 4;SLRemove(sl,p);
-	SLPrint(sl);
 	while(1) {
 		p = SLNextItem(si);
 		if(p == 0) {

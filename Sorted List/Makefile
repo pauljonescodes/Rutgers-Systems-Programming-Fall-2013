@@ -1,7 +1,10 @@
-TARGET = s1
+TARGET = sl
 LIBS = -lm
 CC = gcc
-CFLAGS =-ansi -pedantic -Wall
+CFLAGS =-Wall
+EXEOBJ = main.o
+LIBSOBJ = sorted-list.o
+LIBSL = libsl.a
 
 default: $(TARGET)
 all: default
@@ -12,12 +15,14 @@ HEADERS = $(wildcard *.h)
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LIBS) -o $@
-	ar -r libs1.a $@
+$(LIBSL): $(LIBSOBJ)
+	ar rc $(LIBSL) $(LIBSOBJ)
+
+$(TARGET): $(EXEOBJ) $(LIBSL)
+	$(CC) $(CFLAGS) $(LIBS) sorted-list.c main.c sorted-list.h -o $@
 
 clean:
 	-rm -f *.o
 	-rm -f $(TARGET)
-	-rm -f libs1.a
+	-rm -f $(LIBSL)
 	-rm -f *~
