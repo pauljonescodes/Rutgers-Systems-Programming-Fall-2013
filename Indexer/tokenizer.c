@@ -1,25 +1,13 @@
 /*
  * tokenizer.c
  */
+#include "tokenizer.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
 #define MAX_HEX_CHARS 2
 #define MAX_OCT_CHARS 3
-
-/*
- * Tokenizer type.  You need to fill in the type as part of your implementation.
- */
-
-struct TokenizerT_ {
-	char* copied_string;
-	char* delimiters;		
-	char* current_position;
-};
-
-typedef struct TokenizerT_ TokenizerT;
 
 char is_escape_character(char character) {
 	

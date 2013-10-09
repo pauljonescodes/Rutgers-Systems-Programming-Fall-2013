@@ -4,10 +4,20 @@
 #include <string.h>
 #include <limits.h>
 #include <sys/stat.h>
+#include "tokenizer.h"
 
-void process_file(const char *name)
+void process_file(const char *fname, int filesize)
 {
-    printf("%s\n", name);
+    char *file_contents;
+    FILE *input_file = fopen(fname, "rb");
+    
+    fseek(input_file, 0, SEEK_END);
+    rewind(input_file);
+    file_contents = malloc(filesize * (sizeof(char)));
+    fread(file_contents, sizeof(char), filesize, input_file);
+    fclose(input_file);
+    
+    printf("%s", file_contents);
 }
 
 void get_files_in(const char * root_name)
@@ -16,7 +26,7 @@ void get_files_in(const char * root_name)
     struct dirent * current_entry;
     const char * directory_name;
     char next_root[PATH_MAX];
-    struct stat fileStat;
+    struct stat file_stat;
     
     if ((root = opendir(root_name))) {
         while ((current_entry = readdir(root))) {
@@ -27,10 +37,10 @@ void get_files_in(const char * root_name)
                 
                 snprintf (next_root, PATH_MAX, "%s/%s", root_name, directory_name);
                 
-                stat(next_root,&fileStat);
+                stat(next_root,&file_stat);
                 
-                if (!S_ISDIR(fileStat.st_mode)) {
-                    process_file(next_root);
+                if (!S_ISDIR(file_stat.st_mode)) {
+                    process_file(directory_name, file_stat.st_size);
                 }
                 
                 get_files_in(next_root);
