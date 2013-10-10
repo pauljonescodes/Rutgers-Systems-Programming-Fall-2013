@@ -1,15 +1,16 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
 #include <limits.h>
 #include <sys/stat.h>
-#include "tokenizer.h"
 
 void process_file(const char *fname, int filesize)
 {
     char *file_contents;
     FILE *input_file = fopen(fname, "rb");
+    char * pch;
     
     fseek(input_file, 0, SEEK_END);
     rewind(input_file);
@@ -17,7 +18,12 @@ void process_file(const char *fname, int filesize)
     fread(file_contents, sizeof(char), filesize, input_file);
     fclose(input_file);
     
-    printf("%s", file_contents);
+    pch = strtok (file_contents," \0\a\b\n\t\n\v\f\r!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+    while (pch != NULL)
+    {
+        printf ("\n%s\n",pch);
+        pch = strtok (NULL, " \0\a\b\n\t\n\v\f\r!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+    }
 }
 
 void get_files_in(const char * root_name)
