@@ -54,9 +54,7 @@ void get_files_in(const char * root_name)
         while ((current_entry = readdir(root))) {
             directory_name = current_entry->d_name;
             
-            if (strcmp (directory_name, "..") != 0 &&
-                strcmp (directory_name, ".") != 0 &&
-                directory_name[0] != '.') {
+            if (*directory_name != '.') {
                 
                 snprintf (next_root, PATH_MAX, "%s/%s", root_name, directory_name);
                 
