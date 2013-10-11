@@ -5,6 +5,20 @@
 #include <limits.h>
 #include <sys/stat.h>
 #include "tokenizer.h"
+#include "sorted-list.h"
+#include "index.h"
+
+void compareFileNode(void* f1, void* f2) {
+
+}
+
+void compareWordNode(void* f1, void* f2) {
+
+}
+
+void process_word(char * word) {
+    printf("%s\n", word);
+}
 
 void process_file(const char *fname, int filesize)
 {
@@ -13,21 +27,19 @@ void process_file(const char *fname, int filesize)
     TokenizerT * tokenizer;
     char * token;
     
+    if(input_file==0) {
+        return;
+    }
     fseek(input_file, 0, SEEK_END);
-    rewind(input_file);
-    file_contents = malloc(filesize * (sizeof(char)));
+    file_contents = malloc(ftell(input_file)+5);
+    memset(file_contents,0,ftell(input_file)+5);
+    fseek(input_file, 0, SEEK_SET);
     fread(file_contents, sizeof(char), filesize, input_file);
     fclose(input_file);
-    
-    tokenizer = TKCreate(" \0\a\b\n\t\n\v\f\r!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~", file_contents);
-    
-    printf("%s\n", fname);
-    
+    tokenizer = TKCreate(file_contents);
     while ((token = TKGetNextToken(tokenizer))) {
-        printf("%s\n", token);
+        process_word(token);
     }
-    
-    printf("\n\nakjsnd\n\n");
 }
 
 void get_files_in(const char * root_name)
@@ -43,14 +55,16 @@ void get_files_in(const char * root_name)
             directory_name = current_entry->d_name;
             
             if (strcmp (directory_name, "..") != 0 &&
-                strcmp (directory_name, ".") != 0) {
+                strcmp (directory_name, ".") != 0 &&
+                directory_name[0] != '.') {
                 
                 snprintf (next_root, PATH_MAX, "%s/%s", root_name, directory_name);
+                
                 
                 stat(next_root,&file_stat);
                 
                 if (!S_ISDIR(file_stat.st_mode)) {
-                    process_file(directory_name, file_stat.st_size);
+                    process_file(next_root, file_stat.st_size);
                 }
                 
                 get_files_in(next_root);

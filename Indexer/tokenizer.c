@@ -1,192 +1,82 @@
-/*
- * tokenizer.c
- */
-#include "tokenizer.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-#define MAX_HEX_CHARS 2
-#define MAX_OCT_CHARS 3
+/* Tokenizer struct */
+typedef struct TokenizerT_ {
+	int token_index; /* This keeps track of the token that this object is on for the nextToken feature */
+	char** tokens;   /* filled in by TKCreate; a list of the tokens to be iterated through */
+	int num_tok;     /* number of tokens */
+}TokenizerT;
 
-char is_escape_character(char character) {
-	
-	/*
-	 * Description: determines if a character is a member of the set of escaped characters
-	 * Parameters: character to be evaluated
-	 * Modifies: nothing
-	 * Returns: appropriate escape character sequence if it is a member, 0 if it is not
-	 * 
-	 */
-
-	char* escape_sequence = "ntvbrfa\\?'\"";
-	char* escape_characters = "\n\t\v\b\r\f\a\\\?\'\"";
-	int offset = 0;
-	
-	for(offset = 0; offset < strlen(escape_sequence); offset++) {
-		if(*(escape_sequence + offset) == character) {
-			return *(escape_characters + offset);
-		}
+int isAlphanumeric(char c) {
+	if('A'<=c && 'Z'>=c) {
+		return 1;
 	}
-	
+	if('a'<=c && 'z'>=c) {
+		return 1;
+	}
 	return 0;
 }
- 
-int char_to_hex(char character) {
-	
-	/*
-	 * Description: converts a hex digit represented as a character into its actual integer value
-	 * Parameters: character to be converted
-	 * Modifies: nothing
-	 * Returns: value of the hex digit character as an integer
-	 * 
-	 */
-	
-	if(isdigit(character)){
-		return character - '0';
-	} else if (islower(character)){
-		return character - 'a' + 10;
-	} else {
-		return character - 'A' + 10;
-	}
-} 
- 
-int char_to_oct(char character) {
 
-	/*
-	 * Description: converts a octal digit represented as a character into its actual integer value
-	 * Parameters: character to be converted
-	 * Modifies: nothing
-	 * Returns: value of the octal digit character as an integer
-	 * 
-	 */
-
-	return character - '0';
-} 
- 
-int is_oct_digit(char oct_digit) {
+/* Clone of the string.h function strpbrk */
+char* brk(char* s1) {
+	int i;
 	
-	/*
-	 * Description: determines if a character represents a octal digit
-	 * Parameters: character to be evaluated
-	 * Modifies: nothing
-	 * Returns: 1 if it is an octal character, 0 if it is not
-	 * 
-	 */
-	
-	if(oct_digit >= '0' && oct_digit <= '7') {
-		return 1;
-	} else {
-		return 0;
+	for(i=0;i<strlen(s1);i++) {
+		if(!isAlphanumeric(s1[i])) {
+			return s1 + i;
+		}
 	}
+	return NULL;
 }
- 
- 
-char* unescape_string(char* string) {
-	
-	/*
-	 * Description: given an input stream converts escaped characters into their appropriate char representation and returns it as a new string
-	 * Parameters: string to be converted
-	 * Modifies: nothing
-	 * Returns: resulting string with all the escaped characters with their appropriate values
-	 * 
-	 */
-
-	char* unescaped_string = (char*)malloc(strlen(string) * sizeof(char) + 1);
-	int current_position = 0;
-	int unescaped_string_position = 0;
-	unsigned char escape_character = 0;	
-	int hex_count = 0;
-    
-	for(current_position = 0; current_position < strlen(string); current_position++) {	
-			escape_character = *(string + current_position);
-			if(*(string + current_position) == '\\') {
-				if(*(string + current_position + 1) == 'x') {
-					current_position++;
-					
-					escape_character = 0;
-					for(hex_count = 1; hex_count <= MAX_HEX_CHARS; hex_count++) {
-						if(!isxdigit(*(string + current_position + hex_count))) {
-							break;
-						}
-						escape_character = escape_character * 16 + char_to_hex(*(string + current_position + hex_count));
-					}
-					hex_count--;
-					current_position += hex_count;
-				} else if(is_oct_digit((*(string + current_position + 1))) == 1) {
-					int oct_count;
-					escape_character = 0;
-					for(oct_count = 1; oct_count <= MAX_OCT_CHARS; oct_count++) {
-						if(is_oct_digit(*(string + current_position + oct_count)) == 0) {
-							break;
-						}
-						escape_character = escape_character * 8 + char_to_oct(*(string + current_position + oct_count));
-					}
-					current_position += oct_count;
-				} else {
-					escape_character = is_escape_character(*(string + current_position + 1));
-					
-					if(escape_character == 0) {
-						escape_character = *(string + current_position);
-					} else {
-						current_position++;
-					}
-				}
-			}
-			*(unescaped_string + unescaped_string_position) = escape_character;
-			unescaped_string_position++;
-			escape_character = 0;
-	}
-	
-	*(unescaped_string + unescaped_string_position + 1) = '\0';
-	
-	return unescaped_string;
-}
-
-
-
-
 /*
  * TKCreate creates a new TokenizerT object for a given set of separator
  * characters (given as a string) and a token stream (given as a string).
- * 
+ *
  * TKCreate should copy the two arguments so that it is not dependent on
  * them staying immutable after returning.  (In the future, this may change
  * to increase efficiency.)
  *
  * If the function succeeds, it returns a non-NULL TokenizerT.
  * Else it returns NULL.
- *
- * You need to fill in this function as part of your implementation.
  */
 
-TokenizerT *TKCreate(char *separators, char *ts) {
+TokenizerT *TKCreate(char *ts) {
+	int tok_index = 0;
 	
-	/*
-	 * Description: creates a new tokenizer struct from the token stream and delimiters
-	 * Parameters: set of delimiters, token stream
-	 * Modifies: nothing
-	 * Returns: a pointer to a tokenizer struct on success, a null pointer on failure
-	 * 
-	 */
-	 
-    TokenizerT* tokenizer;
-    
-	if(separators == NULL || ts == NULL){
-		return NULL;
+	/* allocate space and initilize it to 0 before starting */
+	TokenizerT *tk = malloc(sizeof(TokenizerT));
+	memset(tk,0,sizeof(TokenizerT));
+	
+	/* allocate memory for the list of tokens */
+	tk->tokens = malloc(strlen(ts)*sizeof(char*));
+	memset(tk->tokens,0,strlen(ts)*sizeof(char*));
+
+	tk->token_index = 0;
+	for(;;) {
+		char* c = brk(ts);
+		if(c==NULL) {
+			if(strlen(ts)==0) {
+				break;
+			}
+			tk->tokens[tok_index] = malloc(strlen(ts));
+			strcpy(tk->tokens[tok_index],ts);
+			tok_index++;
+			break;
+		}
+		if(c==ts) {
+			ts++;
+			continue;
+		}
+		tk->tokens[tok_index] = malloc((c-ts) + 1);
+		strncpy(tk->tokens[tok_index],ts,c-ts);
+		tok_index++;
+		ts = c;
+		
 	}
-	
-	tokenizer = (TokenizerT*)malloc(sizeof(TokenizerT));
-	
-	if(tokenizer == NULL){
-		return NULL;
-	}
-	
-	tokenizer->delimiters = unescape_string(separators);
-	tokenizer->copied_string = unescape_string(ts);
-	tokenizer->current_position = tokenizer->copied_string;
-	
-	return tokenizer;
+	tk->num_tok = tok_index;
+  	return tk;
 }
 
 /*
@@ -196,42 +86,15 @@ TokenizerT *TKCreate(char *separators, char *ts) {
  * You need to fill in this function as part of your implementation.
  */
 
-void TKDestroy(TokenizerT *tk) {	
+void TKDestroy(TokenizerT *tk) {
+	int i;
 	
-	/*
-	 * Description: destroys tokenizer struct and deallocates all memory
-	 * Parameters: tokenizer to be destroyed
-	 * Modifies: tokenizer struct: deallocates memory
-	 * Returns: nothing 
-	 */
-	 
-	free(tk->copied_string);
-	free(tk->delimiters);
-	free(tk);
-	
-	return;
-}
-
-
-char is_delimiter(char character, char* delimiters) {
-	
-	/*
-	 * Description: determines if a particular character is a member of the set of delimiters
-	 * Parameters: character to be compared, string of delimiters
-	 * Modifies: Nothing
-	 * Returns: 1 if character is a delimiter, 0 if it is not
-	 */
-	
-	char* current = NULL;
-	
-	for(current = delimiters; current - delimiters < strlen(delimiters); current++) {
-		if(character == *current) {
-			return 1;
-		}
+	for(i=0;i<tk->num_tok;i++) {
+		free(tk->tokens[i]);
 	}
-	return 0;
+	free(tk->tokens);
+	free(tk);
 }
-
 
 /*
  * TKGetNextToken returns the next token from the token stream as a
@@ -246,39 +109,16 @@ char is_delimiter(char character, char* delimiters) {
  */
 
 char *TKGetNextToken(TokenizerT *tk) {
-
-	/*
-	 * Description: returns the next token from the token stream specified within the tokenizer
-	 * Parameters: tokenizer from which to extract token
-	 * Modifies: tokenizer->current_position: identifies starting point of next token; creates a new string with 
-	 * Returns: token extracted as a char* on success, null on failure/end of string;
-	 */
+	char* ret;
 	
-	char* token = NULL;
-	char* token_start = NULL;
-
-	while(tk->current_position - tk->copied_string < strlen(tk->copied_string)) {
-		if(!is_delimiter(*tk->current_position, tk->delimiters)) {
-		
-			token_start = tk->current_position;
-			break;
-		}
-		tk->current_position++;
-	}
-	
-	if(token_start == NULL) {
+	if(tk->token_index == tk->num_tok) {
 		return NULL;
 	}
 	
-	while(tk->current_position - tk->copied_string < strlen(tk->copied_string)) {
-		if(is_delimiter(*tk->current_position, tk->delimiters)) {
-			break;
-		}
-		tk->current_position++;
-	}	
+	ret = tk->tokens[tk->token_index];
 
-	token = (char*)malloc(sizeof(char) * (tk->current_position - tk->copied_string + 1));
-	strncpy(token, token_start, tk->current_position - token_start);
-	token[(tk->current_position - tk->copied_string)] = '\0';
-	return token;
+	tk->token_index++;
+  	
+  	return ret;
 }
+
