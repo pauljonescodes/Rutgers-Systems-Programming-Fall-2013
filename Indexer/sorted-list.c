@@ -73,6 +73,30 @@ int SLInsert(SortedListPtr sl, void* o) {
 	return linkedListAdd(sl->head,sl->cf,n);
 }
 
+void* linkedListFind(Node* head, CompareFuncT cf, void* o) {
+	Node* i, *p;
+	i = (Node*)head->next;
+	p = head;
+	
+	while(1) {
+		if(i == 0) {
+			return 0;
+		}
+		if((cf)(i->dataPtr,o) == 0) {
+			return i->dataPtr;
+		}
+		p=i;
+		i=i->next;
+	}
+}
+void* SLFind(SortedListPtr sl, void* o) {
+	Node* n;
+	if((sl->cf)((sl->head)->dataPtr,o) == 0) {
+		return (sl->head)->dataPtr;
+	}
+	return linkedListFind(sl->head,sl->cf,o);
+}
+
 int linkedListRemove(Node* head, CompareFuncT cf, void* o) {
 	Node* i, *p;
 	i = (Node*)head->next;

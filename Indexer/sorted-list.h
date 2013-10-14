@@ -102,6 +102,7 @@ int SLInsert(SortedListPtr list, void *newObj);
  */
 
 int SLRemove(SortedListPtr list, void *newObj);
+void* SLFind(SortedListPtr list, void *newObj);
 
 
 /*

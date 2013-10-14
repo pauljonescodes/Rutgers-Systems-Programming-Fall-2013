@@ -1,26 +1,66 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <limits.h>
+#include <linux/limits.h>
 #include <sys/stat.h>
 #include "tokenizer.h"
 #include "sorted-list.h"
 #include "index.h"
 
-void compareFileNode(void* f1, void* f2) {
+SortedListPtr sl;
 
+int compareFileNode(void* f1, void* f2) {
+	return strcmp(((fileListNode*)f1)->fileName, ((fileListNode*)f1)->fileName);
 }
 
-void compareWordNode(void* f1, void* f2) {
-
+int compareWordNode(void* f1, void* f2) {
+	return strcmp(((wordListNode*)f1)->word, ((wordListNode*)f1)->word);
 }
 
-void process_word(char * word) {
-    printf("%s\n", word);
+void printFileNode(fileListNode* fn) {
+	printf("(\"%s\", %d),", fn->fileName, fn->count);
 }
 
-void process_file(const char *fname, int filesize)
+void printWordNode(wordListNode wn) {
+	SortedListIteratorPtr si = SLCreateIterator(wn.fileList);
+	fileListNode* fn = SLNextItem(si);
+	printf("\"%s\" -> ",wn.word);
+	while(fn != 0) {
+		printFileNode(fn);
+		fn = SLNextItem(si);
+	}
+	printf("\n");
+}
+
+void printLists(SortedListPtr sl) {
+	SortedListIteratorPtr si = SLCreateIterator(sl);
+	wordListNode* wn = SLNextItem(si);
+	while(wn != 0) {
+		printWordNode(*wn);
+		wn = SLNextItem(si);
+	}
+}
+
+void process_word(char * word, char* dname) {
+ 	wordListNode* wn = (wordListNode*)SLFind(sl,word);
+	SortedListPtr fList;
+	fileListNode*  fn;
+	if(wn == 0) {
+		SLInsert(sl,word);
+		return;
+	}
+	fList = wn->fileList;
+	fn = SLFind(fList,dname);
+	if(fn == 0) {
+		SLInsert(fList,dname);
+		fn = SLFind(fList,dname);
+	}
+	fn->count++;
+}
+
+void process_file(const char *fname, int filesize, char* directory_name)
 {
     char *file_contents;
     FILE *input_file = fopen(fname, "rb");
@@ -38,7 +78,7 @@ void process_file(const char *fname, int filesize)
     fclose(input_file);
     tokenizer = TKCreate(file_contents);
     while ((token = TKGetNextToken(tokenizer))) {
-        process_word(token);
+        process_word(token,directory_name);
     }
 }
 
@@ -46,7 +86,7 @@ void get_files_in(const char * root_name)
 {
     DIR * root;
     struct dirent * current_entry;
-    const char * directory_name;
+    char * directory_name;
     char next_root[PATH_MAX];
     struct stat file_stat;
     
@@ -56,13 +96,13 @@ void get_files_in(const char * root_name)
             
             if (*directory_name != '.') {
                 
-                snprintf (next_root, PATH_MAX, "%s/%s", root_name, directory_name);
+                sprintf (next_root,"%s/%s", root_name, directory_name);
                 
                 
                 stat(next_root,&file_stat);
                 
                 if (!S_ISDIR(file_stat.st_mode)) {
-                    process_file(next_root, file_stat.st_size);
+                    process_file(next_root, file_stat.st_size,directory_name);
                 }
                 
                 get_files_in(next_root);
@@ -72,10 +112,15 @@ void get_files_in(const char * root_name)
     
 }
 
+SortedListPtr SL_Init() {
+	SortedListPtr s = SLCreate(compareWordNode);
+	return s;
+}
+
 int main(int argc, char **argv) {
-    
+    sl = SL_Init();
     get_files_in(argv[1]);
-    
+    printLists(sl);
     return 0;
 }
 
