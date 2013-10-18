@@ -61,6 +61,7 @@ TokenizerT *TKCreate(char *ts) {
 				break;
 			}
 			tk->tokens[tok_index] = malloc(strlen(ts));
+			memset(tk->tokens[tok_index],0,strlen(ts));
 			strcpy(tk->tokens[tok_index],ts);
 			tok_index++;
 			break;
@@ -70,10 +71,11 @@ TokenizerT *TKCreate(char *ts) {
 			continue;
 		}
 		tk->tokens[tok_index] = malloc((c-ts) + 1);
+		memset(tk->tokens[tok_index],0,(c-ts) + 1);
 		strncpy(tk->tokens[tok_index],ts,c-ts);
 		tok_index++;
 		ts = c;
-		
+	 	
 	}
 	tk->num_tok = tok_index;
   	return tk;
@@ -118,7 +120,6 @@ char *TKGetNextToken(TokenizerT *tk) {
 	ret = tk->tokens[tk->token_index];
 
 	tk->token_index++;
-  	
   	return ret;
 }
 

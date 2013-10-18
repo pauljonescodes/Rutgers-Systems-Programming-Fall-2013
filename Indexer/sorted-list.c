@@ -123,7 +123,9 @@ void* SLFind(SortedListPtr sl, void* o) {
     if (DEV) {
         printf("SLFind, sl->numItems: %i\n", sl->numItems);
     }
-    
+    if(sl->head == 0) {
+	return 0;
+    } 
     printf("hello1>\n");
     
 	if((sl->cf)((sl->head)->dataPtr,o) == 0) {

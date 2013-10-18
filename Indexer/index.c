@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <limits.h>
+#include <linux/limits.h>
 #include <sys/stat.h>
 #include "tokenizer.h"
 #include "sorted-list.h"
@@ -99,10 +99,12 @@ void process_file(const char *fname, int filesize, char* directory_name)
     fseek(input_file, 0, SEEK_SET);
     fread(file_contents, sizeof(char), filesize, input_file);
     fclose(input_file);
+	printf("file = %s\n",file_contents);
     tokenizer = TKCreate(file_contents);
     
     while ((token = TKGetNextToken(tokenizer))) {
-        process_word(token,directory_name);
+        printf("token = %s\n",token);
+	process_word(token,directory_name);
     }
 }
 
@@ -124,14 +126,14 @@ void get_files_in(const char * root_name)
             
             if (*directory_name != '.') {
                 
-                sprintf (next_root,"%s%s", root_name, directory_name);
+                sprintf (next_root,"%s/%s", root_name, directory_name);
                 
                 stat(next_root,&file_stat);
                 
                 if (!S_ISDIR(file_stat.st_mode)) {
                     process_file(next_root, file_stat.st_size,directory_name);
                 }
-                
+ 		printf("%s\n",next_root);               
                 get_files_in(next_root);
             }
         }
