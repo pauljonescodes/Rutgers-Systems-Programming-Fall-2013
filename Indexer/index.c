@@ -69,7 +69,11 @@ void process_word(char * word, char* dname) {
 		SLInsert(sl,word);
 		return;
 	}
+	if(wn->fileList == 0) {
+		wn->fileList = SLCreate(compareFileNode);
+	}
 	fList = wn->fileList;
+	
 	fn = SLFind(fList,dname);
 	if(fn == 0) {
 		SLInsert(fList,dname);
