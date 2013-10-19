@@ -16,7 +16,14 @@ int compareWordNode(void* f1, void* f2) {
     wordListNode * wl1 = f1;
     wordListNode * wl2 = f2;
     
-    return strcmp(wl1->word, wl2->word);
+    return strcmp(wl2->word, wl1->word);
+}
+
+int compareFileNode(void* f1, void* f2) {
+    fileListNode * fl1 = f1;
+    fileListNode * fl2 = f2;
+    
+    return strcmp(fl1->fileName, fl2->fileName);
 }
 
 int compareStrings(void *p1, void *p2) {
@@ -55,22 +62,42 @@ void printLists(SortedListPtr sl) {
 	}
 }
 
+
 void process_word(char * word, char* dname) {
     wordListNode * wln;
-    void * thing;
+    fileListNode * fln;
+    void * opaqueWLN;
+    void * opaqueFLN;
     
-    if (1) {
+    if (DEV) {
         printf("process_word(%s, %s)\n", word, dname);
     }
     
     wln = malloc(sizeof(* wln));
+    fln = malloc(sizeof(* fln));
     wln->word = word;
+    fln->fileName = dname;
+    fln->count = 0;
     
-    thing = SLFind(sl, wln);
+    opaqueWLN = SLFind(sl, wln);
     
-    if (thing != NULL) printf("not null\n");
-    
-    SLInsert(sl,wln);
+    if (opaqueWLN != NULL) { /* word already exists */
+        wln = (wordListNode *) opaqueWLN;
+        
+        opaqueFLN = SLFind(wln->fileList, fln);
+        
+        if (opaqueFLN != NULL) { /* word already in this file */
+            fln = (fileListNode *) opaqueWLN;
+            fln->count++;
+        } else { /* word is new to this file */
+            
+        }
+        
+    } else { /* word is new SLInsert(sl,wln); */
+        wln->fileList = SLCreate(compareFileNode);
+        SLInsert(wln->fileList, fln);
+        SLInsert(sl,wln);
+    }
 }
 
 void process_file(const char *fname, int filesize, char* directory_name)
@@ -137,19 +164,42 @@ void get_files_in(const char * root_name)
 
 int main(int argc, char **argv) {
     wordListNode * p;
+    fileListNode * f;
     SortedListIteratorPtr si;
+    SortedListIteratorPtr sw;
     
     sl = SLCreate(compareWordNode);
     get_files_in(argv[1]);
     
     si = SLCreateIterator(sl);
-	while(1) {
+	
+    while(1) {
 		p = SLNextItem(si);
 		if(p == NULL) {
 			break;
 		}
-		printf("%s\n",p->word);
+		
+        printf("\"%s\" -> ",p->word);
+        
+        if (strcmp(p->word, "for") != 0 && strcmp(p->word, "one") != 0) {
+            sw = SLCreateIterator(p->fileList);
+            
+            while (1) {
+                f = SLNextItem(sw);
+                
+                if (f == NULL)
+                    break;
+                
+                printf("\"%s\" %i ->", f->fileName, f->count);
+            }
+            
+            printf("\n");
+            
+            SLDestroyIterator(sw);
+        }
 	}
+    
+    
     
     return 0;
 }

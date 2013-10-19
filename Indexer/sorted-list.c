@@ -201,14 +201,17 @@ void SLPrint(SortedListPtr sl) {
 SortedListIteratorPtr SLCreateIterator(SortedListPtr sl) {
 	SortedListIteratorPtr ret;
     
+	ret = malloc(sizeof(struct SortedListIterator));
+    
     if (DEV) {
         printf("SLCreateIterator\n");
     }
     
-	ret = malloc(sizeof(struct SortedListIterator));
-	ret->item = sl->head;
-	(sl->head)->refCount++;
-	return ret;
+    if (ret != NULL) {
+        ret->item = sl->head;
+        (sl->head)->refCount++;
+        return ret;
+    } else return NULL;
 }
 
 void SLDestroyIterator(SortedListIteratorPtr si) {
