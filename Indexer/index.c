@@ -162,14 +162,11 @@ void get_files_in(const char * root_name)
     
 }
 
-int main(int argc, char **argv) {
+void print_structure() {
     wordListNode * p;
     fileListNode * f;
     SortedListIteratorPtr si;
     SortedListIteratorPtr sw;
-    
-    sl = SLCreate(compareWordNode);
-    get_files_in(argv[1]);
     
     si = SLCreateIterator(sl);
 	
@@ -198,7 +195,56 @@ int main(int argc, char **argv) {
 	}
     
     SLDestroyIterator(si);
+}
+
+void write_to_file(char * filename) {
+    FILE *file = fopen(filename, "w");
+    wordListNode * p;
+    fileListNode * f;
+    SortedListIteratorPtr si;
+    SortedListIteratorPtr sw;
     
+    if (file == NULL)
+    {
+        printf("Error opening file!\n");
+        exit(1);
+    }
+    
+    si = SLCreateIterator(sl);
+	
+    while(1) {
+		p = SLNextItem(si);
+		if(p == NULL) {
+			break;
+		}
+		
+        fprintf(file, "<list> %s\n", p->word);
+        
+        sw = SLCreateIterator(p->fileList);
+        
+        while (1) {
+            f = SLNextItem(sw);
+            
+            if (f == NULL)
+                break;
+            
+            fprintf(file, "%s %i ", f->fileName, f->count);
+        }
+        
+        SLDestroyIterator(sw);
+        
+        fprintf(file, "\n</list>\n");
+	}
+    
+    SLDestroyIterator(si);
+    
+    fclose(file);
+}
+
+int main(int argc, char **argv) {
+    sl = SLCreate(compareWordNode);
+    get_files_in(argv[2]);
+    write_to_file(argv[1]);
     return 0;
 }
 
