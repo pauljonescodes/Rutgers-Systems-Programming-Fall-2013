@@ -12,17 +12,11 @@
 #define DEV 0
 
 SortedListPtr sl;
-
-int compareFileNode(void* f1, void* f2) {
-    if (DEV) printf("compareFileNode");
-    
-	return strcmp(((fileListNode*)f1)->fileName, ((fileListNode*)f1)->fileName);
-}
-
 int compareWordNode(void* f1, void* f2) {
-    if (DEV) printf("compareWordNode");
+    wordListNode * wl1 = f1;
+    wordListNode * wl2 = f2;
     
-	return strcmp(((wordListNode*)f1)->word, ((wordListNode*)f1)->word);
+    return strcmp(wl1->word, wl2->word);
 }
 
 int compareStrings(void *p1, void *p2) {
@@ -62,12 +56,16 @@ void printLists(SortedListPtr sl) {
 }
 
 void process_word(char * word, char* dname) {
+    wordListNode * wln;
     
     if (1) {
         printf("process_word(%s, %s)\n", word, dname);
     }
     
-    SLInsert(sl,word);
+    wln = malloc(sizeof(* wln));
+    wln->word = word;
+    
+    SLInsert(sl,wln);
 }
 
 void process_file(const char *fname, int filesize, char* directory_name)
@@ -133,9 +131,10 @@ void get_files_in(const char * root_name)
 }
 
 int main(int argc, char **argv) {
-    char * p;
-    sl = SLCreate(compareStrings);
+    wordListNode * p;
     SortedListIteratorPtr si;
+    
+    sl = SLCreate(compareWordNode);
     get_files_in(argv[1]);
     
     si = SLCreateIterator(sl);
@@ -144,7 +143,7 @@ int main(int argc, char **argv) {
 		if(p == NULL) {
 			break;
 		}
-		printf("%s\n",p);
+		printf("%s\n",p->word);
 	}
     
     return 0;

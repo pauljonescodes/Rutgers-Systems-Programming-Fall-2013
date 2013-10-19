@@ -2,14 +2,14 @@
 #define INDEX_H
 
 typedef struct _FileListNode {
-	char* fileName;
+	char * fileName;
 	int count;
-}fileListNode;
+} fileListNode;
 
 typedef struct _WordListNode {
-	char* word;
+	char * word;
 	SortedListPtr fileList;
-}wordListNode;
+} wordListNode;
 
 int compareWordNode(void* f1, void* f2);
 int compareFileNode(void* f1, void* f2);
