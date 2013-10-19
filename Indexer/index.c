@@ -89,8 +89,8 @@ void process_word(char * word, char* dname) {
         if (opaqueFLN != NULL) { /* word already in this file */
             fln = (fileListNode *) opaqueFLN;
             fln->count++;
-        } else { /* word is new to this file */
-            
+        } else { /*  */
+            SLInsert(wln->fileList, fln);
         }
         
     } else { /* word is new SLInsert(sl,wln); */
