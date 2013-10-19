@@ -87,7 +87,8 @@ void process_word(char * word, char* dname) {
         opaqueFLN = SLFind(wln->fileList, fln);
         
         if (opaqueFLN != NULL) { /* word already in this file */
-            
+            fln = (fileListNode *) opaqueFLN;
+            fln->count++;
         } else { /* word is new to this file */
             
         }
@@ -188,7 +189,7 @@ int main(int argc, char **argv) {
             if (f == NULL)
                 break;
             
-            printf("(\"%s\" %i),", f->fileName, f->count);
+            printf("(\"%s\", %i),", f->fileName, f->count);
         }
         
         SLDestroyIterator(sw);
