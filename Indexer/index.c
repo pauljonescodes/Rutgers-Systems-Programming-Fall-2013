@@ -8,6 +8,7 @@
 #include "tokenizer.h"
 #include "sorted-list.h"
 #include "index.h"
+#include <libgen.h>
 
 #define DEV 0
 
@@ -128,6 +129,8 @@ void process_file(const char *fname, int filesize, char* directory_name)
         process_word(token,directory_name);
     }
 }
+
+
 
 void get_files_in(const char * root_name)
 {
