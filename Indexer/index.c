@@ -57,6 +57,7 @@ void printLists(SortedListPtr sl) {
 
 void process_word(char * word, char* dname) {
     wordListNode * wln;
+    void * thing;
     
     if (1) {
         printf("process_word(%s, %s)\n", word, dname);
@@ -64,6 +65,10 @@ void process_word(char * word, char* dname) {
     
     wln = malloc(sizeof(* wln));
     wln->word = word;
+    
+    thing = SLFind(sl, wln);
+    
+    if (thing != NULL) printf("not null\n");
     
     SLInsert(sl,wln);
 }

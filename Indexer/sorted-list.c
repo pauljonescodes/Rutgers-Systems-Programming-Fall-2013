@@ -125,15 +125,12 @@ void* SLFind(SortedListPtr sl, void* o) {
     }
     if(sl->head == 0) {
 	return 0;
-    } 
-    printf("hello1>\n");
+    }
     
 	if((sl->cf)((sl->head)->dataPtr,o) == 0) {
-        printf("hello2>\n");
 		return (sl->head)->dataPtr;
 	}
     
-    printf("hello3>\n");
 	return linkedListFind(sl->head,sl->cf,o);
 }
 
