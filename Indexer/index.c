@@ -77,7 +77,7 @@ void process_word(char * word, char* dname) {
     fln = malloc(sizeof(* fln));
     wln->word = word;
     fln->fileName = dname;
-    fln->count = 0;
+    fln->count = 1;
     
     opaqueWLN = SLFind(sl, wln);
     
@@ -87,8 +87,7 @@ void process_word(char * word, char* dname) {
         opaqueFLN = SLFind(wln->fileList, fln);
         
         if (opaqueFLN != NULL) { /* word already in this file */
-            fln = (fileListNode *) opaqueWLN;
-            fln->count++;
+            
         } else { /* word is new to this file */
             
         }
@@ -181,25 +180,23 @@ int main(int argc, char **argv) {
 		
         printf("\"%s\" -> ",p->word);
         
-        if (strcmp(p->word, "for") != 0 && strcmp(p->word, "one") != 0) {
-            sw = SLCreateIterator(p->fileList);
+        sw = SLCreateIterator(p->fileList);
+        
+        while (1) {
+            f = SLNextItem(sw);
             
-            while (1) {
-                f = SLNextItem(sw);
-                
-                if (f == NULL)
-                    break;
-                
-                printf("\"%s\" %i ->", f->fileName, f->count);
-            }
+            if (f == NULL)
+                break;
             
-            printf("\n");
-            
-            SLDestroyIterator(sw);
+            printf("(\"%s\" %i),", f->fileName, f->count);
         }
+        
+        SLDestroyIterator(sw);
+        
+        printf("\n");
 	}
     
-    
+    SLDestroyIterator(si);
     
     return 0;
 }
