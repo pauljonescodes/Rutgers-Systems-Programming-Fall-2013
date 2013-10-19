@@ -3,13 +3,13 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-#include <linux/limits.h>
+#include <limits.h>
 #include <sys/stat.h>
 #include "tokenizer.h"
 #include "sorted-list.h"
 #include "index.h"
 
-#define DEV 1
+#define DEV 0
 
 SortedListPtr sl;
 
@@ -59,27 +59,9 @@ void process_word(char * word, char* dname) {
 	SortedListPtr fList;
 	fileListNode*  fn;
     
-    if (DEV) {
+    if (1) {
         printf("process_word(%s, %s)\n", word, dname);
     }
-    
-    wn = (wordListNode*)SLFind(sl,word);
-    
-	if(wn == 0) {
-		SLInsert(sl,word);
-		return;
-	}
-	if(wn->fileList == 0) {
-		wn->fileList = SLCreate(compareFileNode);
-	}
-	fList = wn->fileList;
-	
-	fn = SLFind(fList,dname);
-	if(fn == 0) {
-		SLInsert(fList,dname);
-		fn = SLFind(fList,dname);
-	}
-	fn->count++;
 }
 
 void process_file(const char *fname, int filesize, char* directory_name)
@@ -103,12 +85,11 @@ void process_file(const char *fname, int filesize, char* directory_name)
     fseek(input_file, 0, SEEK_SET);
     fread(file_contents, sizeof(char), filesize, input_file);
     fclose(input_file);
-	printf("file = %s\n",file_contents);
+    
     tokenizer = TKCreate(file_contents);
     
     while ((token = TKGetNextToken(tokenizer))) {
-        printf("token = %s\n",token);
-	process_word(token,directory_name);
+        process_word(token,directory_name);
     }
 }
 
@@ -137,7 +118,7 @@ void get_files_in(const char * root_name)
                 if (!S_ISDIR(file_stat.st_mode)) {
                     process_file(next_root, file_stat.st_size,directory_name);
                 }
- 		printf("%s\n",next_root);               
+              
                 get_files_in(next_root);
             }
         }
@@ -148,7 +129,6 @@ void get_files_in(const char * root_name)
 int main(int argc, char **argv) {
     sl = SLCreate(compareWordNode);
     get_files_in(argv[1]);
-    printLists(sl);
     return 0;
 }
 
