@@ -1,0 +1,22 @@
+Paul Jones
+Andrew Moore
+
+Indexer Test Plan  
+=================
+
+I recommend three test cases for full robustness test.
+
+I have created a very interested "tests" folder which
+has enough to make it complicated and crash if your code
+is bad.
+
+I have transcribed the "boo/baa" test case from the definition.
+
+And then I ran the code on my entire Systems Programming workspace,
+which proved to succeed upon completion of the program.
+
+In any other case, I recommend substituting my workspace for
+one of your own, and then randomly confirming a few of the 
+multiple cases.
+
+ 

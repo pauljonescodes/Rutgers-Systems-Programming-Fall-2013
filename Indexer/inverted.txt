@@ -1,18 +1,120 @@
-<list> A
-boo.txt 2 
+<list> a
+6.txt 1 
 </list>
-<list> Baa
-boo.txt 1 
+<list> andrew
+8.txt 1 2.txt 1 
 </list>
-<list> Boo
-boo.txt 1 
+<list> be
+8.txt 1 
 </list>
-<list> cat
-boo.txt 1 
+<list> can
+8.txt 1 
 </list>
-<list> dog
-boo.txt 1 
+<list> code
+8.txt 1 
+</list>
+<list> for
+7.txt 2 
+</list>
+<list> giant
+7.txt 1 
+</list>
+<list> glasses
+5.txt 1 
+</list>
+<list> guitar
+3.txt 1 
+</list>
+<list> have
+6.txt 1 
+</list>
+<list> hello
+2.txt 1 
+</list>
+<list> hi
+1.txt 5 
+</list>
+<list> houston
+6.txt 1 
+</list>
+<list> i
+5.txt 1 
+</list>
+<list> is
+4.txt 1 2.txt 1 1.txt 1 
+</list>
+<list> jisch
+4.txt 1 
+</list>
+<list> jish
+5.txt 1 
+</list>
+<list> lame
+4.txt 1 
+</list>
+<list> leap
+7.txt 1 
+</list>
+<list> like
+5.txt 1 
+</list>
+<list> man
+7.txt 1 
+</list>
+<list> mankind
+7.txt 1 
+</list>
+<list> my
+1.txt 1 
 </list>
 <list> name
-boo.txt 3 
+1.txt 1 
+</list>
+<list> not
+2.txt 1 
+</list>
+<list> one
+7.txt 2 
+</list>
+<list> paul
+3.txt 1 1.txt 1 
+</list>
+<list> plays
+3.txt 1 
+</list>
+<list> poorly
+3.txt 1 
+</list>
+<list> pretty
+8.txt 1 
+</list>
+<list> problem
+6.txt 1 
+</list>
+<list> s
+8.txt 1 5.txt 1 
+</list>
+<list> shitty
+8.txt 1 
+</list>
+<list> small
+7.txt 1 
+</list>
+<list> step
+7.txt 1 
+</list>
+<list> the
+3.txt 1 
+</list>
+<list> this
+2.txt 1 
+</list>
+<list> though
+5.txt 1 
+</list>
+<list> totally
+4.txt 1 
+</list>
+<list> we
+6.txt 1 
 </list>
