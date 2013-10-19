@@ -1,4 +1,4 @@
-/*
+ /*
  * main.c
  */
 
@@ -34,6 +34,7 @@ int main() {
 	p = malloc(sizeof(int));
 	SortedListPtr sl = SLCreate(compareInts);
 	SortedListIteratorPtr si;
+    
 	while(scanf("%d",&x)==1) {
 		v = malloc(sizeof(int));
 		*v = x;

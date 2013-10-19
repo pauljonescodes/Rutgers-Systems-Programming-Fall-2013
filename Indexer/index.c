@@ -25,6 +25,13 @@ int compareWordNode(void* f1, void* f2) {
 	return strcmp(((wordListNode*)f1)->word, ((wordListNode*)f1)->word);
 }
 
+int compareStrings(void *p1, void *p2) {
+	char *s1 = p1;
+	char *s2 = p2;
+    
+	return strcmp(s1, s2);
+}
+
 void printFileNode(fileListNode* fn) {
 	printf("(\"%s\", %d),", fn->fileName, fn->count);
 }
@@ -55,13 +62,12 @@ void printLists(SortedListPtr sl) {
 }
 
 void process_word(char * word, char* dname) {
- 	wordListNode* wn;
-	SortedListPtr fList;
-	fileListNode*  fn;
     
     if (1) {
         printf("process_word(%s, %s)\n", word, dname);
     }
+    
+    SLInsert(sl,word);
 }
 
 void process_file(const char *fname, int filesize, char* directory_name)
@@ -127,8 +133,20 @@ void get_files_in(const char * root_name)
 }
 
 int main(int argc, char **argv) {
-    sl = SLCreate(compareWordNode);
+    char * p;
+    sl = SLCreate(compareStrings);
+    SortedListIteratorPtr si;
     get_files_in(argv[1]);
+    
+    si = SLCreateIterator(sl);
+	while(1) {
+		p = SLNextItem(si);
+		if(p == NULL) {
+			break;
+		}
+		printf("%s\n",p);
+	}
+    
     return 0;
 }
 
