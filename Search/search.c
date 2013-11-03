@@ -72,7 +72,16 @@ int loop(SortedListPtr sl) {
 	}
 }
 
-void parse_index_file(char * index_file) {
+char *substring(const char* str, int beg, int n)
+{
+    char *ret = malloc(n+1);
+    strncpy(ret, (str + beg), n);
+    *(ret+n) = '0';
+    
+    return ret;
+}
+
+void parse_index_file(char * index_file, SortedListPtr sl) {
     if (VERBOSE) {
         printf("parsing file %s\n", index_file);
     }
@@ -81,10 +90,13 @@ void parse_index_file(char * index_file) {
     char line[1024];
     char * pch;
     int is_frequency = 0;
+    wordListNode * wln;
+    fileListNode * fln;
     
     while (fgets(line, sizeof(line), file)) {
         if (strstr(line, "<list>") != NULL) { /* start of a new word. */
-            
+            char* word = substring(line, strlen("<list> "), strlen(line) - 3);
+            printf("word: %s", word);
         } else if (strstr(line, "</list>") != NULL) { /* end of a new word */
             
         } else { /* file list */
@@ -94,8 +106,9 @@ void parse_index_file(char * index_file) {
             while (pch != NULL)
             {
                 if (is_frequency) {
-                    printf("freq: %s\n", pch);
+                    printf("freq: %s \n", pch);
                     is_frequency = 0;
+                    
                 } else {
                     printf("file: %s \n", pch);
                     is_frequency = 1;
@@ -115,7 +128,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
     
-    parse_index_file(argv[1]);
+    parse_index_file(argv[1], sl);
     
 	/*add reader stuff here */
 	return loop(sl);	
