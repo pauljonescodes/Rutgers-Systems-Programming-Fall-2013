@@ -90,6 +90,7 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
     char line[1024];
     char * pch;
     int is_frequency = 0;
+    
     wordListNode * wln;
     fileListNode * fln;
     
@@ -97,6 +98,11 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
         if (strstr(line, "<list>") != NULL) { /* start of a new word. */
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
             printf("word: %s", word);
+            
+            wln = malloc(sizeof(*wln));
+            wln->word = word;
+            wln->fileList = SLCreate(compareFileNode);
+            
         } else if (strstr(line, "</list>") != NULL) { /* end of a new word */
             
         } else { /* file list */
@@ -109,13 +115,20 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                     printf("freq: %s \n", pch);
                     is_frequency = 0;
                     
+                    fln->count = atoi(pch);
+                    SLInsert(wln->fileList, fln);
                 } else {
                     printf("file: %s \n", pch);
                     is_frequency = 1;
+                    
+                    fln = malloc(sizeof(*fln));
+                    fln->fileName = pch;
                 }
                 
                 pch = strtok (NULL, " \n");
             }
+            
+            SLInsert(sl, wln);
         }
     }
 }
