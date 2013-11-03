@@ -1,0 +1,3390 @@
+<list> A
+tokenizer.c 6 test.sh 1 readme.pdf 3 boo.txt 1 baa.txt 1 LICENSE 1 
+</list>
+<list> ACTION
+LICENSE 1 
+</list>
+<list> AN
+LICENSE 1 
+</list>
+<list> AND
+LICENSE 1 
+</list>
+<list> ANY
+LICENSE 2 
+</list>
+<list> ARISING
+LICENSE 1 
+</list>
+<list> AS
+LICENSE 1 
+</list>
+<list> AUTHORS
+LICENSE 1 
+</list>
+<list> Academic
+Readme.md 1 
+</list>
+<list> After
+readme.tex 1 
+</list>
+<list> All
+Readme.md 1 
+</list>
+<list> Analysis
+readme.tex 1 readme.md 2 
+</list>
+<list> And
+testplan.txt 1 
+</list>
+<list> Andrew
+testplan.txt 1 readme.tex 3 readme.md 1 
+</list>
+<list> Arts
+readme.tex 2 
+</list>
+<list> As
+readme.tex 1 
+</list>
+<list> B
+tokenizer.c 2 readme.log 1 
+</list>
+<list> BE
+LICENSE 1 
+</list>
+<list> BUT
+LICENSE 1 
+</list>
+<list> BUwA
+readme.pdf 1 
+</list>
+<list> Baa
+baa.txt 1 
+</list>
+<list> Babel
+readme.log 2 
+</list>
+<list> Because
+readme.tex 1 
+</list>
+<list> Big
+readme.tex 1 readme.md 1 
+</list>
+<list> Binary
+readme.tex 1 
+</list>
+<list> Boo
+boo.txt 1 
+</list>
+<list> Brian
+Readme.md 1 
+</list>
+<list> C
+tokenizer.c 5 readme.pdf 3 
+</list>
+<list> CC
+Makefile 12 
+</list>
+<list> CFLAGS
+Makefile 9 
+</list>
+<list> CLAIM
+LICENSE 1 
+</list>
+<list> CONNECTION
+LICENSE 1 
+</list>
+<list> CONTRACT
+LICENSE 1 
+</list>
+<list> COPYRIGHT
+LICENSE 1 
+</list>
+<list> Case
+testplan.txt 2 
+</list>
+<list> Ch
+readme.pdf 1 
+</list>
+<list> Checking
+readme.log 12 
+</list>
+<list> Ci
+readme.pdf 1 
+</list>
+<list> Class
+readme.log 2 
+</list>
+<list> Clone
+tokenizer.c 3 
+</list>
+<list> CompareFuncT
+sorted-list.h 9 sorted-list.c 11 
+</list>
+<list> Copyright
+LICENSE 1 
+</list>
+<list> Creating
+readme.md 1 
+</list>
+<list> D
+tokenizer.c 2 readme.pdf 2 
+</list>
+<list> DAMAGES
+LICENSE 1 
+</list>
+<list> DCS
+Readme.md 1 
+</list>
+<list> DEALINGS
+LICENSE 1 
+</list>
+<list> DEV
+sorted-list.c 28 index.c 10 
+</list>
+<list> DIR
+index.c 2 
+</list>
+<list> DPC
+readme.log 1 
+</list>
+<list> Description
+readme.tex 1 readme.aux 1 
+</list>
+<list> Design
+readme.md 1 
+</list>
+<list> Detect
+readme.log 1 
+</list>
+<list> Document
+readme.log 2 
+</list>
+<list> E
+readme.pdf 1 
+</list>
+<list> END
+index.c 2 
+</list>
+<list> ERROR
+tokenizer.c 1 
+</list>
+<list> EVENT
+LICENSE 1 
+</list>
+<list> EXEOBJ
+Makefile 2 
+</list>
+<list> EXPRESS
+LICENSE 1 
+</list>
+<list> Each
+tokenizer.c 1 
+</list>
+<list> Else
+tokenizer.c 6 sorted-list.h 12 
+</list>
+<list> Error
+index.c 2 
+</list>
+<list> External
+readme.log 5 
+</list>
+<list> FILE
+index.c 4 
+</list>
+<list> FITNESS
+LICENSE 1 
+</list>
+<list> FOR
+LICENSE 2 
+</list>
+<list> FROM
+LICENSE 1 
+</list>
+<list> Fall
+Readme.md 1 
+</list>
+<list> Features
+readme.tex 1 readme.aux 1 
+</list>
+<list> File
+readme.log 2 
+</list>
+<list> FileListNode
+index.h 2 
+</list>
+<list> Filter
+readme.pdf 3 
+</list>
+<list> Finally
+readme.tex 1 
+</list>
+<list> FlateDecode
+readme.pdf 3 
+</list>
+<list> Font
+readme.log 34 
+</list>
+<list> For
+sorted-list.h 3 
+</list>
+<list> Fyk
+readme.pdf 1 
+</list>
+<list> G
+readme.pdf 1 
+</list>
+<list> Geometry
+readme.log 1 
+</list>
+<list> Gm
+readme.log 12 
+</list>
+<list> H
+tokenizer.h 4 sorted-list.h 6 readme.pdf 1 readme.log 1 index.h 4 
+</list>
+<list> HEADERS
+Makefile 8 
+</list>
+<list> HO
+readme.log 2 
+</list>
+<list> HOLDERS
+LICENSE 1 
+</list>
+<list> Having
+readme.tex 1 
+</list>
+<list> Here
+readme.log 2 
+</list>
+<list> Hexadecimal
+tokenizer.c 1 
+</list>
+<list> However
+readme.tex 1 
+</list>
+<list> I
+testplan.txt 5 readme.tex 1 readme.pdf 3 
+</list>
+<list> IMPLIED
+LICENSE 1 
+</list>
+<list> IN
+LICENSE 4 
+</list>
+<list> INCLUDING
+LICENSE 1 
+</list>
+<list> INDEX
+index.h 4 
+</list>
+<list> IS
+LICENSE 2 
+</list>
+<list> ISDIR
+index.c 2 
+</list>
+<list> If
+tokenizer.c 6 sorted-list.h 15 readme.tex 1 
+</list>
+<list> In
+tokenizer.c 3 testplan.txt 1 
+</list>
+<list> Indexer
+testplan.txt 1 readme.md 1 
+</list>
+<list> Info
+readme.log 31 
+</list>
+<list> Input
+testplan.txt 2 
+</list>
+<list> Inserting
+readme.md 1 
+</list>
+<list> Instead
+readme.tex 2 
+</list>
+<list> Integrity
+Readme.md 1 
+</list>
+<list> Invalid
+tokenizer.c 1 
+</list>
+<list> It
+tokenizer.c 3 sorted-list.h 3 readme.tex 3 
+</list>
+<list> Iterator
+sorted-list.h 3 
+</list>
+<list> J
+readme.pdf 4 
+</list>
+<list> JfR
+readme.pdf 1 
+</list>
+<list> Jones
+testplan.txt 1 readme.tex 3 readme.md 1 LICENSE 1 
+</list>
+<list> KIND
+LICENSE 1 
+</list>
+<list> KV
+readme.log 1 
+</list>
+<list> L
+readme.pdf 2 readme.log 1 
+</list>
+<list> LIABILITY
+LICENSE 1 
+</list>
+<list> LIABLE
+LICENSE 1 
+</list>
+<list> LIBS
+Makefile 8 
+</list>
+<list> LIBSL
+Makefile 5 
+</list>
+<list> LIBSOBJ
+Makefile 3 
+</list>
+<list> LIMITED
+LICENSE 1 
+</list>
+<list> LIST
+sorted-list.h 6 
+</list>
+<list> LaTeX
+readme.log 35 
+</list>
+<list> Length
+readme.pdf 3 
+</list>
+<list> Linked
+sorted-list.h 3 
+</list>
+<list> List
+testplan.txt 1 readme.tex 2 
+</list>
+<list> Live
+readme.log 2 
+</list>
+<list> Looping
+readme.tex 1 
+</list>
+<list> M
+readme.pdf 2 
+</list>
+<list> MAX
+index.c 2 
+</list>
+<list> MERCHANTABILITY
+LICENSE 1 
+</list>
+<list> MSB
+tokenizer.c 2 
+</list>
+<list> MUST
+sorted-list.h 3 
+</list>
+<list> Moore
+testplan.txt 1 readme.tex 3 readme.md 1 
+</list>
+<list> N
+readme.pdf 1 
+</list>
+<list> NO
+LICENSE 1 
+</list>
+<list> NONINFRINGEMENT
+LICENSE 1 
+</list>
+<list> NOT
+sorted-list.h 3 LICENSE 1 
+</list>
+<list> NULL
+tokenizer.c 22 sorted-list.h 15 sorted-list.c 4 index.c 14 
+</list>
+<list> Node
+sorted-list.h 12 sorted-list.c 50 
+</list>
+<list> Note
+sorted-list.h 6 readme.tex 1 
+</list>
+<list> Notes
+readme.tex 1 readme.md 1 
+</list>
+<list> O
+readme.tex 9 readme.pdf 2 readme.md 2 
+</list>
+<list> OBJECTS
+Makefile 10 
+</list>
+<list> OCT
+readme.log 1 
+</list>
+<list> OF
+LICENSE 4 
+</list>
+<list> OML
+readme.log 2 
+</list>
+<list> OMS
+readme.log 2 
+</list>
+<list> OMX
+readme.log 2 
+</list>
+<list> OR
+LICENSE 7 
+</list>
+<list> OS
+readme.tex 1 
+</list>
+<list> OT
+readme.log 2 
+</list>
+<list> OTHER
+LICENSE 2 
+</list>
+<list> OTHERWISE
+LICENSE 1 
+</list>
+<list> OUT
+LICENSE 1 
+</list>
+<list> One
+sorted-list.h 3 
+</list>
+<list> Output
+testplan.txt 2 readme.log 2 
+</list>
+<list> PARTICULAR
+LICENSE 1 
+</list>
+<list> PATH
+index.c 2 
+</list>
+<list> PDF
+readme.pdf 2 readme.log 7 
+</list>
+<list> PROVIDED
+LICENSE 1 
+</list>
+<list> PURPOSE
+LICENSE 1 
+</list>
+<list> Package
+readme.log 7 
+</list>
+<list> Page
+readme.log 1 
+</list>
+<list> Paul
+testplan.txt 1 readme.tex 3 readme.md 1 LICENSE 1 
+</list>
+<list> Permission
+LICENSE 1 
+</list>
+<list> Plan
+testplan.txt 2 
+</list>
+<list> Policy
+Readme.md 1 
+</list>
+<list> Populating
+readme.md 2 
+</list>
+<list> Print
+tokenizer.c 1 
+</list>
+<list> Printing
+readme.md 1 
+</list>
+<list> Professor
+Readme.md 1 
+</list>
+<list> Programming
+testplan.txt 1 readme.tex 2 Readme.md 1 
+</list>
+<list> Provides
+readme.log 2 
+</list>
+<list> Q
+readme.pdf 1 
+</list>
+<list> R
+readme.pdf 2 readme.log 1 
+</list>
+<list> Readme
+readme.tex 2 
+</list>
+<list> Returns
+readme.tex 1 
+</list>
+<list> Rq
+readme.pdf 1 
+</list>
+<list> Russell
+Readme.md 1 
+</list>
+<list> Rutgers
+readme.tex 2 
+</list>
+<list> S
+readme.pdf 1 index.c 2 
+</list>
+<list> SEEK
+index.c 4 
+</list>
+<list> SEP
+readme.log 1 
+</list>
+<list> SET
+index.c 2 
+</list>
+<list> SHALL
+LICENSE 1 
+</list>
+<list> SLCreate
+sorted-list.h 6 sorted-list.c 5 readme.tex 1 main.c 1 index.c 4 
+</list>
+<list> SLCreateIterator
+sorted-list.h 9 sorted-list.c 5 readme.tex 1 main.c 1 index.c 12 
+</list>
+<list> SLDestroy
+sorted-list.h 6 sorted-list.c 5 readme.tex 1 
+</list>
+<list> SLDestroyIterator
+sorted-list.h 6 sorted-list.c 5 readme.tex 1 index.c 8 
+</list>
+<list> SLFind
+sorted-list.h 2 sorted-list.c 4 index.c 4 
+</list>
+<list> SLInsert
+sorted-list.h 6 sorted-list.c 5 readme.tex 2 main.c 1 index.c 8 
+</list>
+<list> SLNextItem
+sorted-list.h 12 sorted-list.c 5 readme.tex 1 main.c 1 index.c 16 
+</list>
+<list> SLPrint
+sorted-list.c 8 
+</list>
+<list> SLRemove
+sorted-list.h 9 sorted-list.c 5 readme.tex 1 
+</list>
+<list> SOFTWARE
+LICENSE 3 
+</list>
+<list> SORTED
+sorted-list.h 6 
+</list>
+<list> School
+readme.tex 2 
+</list>
+<list> Sciences
+readme.tex 2 
+</list>
+<list> Search
+readme.tex 1 
+</list>
+<list> ShE
+test.sh 4 
+</list>
+<list> Software
+LICENSE 5 
+</list>
+<list> Sorted
+testplan.txt 1 sorted-list.h 6 readme.tex 2 
+</list>
+<list> SortedList
+sorted-list.h 6 sorted-list.c 6 
+</list>
+<list> SortedListIterT
+sorted-list.h 3 
+</list>
+<list> SortedListIterator
+sorted-list.h 6 sorted-list.c 3 
+</list>
+<list> SortedListIteratorPtr
+sorted-list.h 12 sorted-list.c 12 main.c 1 index.c 12 
+</list>
+<list> SortedListPtr
+sorted-list.h 20 sorted-list.c 26 main.c 1 index.h 2 index.c 4 
+</list>
+<list> SortedListT
+sorted-list.h 3 
+</list>
+<list> Space
+tokenizer.c 3 
+</list>
+<list> Standard
+readme.log 4 
+</list>
+<list> Systems
+testplan.txt 1 readme.tex 2 Readme.md 1 
+</list>
+<list> T
+readme.pdf 2 readme.log 3 
+</list>
+<list> TARGET
+Makefile 16 
+</list>
+<list> THE
+LICENSE 6 
+</list>
+<list> TKCreate
+tokenizer.h 2 tokenizer.c 13 index.c 2 
+</list>
+<list> TKDestroy
+tokenizer.h 2 tokenizer.c 7 
+</list>
+<list> TKGetNextToken
+tokenizer.h 2 tokenizer.c 7 readme.tex 1 index.c 2 
+</list>
+<list> TO
+LICENSE 1 
+</list>
+<list> TOKENIZER
+tokenizer.h 4 
+</list>
+<list> TORT
+LICENSE 1 
+</list>
+<list> TeX
+readme.log 4 
+</list>
+<list> Test
+testplan.txt 4 
+</list>
+<list> The
+tokenizer.c 5 sorted-list.h 3 readme.tex 3 readme.md 1 LICENSE 1 
+</list>
+<list> Then
+readme.tex 1 
+</list>
+<list> There
+readme.tex 1 
+</list>
+<list> This
+tokenizer.c 3 readme.tex 9 readme.log 2 
+</list>
+<list> Tokenizer
+tokenizer.h 2 tokenizer.c 3 readme.tex 1 
+</list>
+<list> TokenizerT
+tokenizer.h 10 tokenizer.c 34 readme.tex 1 index.c 2 
+</list>
+<list> Traversing
+readme.md 1 
+</list>
+<list> U
+readme.pdf 3 readme.log 2 
+</list>
+<list> USE
+LICENSE 1 
+</list>
+<list> UY
+readme.pdf 1 
+</list>
+<list> University
+readme.tex 2 
+</list>
+<list> V
+readme.pdf 1 
+</list>
+<list> VTeX
+readme.log 2 
+</list>
+<list> Version
+readme.log 2 
+</list>
+<list> W
+readme.pdf 4 readme.log 1 
+</list>
+<list> WARRANTIES
+LICENSE 1 
+</list>
+<list> WARRANTY
+LICENSE 1 
+</list>
+<list> WHETHER
+LICENSE 1 
+</list>
+<list> WITH
+LICENSE 1 
+</list>
+<list> WITHOUT
+LICENSE 1 
+</list>
+<list> Wall
+Makefile 7 
+</list>
+<list> When
+sorted-list.h 3 
+</list>
+<list> While
+readme.tex 1 
+</list>
+<list> WordListNode
+index.h 2 
+</list>
+<list> X
+readme.pdf 4 
+</list>
+<list> XKs
+readme.pdf 1 
+</list>
+<list> Y
+readme.pdf 2 
+</list>
+<list> You
+tokenizer.h 2 tokenizer.c 6 test.sh 2 sorted-list.h 33 
+</list>
+<list> Z
+tokenizer.c 2 
+</list>
+<list> a
+tokenizer.c 37 testplan.txt 2 test.sh 2 sorted-list.h 48 readme.tex 8 readme.md 6 inverted.txt 1 Makefile 1 LICENSE 1 6.txt 1 
+</list>
+<list> above
+LICENSE 1 
+</list>
+<list> abovecaptionskip
+readme.log 2 
+</list>
+<list> academicintegrity
+Readme.md 1 
+</list>
+<list> active
+sorted-list.h 3 
+</list>
+<list> actual
+test.sh 31 readme.tex 2 
+</list>
+<list> actually
+readme.tex 1 
+</list>
+<list> add
+sorted-list.c 3 
+</list>
+<list> address
+sorted-list.h 3 
+</list>
+<list> affectt
+sorted-list.h 3 
+</list>
+<list> afrikaans
+readme.log 2 
+</list>
+<list> after
+tokenizer.c 3 
+</list>
+<list> against
+readme.tex 1 
+</list>
+<list> all
+tokenizer.c 4 sorted-list.h 6 readme.tex 3 Makefile 4 LICENSE 1 
+</list>
+<list> allocate
+tokenizer.c 6 
+</list>
+<list> allocated
+tokenizer.c 6 sorted-list.h 3 readme.tex 1 
+</list>
+<list> allocates
+readme.tex 4 
+</list>
+<list> allow
+sorted-list.h 3 
+</list>
+<list> allows
+readme.tex 1 
+</list>
+<list> already
+index.c 4 
+</list>
+<list> also
+readme.tex 1 
+</list>
+<list> amsfon
+readme.log 1 
+</list>
+<list> amsfont
+readme.log 1 
+</list>
+<list> amsfonts
+readme.log 5 
+</list>
+<list> an
+sorted-list.h 12 readme.tex 6 
+</list>
+<list> analysis
+readme.tex 1 
+</list>
+<list> ancientgreek
+readme.log 2 
+</list>
+<list> and
+tokenizer.c 7 testplan.txt 2 sorted-list.h 3 readme.tex 15 readme.md 6 readme.log 3 LICENSE 4 
+</list>
+<list> andrew
+inverted.txt 1 8.txt 1 2.txt 1 
+</list>
+<list> another
+readme.md 1 
+</list>
+<list> ansi
+Makefile 3 
+</list>
+<list> any
+testplan.txt 1 sorted-list.h 9 LICENSE 1 
+</list>
+<list> appropriately
+readme.tex 1 
+</list>
+<list> ar
+Makefile 1 
+</list>
+<list> arabi
+readme.log 2 
+</list>
+<list> are
+sorted-list.h 6 readme.tex 4 
+</list>
+<list> argc
+tokenizer.c 2 index.c 2 
+</list>
+<list> arguments
+tokenizer.c 6 readme.tex 1 
+</list>
+<list> argv
+tokenizer.c 6 index.c 6 
+</list>
+<list> armenian
+readme.log 2 
+</list>
+<list> around
+readme.tex 1 
+</list>
+<list> article
+readme.tex 2 readme.log 4 
+</list>
+<list> as
+tokenizer.h 2 tokenizer.c 15 sorted-list.h 30 readme.tex 1 readme.md 1 readme.log 1 
+</list>
+<list> ascii
+tokenizer.c 3 
+</list>
+<list> assamese
+readme.log 2 
+</list>
+<list> assignment
+readme.tex 1 
+</list>
+<list> associated
+LICENSE 1 
+</list>
+<list> assume
+readme.tex 1 
+</list>
+<list> assuming
+tokenizer.c 3 
+</list>
+<list> assured
+readme.tex 1 
+</list>
+<list> assuring
+readme.tex 1 
+</list>
+<list> at
+readme.tex 3 
+</list>
+<list> attempting
+readme.md 1 
+</list>
+<list> author
+readme.tex 2 
+</list>
+<list> auto
+readme.log 1 
+</list>
+<list> aux
+readme.log 6 
+</list>
+<list> b
+tokenizer.c 5 test.sh 9 readme.pdf 2 readme.log 4 
+</list>
+<list> baa
+testplan.txt 1 
+</list>
+<list> backspace
+tokenizer.c 1 
+</list>
+<list> bad
+testplan.txt 1 
+</list>
+<list> base
+readme.log 4 
+</list>
+<list> bash
+test.sh 1 readme.tex 1 
+</list>
+<list> basque
+readme.log 2 
+</list>
+<list> be
+tokenizer.c 7 sorted-list.h 18 sorted-list.c 3 inverted.txt 1 Readme.md 1 LICENSE 1 8.txt 1 
+</list>
+<list> been
+sorted-list.h 3 readme.tex 1 
+</list>
+<list> before
+tokenizer.c 3 sorted-list.h 3 readme.tex 1 
+</list>
+<list> begin
+readme.tex 2 
+</list>
+<list> beginning
+sorted-list.h 6 
+</list>
+<list> being
+tokenizer.c 3 readme.md 1 
+</list>
+<list> bell
+tokenizer.c 1 
+</list>
+<list> belowcaptionskip
+readme.log 2 
+</list>
+<list> bengali
+readme.log 2 
+</list>
+<list> bibindent
+readme.log 2 
+</list>
+<list> bin
+test.sh 1 
+</list>
+<list> bindingoffset
+readme.log 1 
+</list>
+<list> bokmal
+readme.log 2 
+</list>
+<list> boo
+testplan.txt 1 
+</list>
+<list> boring
+readme.tex 1 
+</list>
+<list> bottom
+readme.tex 1 
+</list>
+<list> break
+tokenizer.c 28 main.c 1 index.c 8 
+</list>
+<list> brk
+tokenizer.c 6 
+</list>
+<list> bulgarian
+readme.log 2 
+</list>
+<list> but
+sorted-list.h 6 
+</list>
+<list> bworld
+test.sh 1 
+</list>
+<list> by
+tokenizer.c 6 test.sh 4 sorted-list.h 6 readme.tex 4 readme.md 3 
+</list>
+<list> bytes
+readme.log 2 
+</list>
+<list> c
+tokenizer.c 30 sorted-list.c 3 readme.log 20 main.c 1 Makefile 18 
+</list>
+<list> called
+sorted-list.h 3 
+</list>
+<list> caller
+tokenizer.c 3 sorted-list.h 6 readme.tex 1 
+</list>
+<list> can
+sorted-list.h 9 readme.tex 3 inverted.txt 1 8.txt 1 
+</list>
+<list> carriage
+tokenizer.c 1 
+</list>
+<list> case
+tokenizer.c 21 testplan.txt 2 readme.md 2 
+</list>
+<list> cases
+testplan.txt 2 readme.tex 3 
+</list>
+<list> cat
+baa.txt 1 
+</list>
+<list> catalan
+readme.log 2 
+</list>
+<list> cf
+sorted-list.h 6 sorted-list.c 41 
+</list>
+<list> change
+tokenizer.c 3 
+</list>
+<list> char
+tokenizer.h 10 tokenizer.c 40 main.c 2 index.h 4 index.c 28 
+</list>
+<list> character
+tokenizer.c 8 
+</list>
+<list> characters
+tokenizer.c 5 readme.log 2 
+</list>
+<list> charge
+LICENSE 1 
+</list>
+<list> class
+readme.log 2 
+</list>
+<list> clean
+test.sh 1 readme.tex 1 Makefile 4 
+</list>
+<list> clearpage
+readme.tex 2 
+</list>
+<list> clo
+readme.log 4 
+</list>
+<list> cls
+readme.log 2 
+</list>
+<list> cm
+readme.log 7 
+</list>
+<list> cmbx
+readme.log 2 
+</list>
+<list> cmex
+readme.log 7 
+</list>
+<list> cmm
+readme.log 2 
+</list>
+<list> cmmi
+readme.log 1 
+</list>
+<list> cmr
+readme.log 10 
+</list>
+<list> cmsy
+readme.log 2 
+</list>
+<list> cnth
+readme.log 1 
+</list>
+<list> cntv
+readme.log 1 
+</list>
+<list> code
+testplan.txt 2 readme.tex 1 inverted.txt 1 Readme.md 1 8.txt 1 
+</list>
+<list> columnsep
+readme.log 1 
+</list>
+<list> comparator
+sorted-list.h 15 
+</list>
+<list> compareDoubles
+main.c 1 
+</list>
+<list> compareFileNode
+index.h 2 index.c 4 
+</list>
+<list> compareInts
+main.c 2 
+</list>
+<list> compareStrings
+main.c 1 index.c 2 
+</list>
+<list> compareWordNode
+index.h 2 index.c 4 
+</list>
+<list> compares
+readme.tex 1 
+</list>
+<list> completion
+testplan.txt 1 
+</list>
+<list> complicated
+testplan.txt 1 
+</list>
+<list> complication
+sorted-list.h 3 
+</list>
+<list> compressed
+readme.log 2 
+</list>
+<list> conditional
+readme.log 1 
+</list>
+<list> conditions
+LICENSE 1 
+</list>
+<list> confirm
+readme.tex 1 
+</list>
+<list> confirming
+testplan.txt 1 
+</list>
+<list> consider
+sorted-list.h 3 
+</list>
+<list> considered
+readme.tex 1 
+</list>
+<list> consistent
+Readme.md 1 
+</list>
+<list> const
+index.c 4 
+</list>
+<list> constant
+readme.md 2 
+</list>
+<list> containing
+tokenizer.c 3 
+</list>
+<list> contains
+tokenizer.c 2 
+</list>
+<list> contents
+index.c 10 
+</list>
+<list> contentsline
+readme.aux 2 
+</list>
+<list> continue
+tokenizer.c 7 
+</list>
+<list> control
+readme.log 2 
+</list>
+<list> copied
+tokenizer.h 2 
+</list>
+<list> copies
+LICENSE 2 
+</list>
+<list> coptic
+readme.log 2 
+</list>
+<list> copy
+tokenizer.c 3 LICENSE 2 
+</list>
+<list> copyright
+LICENSE 1 
+</list>
+<list> correct
+readme.tex 1 readme.md 1 
+</list>
+<list> could
+readme.tex 1 
+</list>
+<list> count
+readme.tex 1 readme.md 1 readme.log 19 index.h 2 index.c 10 
+</list>
+<list> counter
+readme.tex 1 
+</list>
+<list> crash
+testplan.txt 1 
+</list>
+<list> create
+sorted-list.h 3 
+</list>
+<list> created
+testplan.txt 1 sorted-list.h 6 
+</list>
+<list> creates
+tokenizer.c 3 sorted-list.h 6 readme.tex 3 
+</list>
+<list> creating
+readme.md 1 
+</list>
+<list> croatian
+readme.log 2 
+</list>
+<list> cs
+Readme.md 1 
+</list>
+<list> current
+tokenizer.h 2 readme.tex 1 index.c 6 
+</list>
+<list> czech
+readme.log 2 
+</list>
+<list> d
+sorted-list.c 3 readme.pdf 5 main.c 8 index.c 4 
+</list>
+<list> danis
+readme.log 2 
+</list>
+<list> dataPtr
+sorted-list.h 3 sorted-list.c 32 
+</list>
+<list> date
+readme.tex 2 
+</list>
+<list> deal
+LICENSE 1 
+</list>
+<list> default
+tokenizer.c 2 Makefile 8 
+</list>
+<list> defaults
+readme.log 12 
+</list>
+<list> define
+tokenizer.h 2 sorted-list.h 3 sorted-list.c 2 index.h 2 index.c 2 
+</list>
+<list> definition
+testplan.txt 1 
+</list>
+<list> deletion
+readme.tex 1 
+</list>
+<list> delimited
+tokenizer.c 3 
+</list>
+<list> delimiters
+tokenizer.h 2 
+</list>
+<list> delims
+tokenizer.c 1 
+</list>
+<list> dependent
+tokenizer.c 3 
+</list>
+<list> depends
+readme.tex 1 
+</list>
+<list> deserves
+sorted-list.c 3 
+</list>
+<list> destinations
+readme.log 2 
+</list>
+<list> destroy
+sorted-list.h 3 
+</list>
+<list> destroyLinkedList
+sorted-list.c 11 
+</list>
+<list> destroyed
+tokenizer.c 3 
+</list>
+<list> destroys
+tokenizer.c 3 sorted-list.h 6 
+</list>
+<list> detected
+readme.log 3 
+</list>
+<list> detecting
+readme.log 1 
+</list>
+<list> different
+readme.md 1 
+</list>
+<list> dimen
+readme.log 10 
+</list>
+<list> dimlist
+readme.log 1 
+</list>
+<list> directory
+readme.md 1 index.c 16 
+</list>
+<list> dirent
+index.c 4 
+</list>
+<list> disconnected
+readme.tex 1 
+</list>
+<list> disconnecting
+readme.tex 1 
+</list>
+<list> dist
+readme.log 16 
+</list>
+<list> distribute
+LICENSE 1 
+</list>
+<list> dname
+index.c 6 
+</list>
+<list> do
+tokenizer.c 1 LICENSE 1 
+</list>
+<list> document
+readme.tex 4 readme.log 2 
+</list>
+<list> documentation
+LICENSE 1 
+</list>
+<list> documentclass
+readme.tex 2 
+</list>
+<list> does
+readme.tex 2 readme.md 2 
+</list>
+<list> dog
+boo.txt 1 
+</list>
+<list> doing
+readme.tex 1 
+</list>
+<list> double
+main.c 4 
+</list>
+<list> driver
+readme.log 3 
+</list>
+<list> dumylang
+readme.log 2 
+</list>
+<list> dutch
+readme.log 2 
+</list>
+<list> dynamically
+tokenizer.c 6 sorted-list.h 3 
+</list>
+<list> e
+test.sh 1 readme.pdf 1 readme.log 2 
+</list>
+<list> eE
+readme.pdf 1 
+</list>
+<list> eH
+readme.pdf 1 
+</list>
+<list> each
+readme.tex 1 
+</list>
+<list> echo
+test.sh 30 
+</list>
+<list> edu
+Readme.md 1 
+</list>
+<list> efficiency
+tokenizer.c 3 
+</list>
+<list> either
+readme.md 1 
+</list>
+<list> else
+tokenizer.c 14 test.sh 15 sorted-list.c 2 index.c 4 
+</list>
+<list> empty
+sorted-list.h 3 readme.tex 2 
+</list>
+<list> enabled
+readme.log 6 
+</list>
+<list> encapsulated
+sorted-list.h 6 
+</list>
+<list> end
+tokenizer.c 1 sorted-list.h 9 readme.tex 3 
+</list>
+<list> endif
+tokenizer.h 2 sorted-list.h 3 index.h 2 
+</list>
+<list> endobj
+readme.pdf 1 
+</list>
+<list> endstream
+readme.pdf 1 
+</list>
+<list> english
+readme.log 2 
+</list>
+<list> enough
+testplan.txt 1 
+</list>
+<list> entering
+readme.log 2 
+</list>
+<list> entire
+testplan.txt 1 
+</list>
+<list> entry
+index.c 6 
+</list>
+<list> equal
+sorted-list.h 6 
+</list>
+<list> error
+tokenizer.c 1 readme.log 2 
+</list>
+<list> escape
+tokenizer.c 3 
+</list>
+<list> escapeChar
+tokenizer.c 2 
+</list>
+<list> escapeWithSeparators
+tokenizer.c 2 
+</list>
+<list> esperanto
+readme.log 2 
+</list>
+<list> estonian
+readme.log 2 
+</list>
+<list> ethiopic
+readme.log 2 
+</list>
+<list> even
+readme.log 1 
+</list>
+<list> evensidemargin
+readme.log 1 
+</list>
+<list> every
+readme.tex 2 readme.md 3 
+</list>
+<list> example
+sorted-list.h 3 
+</list>
+<list> exceptions
+readme.log 2 
+</list>
+<list> exist
+readme.md 2 
+</list>
+<list> existing
+sorted-list.h 3 
+</list>
+<list> exists
+index.c 2 
+</list>
+<list> exit
+index.c 2 
+</list>
+<list> expect
+test.sh 30 sorted-list.h 3 readme.tex 1 
+</list>
+<list> expected
+sorted-list.h 3 readme.tex 1 
+</list>
+<list> extended
+readme.log 2 
+</list>
+<list> extra
+readme.log 2 
+</list>
+<list> f
+tokenizer.c 5 sorted-list.c 9 readme.pdf 1 index.h 8 index.c 36 Makefile 13 
+</list>
+<list> facilities
+readme.log 1 
+</list>
+<list> failed
+test.sh 15 
+</list>
+<list> fails
+readme.tex 1 
+</list>
+<list> farsi
+readme.log 2 
+</list>
+<list> fclose
+index.c 4 
+</list>
+<list> feature
+tokenizer.c 3 
+</list>
+<list> feed
+tokenizer.c 2 
+</list>
+<list> feeling
+readme.tex 1 
+</list>
+<list> few
+testplan.txt 1 
+</list>
+<list> fi
+test.sh 15 
+</list>
+<list> figure
+readme.log 2 
+</list>
+<list> file
+readme.tex 1 readme.md 5 readme.log 4 index.c 60 
+</list>
+<list> fileList
+index.h 2 index.c 14 
+</list>
+<list> fileListNode
+index.h 2 index.c 16 
+</list>
+<list> fileName
+index.h 2 index.c 12 
+</list>
+<list> filename
+readme.md 1 index.c 4 
+</list>
+<list> files
+index.c 8 LICENSE 1 
+</list>
+<list> filesize
+index.c 6 
+</list>
+<list> fill
+tokenizer.h 2 tokenizer.c 6 sorted-list.h 27 
+</list>
+<list> filled
+tokenizer.c 3 
+</list>
+<list> find
+readme.tex 1 readme.md 2 
+</list>
+<list> finnis
+readme.log 2 
+</list>
+<list> first
+tokenizer.c 1 readme.md 1 
+</list>
+<list> fl
+index.c 8 
+</list>
+<list> flags
+sorted-list.c 3 
+</list>
+<list> fln
+index.c 20 
+</list>
+<list> fn
+index.c 14 
+</list>
+<list> fname
+index.c 6 
+</list>
+<list> folder
+testplan.txt 1 
+</list>
+<list> following
+readme.md 1 LICENSE 1 
+</list>
+<list> font
+readme.log 7 
+</list>
+<list> fonts
+readme.log 11 
+</list>
+<list> footins
+readme.log 1 
+</list>
+<list> footskip
+readme.log 1 
+</list>
+<list> fopen
+index.c 4 
+</list>
+<list> for
+tokenizer.c 28 testplan.txt 3 sorted-list.h 3 sorted-list.c 3 readme.tex 6 readme.log 25 inverted.txt 1 7.txt 2 
+</list>
+<list> form
+tokenizer.c 1 
+</list>
+<list> format
+tokenizer.c 3 readme.log 2 
+</list>
+<list> formatting
+tokenizer.c 1 
+</list>
+<list> fprintf
+tokenizer.c 1 index.c 6 
+</list>
+<list> fread
+index.c 2 
+</list>
+<list> free
+tokenizer.c 12 sorted-list.c 21 readme.tex 1 LICENSE 1 
+</list>
+<list> freed
+readme.tex 2 
+</list>
+<list> freeing
+tokenizer.c 3 sorted-list.h 3 readme.tex 2 
+</list>
+<list> frees
+readme.tex 3 
+</list>
+<list> french
+readme.log 2 
+</list>
+<list> friulan
+readme.log 2 
+</list>
+<list> from
+tokenizer.c 3 testplan.txt 1 sorted-list.h 12 readme.tex 5 readme.md 1 
+</list>
+<list> fseek
+index.c 4 
+</list>
+<list> ftell
+index.c 4 
+</list>
+<list> full
+testplan.txt 1 
+</list>
+<list> function
+tokenizer.c 15 sorted-list.h 48 
+</list>
+<list> functions
+sorted-list.h 3 
+</list>
+<list> furnished
+LICENSE 1 
+</list>
+<list> future
+tokenizer.c 3 
+</list>
+<list> g
+readme.pdf 1 
+</list>
+<list> galician
+readme.log 2 
+</list>
+<list> gcc
+Makefile 4 
+</list>
+<list> ge
+readme.log 2 
+</list>
+<list> generic
+readme.log 3 
+</list>
+<list> geometry
+readme.tex 2 readme.log 6 
+</list>
+<list> german
+readme.log 2 
+</list>
+<list> get
+index.c 8 
+</list>
+<list> giant
+inverted.txt 1 7.txt 1 
+</list>
+<list> given
+tokenizer.c 9 sorted-list.h 12 
+</list>
+<list> glasses
+inverted.txt 1 5.txt 1 
+</list>
+<list> go
+readme.tex 1 
+</list>
+<list> granted
+LICENSE 1 
+</list>
+<list> graphics
+readme.log 1 
+</list>
+<list> greek
+readme.log 2 
+</list>
+<list> guitar
+inverted.txt 1 3.txt 1 
+</list>
+<list> gujarati
+readme.log 2 
+</list>
+<list> h
+tokenizer.h 2 tokenizer.c 12 test.sh 1 sorted-list.h 6 sorted-list.c 12 readme.pdf 1 readme.log 12 main.c 4 index.c 22 Makefile 5 
+</list>
+<list> hD
+readme.pdf 1 
+</list>
+<list> handling
+tokenizer.c 1 
+</list>
+<list> happens
+sorted-list.h 3 readme.md 1 
+</list>
+<list> has
+testplan.txt 1 sorted-list.h 3 readme.tex 2 
+</list>
+<list> have
+tokenizer.c 1 testplan.txt 2 test.sh 2 readme.tex 1 inverted.txt 1 6.txt 1 
+</list>
+<list> head
+sorted-list.h 3 sorted-list.c 98 readme.tex 2 
+</list>
+<list> headheight
+readme.log 1 
+</list>
+<list> headsep
+readme.log 1 
+</list>
+<list> hel
+test.sh 3 
+</list>
+<list> hello
+test.sh 12 inverted.txt 1 2.txt 1 
+</list>
+<list> here
+tokenizer.c 2 
+</list>
+<list> hereby
+LICENSE 1 
+</list>
+<list> hex
+test.sh 2 
+</list>
+<list> hi
+inverted.txt 1 1.txt 5 
+</list>
+<list> hindi
+readme.log 2 
+</list>
+<list> hoffset
+readme.log 1 
+</list>
+<list> horizontal
+tokenizer.c 1 
+</list>
+<list> houston
+inverted.txt 1 6.txt 1 
+</list>
+<list> how
+readme.log 2 
+</list>
+<list> http
+Readme.md 1 
+</list>
+<list> hyphenation
+readme.log 4 
+</list>
+<list> i
+tokenizer.c 78 sorted-list.c 87 readme.pdf 3 readme.log 4 main.c 4 inverted.txt 1 index.c 6 5.txt 1 
+</list>
+<list> ibycus
+readme.log 2 
+</list>
+<list> icelandic
+readme.log 2 
+</list>
+<list> if
+tokenizer.c 39 testplan.txt 1 test.sh 15 sorted-list.h 15 sorted-list.c 87 readme.md 3 main.c 1 index.c 30 
+</list>
+<list> ifndef
+tokenizer.h 2 sorted-list.h 3 index.h 2 
+</list>
+<list> ifpdf
+readme.log 4 
+</list>
+<list> ifvtex
+readme.log 3 
+</list>
+<list> ifxetex
+readme.log 4 
+</list>
+<list> immutable
+tokenizer.c 3 
+</list>
+<list> implement
+sorted-list.h 3 
+</list>
+<list> implementation
+tokenizer.h 2 tokenizer.c 6 sorted-list.h 27 
+</list>
+<list> in
+tokenizer.h 2 tokenizer.c 13 sorted-list.h 51 sorted-list.c 6 readme.tex 6 readme.md 3 readme.log 2 index.c 10 LICENSE 2 
+</list>
+<list> include
+tokenizer.h 2 tokenizer.c 9 sorted-list.h 3 sorted-list.c 12 main.c 4 index.c 22 
+</list>
+<list> included
+readme.tex 1 LICENSE 1 
+</list>
+<list> including
+LICENSE 1 
+</list>
+<list> increase
+tokenizer.c 3 
+</list>
+<list> incrementing
+readme.md 1 
+</list>
+<list> index
+tokenizer.c 43 index.c 2 Readme.md 1 Makefile 2 
+</list>
+<list> individually
+readme.tex 1 
+</list>
+<list> indonesian
+readme.log 2 
+</list>
+<list> info
+readme.log 2 
+</list>
+<list> initilize
+tokenizer.c 3 
+</list>
+<list> input
+readme.log 29 index.c 16 
+</list>
+<list> inputted
+readme.md 2 
+</list>
+<list> inserting
+readme.md 3 
+</list>
+<list> inserts
+sorted-list.h 3 readme.tex 1 
+</list>
+<list> int
+tokenizer.c 22 sorted-list.h 15 sorted-list.c 18 main.c 11 index.h 6 index.c 12 
+</list>
+<list> interested
+testplan.txt 1 
+</list>
+<list> interlingua
+readme.log 2 
+</list>
+<list> into
+sorted-list.h 3 readme.tex 1 readme.md 2 
+</list>
+<list> involves
+readme.md 1 
+</list>
+<list> irish
+readme.log 2 
+</list>
+<list> is
+tokenizer.c 17 testplan.txt 1 sorted-list.h 36 sorted-list.c 3 readme.tex 8 readme.md 6 readme.log 5 inverted.txt 1 index.c 2 LICENSE 2 4.txt 1 2.txt 1 1.txt 1 
+</list>
+<list> isAlphanumeric
+tokenizer.c 4 
+</list>
+<list> it
+tokenizer.c 21 testplan.txt 1 sorted-list.h 24 readme.tex 10 readme.md 5 readme.log 2 
+</list>
+<list> italian
+readme.log 2 
+</list>
+<list> item
+sorted-list.h 9 sorted-list.c 30 readme.tex 1 
+</list>
+<list> iter
+sorted-list.h 6 
+</list>
+<list> iterate
+readme.tex 1 
+</list>
+<list> iterated
+tokenizer.c 3 
+</list>
+<list> iterator
+sorted-list.h 24 readme.tex 5 
+</list>
+<list> iterators
+readme.tex 1 
+</list>
+<list> its
+readme.tex 1 readme.md 1 readme.log 1 
+</list>
+<list> j
+tokenizer.c 84 readme.pdf 1 
+</list>
+<list> jisch
+inverted.txt 1 4.txt 1 
+</list>
+<list> jish
+inverted.txt 1 5.txt 1 
+</list>
+<list> jm
+readme.pdf 1 
+</list>
+<list> k
+test.sh 3 
+</list>
+<list> kannada
+readme.log 2 
+</list>
+<list> keeps
+tokenizer.c 3 
+</list>
+<list> kept
+sorted-list.h 6 
+</list>
+<list> key
+readme.log 1 
+</list>
+<list> keyval
+readme.log 2 
+</list>
+<list> king
+sorted-list.c 3 
+</list>
+<list> kurmanji
+readme.log 2 
+</list>
+<list> kworld
+test.sh 3 
+</list>
+<list> l
+test.sh 1 
+</list>
+<list> lame
+inverted.txt 1 4.txt 1 
+</list>
+<list> last
+readme.tex 1 
+</list>
+<list> latex
+readme.log 6 
+</list>
+<list> latin
+readme.log 2 
+</list>
+<list> latvian
+readme.log 2 
+</list>
+<list> layout
+readme.log 1 
+</list>
+<list> layoutheight
+readme.log 1 
+</list>
+<list> layouthoffset
+readme.log 1 
+</list>
+<list> layoutoffset
+readme.log 1 
+</list>
+<list> layoutvoffset
+readme.log 1 
+</list>
+<list> layoutwidth
+readme.log 1 
+</list>
+<list> le
+test.sh 1 
+</list>
+<list> leap
+inverted.txt 1 7.txt 1 
+</list>
+<list> leaves
+readme.tex 1 
+</list>
+<list> left
+tokenizer.c 1 readme.tex 1 
+</list>
+<list> less
+tokenizer.c 2 
+</list>
+<list> letterpaper
+readme.tex 1 readme.log 1 
+</list>
+<list> lexicographically
+readme.md 1 
+</list>
+<list> libgen
+index.c 2 
+</list>
+<list> libsl
+Makefile 1 
+</list>
+<list> like
+inverted.txt 1 5.txt 1 
+</list>
+<list> limitation
+LICENSE 1 
+</list>
+<list> limits
+index.c 2 
+</list>
+<list> line
+tokenizer.c 2 readme.log 33 
+</list>
+<list> linear
+readme.tex 2 
+</list>
+<list> linked
+readme.tex 1 
+</list>
+<list> linkedListAdd
+sorted-list.c 8 
+</list>
+<list> linkedListFind
+sorted-list.c 6 
+</list>
+<list> linkedListRemove
+sorted-list.c 8 
+</list>
+<list> linux
+index.c 1 
+</list>
+<list> list
+tokenizer.c 6 sorted-list.h 77 sorted-list.c 12 readme.tex 12 readme.md 8 main.c 1 inverted.txt 80 index.c 6 Makefile 3 
+</list>
+<list> lithuanian
+readme.log 2 
+</list>
+<list> lm
+Makefile 4 
+</list>
+<list> lo
+test.sh 2 
+</list>
+<list> loaded
+readme.log 7 
+</list>
+<list> local
+readme.log 18 
+</list>
+<list> log
+readme.tex 1 
+</list>
+<list> longer
+tokenizer.c 3 
+</list>
+<list> look
+readme.tex 1 
+</list>
+<list> loop
+tokenizer.c 1 
+</list>
+<list> lovak
+readme.log 2 
+</list>
+<list> m
+test.sh 1 readme.pdf 1 readme.log 15 
+</list>
+<list> ma
+readme.log 2 
+</list>
+<list> mag
+readme.log 1 
+</list>
+<list> main
+tokenizer.c 2 main.c 2 index.c 2 Makefile 2 
+</list>
+<list> maintained
+sorted-list.h 3 
+</list>
+<list> maintaining
+sorted-list.h 3 
+</list>
+<list> make
+testplan.txt 1 test.sh 2 
+</list>
+<list> makes
+readme.tex 1 
+</list>
+<list> maketitle
+readme.tex 1 
+</list>
+<list> malayalam
+readme.log 2 
+</list>
+<list> malloc
+tokenizer.c 14 sorted-list.c 9 main.c 2 index.c 6 
+</list>
+<list> man
+inverted.txt 1 7.txt 1 
+</list>
+<list> mankind
+inverted.txt 1 7.txt 1 
+</list>
+<list> map
+readme.log 4 
+</list>
+<list> marginparsep
+readme.log 1 
+</list>
+<list> marginparwidth
+readme.log 1 
+</list>
+<list> max
+readme.log 6 
+</list>
+<list> may
+tokenizer.c 3 
+</list>
+<list> memory
+tokenizer.c 6 sorted-list.h 3 readme.tex 5 readme.log 6 
+</list>
+<list> memset
+tokenizer.c 12 sorted-list.c 3 index.c 2 
+</list>
+<list> merge
+LICENSE 1 
+</list>
+<list> messages
+readme.log 2 
+</list>
+<list> method
+readme.tex 2 
+</list>
+<list> minus
+readme.log 1 
+</list>
+<list> mm
+readme.log 1 
+</list>
+<list> mmmmm
+test.sh 1 
+</list>
+<list> mode
+readme.log 4 index.c 2 
+</list>
+<list> modes
+readme.log 1 
+</list>
+<list> modified
+sorted-list.h 3 
+</list>
+<list> modify
+LICENSE 1 
+</list>
+<list> mongolian
+readme.log 2 
+</list>
+<list> mongolianlmc
+readme.log 2 
+</list>
+<list> monogreek
+readme.log 2 
+</list>
+<list> more
+readme.tex 1 
+</list>
+<list> mp
+readme.log 3 
+</list>
+<list> mparswitchfalse
+readme.log 1 
+</list>
+<list> much
+readme.log 2 
+</list>
+<list> multiletter
+readme.log 2 
+</list>
+<list> multiple
+testplan.txt 1 
+</list>
+<list> must
+sorted-list.h 3 Readme.md 1 
+</list>
+<list> my
+testplan.txt 2 readme.tex 1 inverted.txt 1 1.txt 1 
+</list>
+<list> n
+tokenizer.c 9 test.sh 3 sorted-list.c 112 readme.tex 4 readme.pdf 1 readme.md 1 readme.log 14 main.c 1 index.c 18 
+</list>
+<list> nExpects
+tokenizer.c 1 
+</list>
+<list> nal
+readme.pdf 1 
+</list>
+<list> name
+inverted.txt 1 index.c 26 boo.txt 2 baa.txt 1 1.txt 1 
+</list>
+<list> named
+readme.log 2 
+</list>
+<list> nd
+sorted-list.h 3 
+</list>
+<list> necessary
+readme.tex 1 
+</list>
+<list> need
+tokenizer.h 2 tokenizer.c 6 sorted-list.h 30 
+</list>
+<list> needed
+tokenizer.c 3 
+</list>
+<list> new
+tokenizer.c 3 sorted-list.h 9 sorted-list.c 3 readme.md 1 index.c 2 
+</list>
+<list> newObj
+sorted-list.h 8 
+</list>
+<list> newline
+readme.tex 1 
+</list>
+<list> next
+tokenizer.c 3 sorted-list.h 9 sorted-list.c 67 readme.tex 1 index.c 10 
+</list>
+<list> nextToken
+tokenizer.c 3 
+</list>
+<list> ngerman
+readme.log 4 
+</list>
+<list> no
+tokenizer.c 3 
+</list>
+<list> node
+sorted-list.h 3 sorted-list.c 3 readme.tex 9 
+</list>
+<list> nodes
+readme.tex 1 readme.md 1 
+</list>
+<list> nohyphenation
+readme.log 2 
+</list>
+<list> non
+tokenizer.c 3 sorted-list.h 6 
+</list>
+<list> not
+tokenizer.c 3 sorted-list.h 3 readme.tex 3 readme.md 1 readme.log 1 inverted.txt 1 2.txt 1 
+</list>
+<list> nothing
+sorted-list.c 3 
+</list>
+<list> notice
+LICENSE 2 
+</list>
+<list> num
+tokenizer.c 13 
+</list>
+<list> numItems
+sorted-list.h 3 sorted-list.c 10 
+</list>
+<list> number
+tokenizer.c 4 readme.tex 1 
+</list>
+<list> numberline
+readme.aux 2 
+</list>
+<list> nworld
+test.sh 1 
+</list>
+<list> nynorsk
+readme.log 2 
+</list>
+<list> o
+sorted-list.c 34 readme.pdf 1 Makefile 22 
+</list>
+<list> oberdiek
+readme.log 2 
+</list>
+<list> obj
+readme.pdf 3 
+</list>
+<list> object
+tokenizer.c 12 sorted-list.h 36 readme.tex 5 readme.log 2 
+</list>
+<list> objects
+sorted-list.h 18 readme.log 4 
+</list>
+<list> obtaining
+LICENSE 1 
+</list>
+<list> octal
+tokenizer.c 2 
+</list>
+<list> odd
+readme.log 1 
+</list>
+<list> oddsidemargin
+readme.log 1 
+</list>
+<list> of
+tokenizer.h 2 tokenizer.c 29 testplan.txt 3 test.sh 2 sorted-list.h 39 readme.tex 8 readme.md 2 readme.log 28 Readme.md 1 LICENSE 4 
+</list>
+<list> okay
+readme.log 12 
+</list>
+<list> old
+readme.tex 1 
+</list>
+<list> on
+tokenizer.c 8 testplan.txt 1 readme.tex 2 readme.log 31 
+</list>
+<list> once
+tokenizer.c 3 
+</list>
+<list> one
+testplan.txt 1 sorted-list.h 3 sorted-list.c 3 readme.tex 2 inverted.txt 1 7.txt 2 
+</list>
+<list> only
+sorted-list.c 3 readme.tex 2 
+</list>
+<list> opaque
+sorted-list.h 3 
+</list>
+<list> opaqueFLN
+index.c 8 
+</list>
+<list> opaqueWLN
+index.c 8 
+</list>
+<list> opendir
+index.c 2 
+</list>
+<list> opening
+index.c 2 
+</list>
+<list> openout
+readme.log 2 
+</list>
+<list> operates
+readme.md 2 
+</list>
+<list> option
+readme.log 2 
+</list>
+<list> or
+readme.tex 2 readme.md 1 LICENSE 2 
+</list>
+<list> order
+tokenizer.c 1 sorted-list.h 12 
+</list>
+<list> ordering
+sorted-list.h 3 
+</list>
+<list> original
+sorted-list.h 3 
+</list>
+<list> oriya
+readme.log 2 
+</list>
+<list> other
+testplan.txt 1 
+</list>
+<list> out
+tokenizer.c 1 test.sh 2 readme.log 20 
+</list>
+<list> output
+readme.log 2 
+</list>
+<list> over
+readme.tex 1 readme.md 1 
+</list>
+<list> ow
+readme.pdf 1 
+</list>
+<list> own
+testplan.txt 1 
+</list>
+<list> p
+sorted-list.c 33 readme.pdf 1 readme.log 4 main.c 17 index.c 28 
+</list>
+<list> page
+readme.log 1 
+</list>
+<list> pages
+readme.log 1 
+</list>
+<list> panjabi
+readme.log 2 
+</list>
+<list> paper
+readme.log 2 
+</list>
+<list> paperheight
+readme.log 1 
+</list>
+<list> paperwidth
+readme.log 1 
+</list>
+<list> paragraph
+readme.log 2 
+</list>
+<list> parser
+readme.log 1 
+</list>
+<list> parsing
+readme.md 1 readme.log 2 
+</list>
+<list> part
+tokenizer.h 2 tokenizer.c 9 sorted-list.h 27 readme.log 4 
+</list>
+<list> passed
+test.sh 15 
+</list>
+<list> passes
+readme.tex 1 
+</list>
+<list> patsubst
+Makefile 4 
+</list>
+<list> patterns
+readme.log 2 
+</list>
+<list> paul
+inverted.txt 1 3.txt 1 1.txt 1 
+</list>
+<list> pdf
+readme.log 2 
+</list>
+<list> pdfTeX
+readme.log 3 
+</list>
+<list> pdflatex
+readme.log 2 
+</list>
+<list> pdftex
+readme.log 6 
+</list>
+<list> pedantic
+Makefile 3 
+</list>
+<list> perfect
+tokenizer.c 3 
+</list>
+<list> permission
+LICENSE 1 
+</list>
+<list> permit
+LICENSE 1 
+</list>
+<list> persistent
+readme.tex 1 
+</list>
+<list> person
+LICENSE 1 
+</list>
+<list> persons
+LICENSE 1 
+</list>
+<list> pfb
+readme.log 7 
+</list>
+<list> php
+Readme.md 1 
+</list>
+<list> pinyin
+readme.log 2 
+</list>
+<list> plays
+inverted.txt 1 3.txt 1 
+</list>
+<list> plus
+readme.log 1 
+</list>
+<list> pointer
+readme.tex 2 
+</list>
+<list> pointing
+sorted-list.h 3 
+</list>
+<list> policies
+Readme.md 1 
+</list>
+<list> polish
+readme.log 2 
+</list>
+<list> poorly
+inverted.txt 1 3.txt 1 
+</list>
+<list> populated
+readme.md 2 
+</list>
+<list> populating
+readme.md 1 
+</list>
+<list> portions
+LICENSE 1 
+</list>
+<list> portuguese
+readme.log 2 
+</list>
+<list> position
+tokenizer.h 2 readme.md 1 
+</list>
+<list> positions
+readme.log 2 
+</list>
+<list> preamble
+readme.log 1 
+</list>
+<list> pretty
+inverted.txt 1 8.txt 1 
+</list>
+<list> previous
+readme.md 1 
+</list>
+<list> print
+test.sh 2 index.c 2 
+</list>
+<list> printFileNode
+index.c 4 
+</list>
+<list> printLists
+index.c 4 
+</list>
+<list> printWordNode
+index.c 4 
+</list>
+<list> printed
+tokenizer.c 1 readme.tex 2 
+</list>
+<list> printf
+tokenizer.c 3 sorted-list.c 32 main.c 1 index.c 22 
+</list>
+<list> printing
+readme.md 1 
+</list>
+<list> problem
+inverted.txt 1 6.txt 1 
+</list>
+<list> process
+index.c 12 
+</list>
+<list> program
+testplan.txt 1 readme.tex 1 readme.md 1 
+</list>
+<list> proved
+testplan.txt 1 
+</list>
+<list> provide
+sorted-list.h 3 
+</list>
+<list> pt
+readme.log 29 
+</list>
+<list> public
+readme.log 7 
+</list>
+<list> publish
+LICENSE 1 
+</list>
+<list> q
+readme.pdf 1 
+</list>
+<list> qy
+readme.pdf 1 
+</list>
+<list> r
+tokenizer.c 5 readme.pdf 2 
+</list>
+<list> rU
+readme.pdf 1 
+</list>
+<list> raises
+readme.tex 1 
+</list>
+<list> ran
+testplan.txt 1 
+</list>
+<list> randomly
+testplan.txt 1 
+</list>
+<list> rathi
+readme.log 2 
+</list>
+<list> rb
+index.c 2 
+</list>
+<list> rc
+Makefile 1 
+</list>
+<list> re
+readme.tex 1 
+</list>
+<list> reached
+sorted-list.h 3 
+</list>
+<list> readdir
+index.c 2 
+</list>
+<list> readme
+readme.log 12 
+</list>
+<list> realloc
+tokenizer.c 7 
+</list>
+<list> recommend
+testplan.txt 2 
+</list>
+<list> recursing
+readme.md 1 
+</list>
+<list> recursively
+readme.tex 1 
+</list>
+<list> refCount
+sorted-list.h 3 sorted-list.c 33 
+</list>
+<list> reference
+readme.tex 2 
+</list>
+<list> referenced
+readme.tex 1 
+</list>
+<list> referencer
+readme.tex 2 
+</list>
+<list> relax
+readme.aux 2 
+</list>
+<list> relevant
+readme.tex 1 
+</list>
+<list> removed
+sorted-list.h 3 
+</list>
+<list> removes
+sorted-list.h 3 readme.tex 1 
+</list>
+<list> replace
+tokenizer.c 1 
+</list>
+<list> replaceIn
+tokenizer.c 12 
+</list>
+<list> requested
+readme.tex 1 
+</list>
+<list> responibility
+readme.tex 1 
+</list>
+<list> responsibility
+readme.tex 1 
+</list>
+<list> responsible
+tokenizer.c 3 
+</list>
+<list> rest
+readme.tex 1 
+</list>
+<list> restricted
+readme.log 2 
+</list>
+<list> restriction
+LICENSE 1 
+</list>
+<list> result
+readme.log 1 
+</list>
+<list> ret
+tokenizer.c 102 sorted-list.c 26 
+</list>
+<list> return
+tokenizer.c 26 sorted-list.h 6 sorted-list.c 57 main.c 4 index.c 10 
+</list>
+<list> returned
+tokenizer.c 3 sorted-list.h 3 
+</list>
+<list> returning
+tokenizer.c 3 
+</list>
+<list> returns
+tokenizer.c 15 sorted-list.h 27 
+</list>
+<list> reversemarginfalse
+readme.log 1 
+</list>
+<list> right
+tokenizer.c 1 readme.tex 1 
+</list>
+<list> rights
+LICENSE 1 
+</list>
+<list> rm
+Makefile 13 
+</list>
+<list> rman
+readme.log 2 
+</list>
+<list> robustness
+testplan.txt 1 
+</list>
+<list> romanian
+readme.log 2 
+</list>
+<list> romansh
+readme.log 2 
+</list>
+<list> root
+index.c 24 
+</list>
+<list> running
+readme.tex 1 
+</list>
+<list> russian
+readme.log 2 
+</list>
+<list> rutgers
+Readme.md 1 
+</list>
+<list> s
+tokenizer.c 42 test.sh 3 readme.tex 2 readme.pdf 2 readme.log 9 main.c 4 inverted.txt 1 index.c 34 8.txt 1 5.txt 1 
+</list>
+<list> sEa
+test.sh 8 
+</list>
+<list> same
+readme.md 2 readme.log 1 
+</list>
+<list> sanskrit
+readme.log 2 
+</list>
+<list> scanf
+main.c 1 
+</list>
+<list> school
+readme.tex 1 
+</list>
+<list> script
+readme.tex 2 
+</list>
+<list> search
+readme.tex 2 
+</list>
+<list> second
+tokenizer.c 2 
+</list>
+<list> section
+readme.tex 3 readme.log 2 readme.aux 2 
+</list>
+<list> see
+readme.tex 1 
+</list>
+<list> seeing
+readme.tex 1 
+</list>
+<list> sell
+LICENSE 1 
+</list>
+<list> sells
+test.sh 3 
+</list>
+<list> separate
+tokenizer.c 1 
+</list>
+<list> separator
+tokenizer.c 4 
+</list>
+<list> separators
+tokenizer.c 15 readme.tex 1 
+</list>
+<list> sequences
+readme.log 2 
+</list>
+<list> serbian
+readme.log 2 
+</list>
+<list> serbianc
+readme.log 2 
+</list>
+<list> set
+tokenizer.c 3 
+</list>
+<list> sets
+readme.tex 1 
+</list>
+<list> sh
+test.sh 1 
+</list>
+<list> shall
+LICENSE 1 
+</list>
+<list> shells
+test.sh 3 
+</list>
+<list> shitty
+inverted.txt 1 8.txt 1 
+</list>
+<list> shorE
+test.sh 4 
+</list>
+<list> should
+tokenizer.c 10 sorted-list.h 12 
+</list>
+<list> si
+sorted-list.c 33 main.c 3 index.c 28 
+</list>
+<list> simple
+readme.tex 1 
+</list>
+<list> since
+sorted-list.h 3 
+</list>
+<list> sits
+readme.tex 1 
+</list>
+<list> size
+readme.log 12 index.c 2 
+</list>
+<list> sizeof
+tokenizer.c 12 sorted-list.c 12 main.c 2 index.c 6 
+</list>
+<list> skip
+readme.log 5 
+</list>
+<list> sl
+sorted-list.c 117 main.c 3 index.c 18 Makefile 1 
+</list>
+<list> slovenian
+readme.log 2 
+</list>
+<list> small
+inverted.txt 1 7.txt 1 
+</list>
+<list> smaller
+sorted-list.h 6 
+</list>
+<list> so
+tokenizer.c 3 LICENSE 1 
+</list>
+<list> software
+LICENSE 1 
+</list>
+<list> some
+tokenizer.c 1 sorted-list.h 6 
+</list>
+<list> sorted
+sorted-list.h 27 sorted-list.c 6 readme.tex 5 readme.md 5 main.c 1 index.c 2 Makefile 3 
+</list>
+<list> space
+tokenizer.c 6 readme.tex 4 
+</list>
+<list> spanish
+readme.log 2 
+</list>
+<list> sprintf
+index.c 2 
+</list>
+<list> st
+sorted-list.h 3 index.c 4 
+</list>
+<list> stack
+readme.log 2 
+</list>
+<list> starting
+tokenizer.c 3 
+</list>
+<list> starts
+readme.tex 1 
+</list>
+<list> stat
+index.c 14 
+</list>
+<list> statistics
+readme.log 2 
+</list>
+<list> staying
+tokenizer.c 3 
+</list>
+<list> stderr
+tokenizer.c 1 
+</list>
+<list> stdio
+tokenizer.c 3 sorted-list.c 3 main.c 1 index.c 2 
+</list>
+<list> stdlib
+tokenizer.h 2 tokenizer.c 3 sorted-list.h 3 sorted-list.c 3 main.c 1 index.c 2 
+</list>
+<list> step
+inverted.txt 1 7.txt 1 
+</list>
+<list> still
+readme.tex 2 
+</list>
+<list> store
+sorted-list.h 3 
+</list>
+<list> strcmp
+main.c 1 index.c 6 
+</list>
+<list> strcpy
+tokenizer.c 3 
+</list>
+<list> stream
+tokenizer.c 7 readme.pdf 3 readme.log 2 
+</list>
+<list> string
+tokenizer.h 2 tokenizer.c 23 sorted-list.c 3 readme.log 2 main.c 1 index.c 2 
+</list>
+<list> strings
+readme.log 2 
+</list>
+<list> strlen
+tokenizer.c 33 
+</list>
+<list> strncpy
+tokenizer.c 3 
+</list>
+<list> strpbrk
+tokenizer.c 3 
+</list>
+<list> strstr
+tokenizer.c 7 
+</list>
+<list> struct
+tokenizer.h 2 tokenizer.c 6 sorted-list.h 15 sorted-list.c 9 readme.tex 4 index.h 4 index.c 4 
+</list>
+<list> structure
+readme.tex 2 readme.md 1 index.c 2 
+</list>
+<list> sty
+readme.log 5 
+</list>
+<list> style
+readme.log 2 
+</list>
+<list> subject
+LICENSE 1 
+</list>
+<list> sublicense
+LICENSE 1 
+</list>
+<list> subparagraph
+readme.log 2 
+</list>
+<list> subsection
+readme.tex 7 readme.log 2 
+</list>
+<list> subset
+sorted-list.h 6 
+</list>
+<list> substantial
+LICENSE 1 
+</list>
+<list> substituting
+testplan.txt 1 
+</list>
+<list> subsubsection
+readme.log 2 
+</list>
+<list> succeed
+testplan.txt 1 
+</list>
+<list> succeeds
+tokenizer.c 6 sorted-list.h 12 
+</list>
+<list> sure
+readme.tex 1 
+</list>
+<list> sw
+index.c 16 
+</list>
+<list> swedish
+readme.log 2 
+</list>
+<list> swissgerman
+readme.log 2 
+</list>
+<list> switch
+tokenizer.c 2 readme.log 1 
+</list>
+<list> sys
+index.c 4 
+</list>
+<list> t
+tokenizer.c 6 test.sh 3 
+</list>
+<list> tab
+tokenizer.c 2 
+</list>
+<list> table
+readme.log 2 
+</list>
+<list> tail
+sorted-list.c 3 
+</list>
+<list> tamil
+readme.log 2 
+</list>
+<list> tell
+readme.tex 1 
+</list>
+<list> telugu
+readme.log 2 
+</list>
+<list> tempcnt
+readme.log 1 
+</list>
+<list> test
+testplan.txt 3 readme.tex 2 
+</list>
+<list> tests
+testplan.txt 1 
+</list>
+<list> tex
+readme.log 13 
+</list>
+<list> texlive
+readme.log 18 
+</list>
+<list> texmf
+readme.log 18 
+</list>
+<list> textheight
+readme.log 1 
+</list>
+<list> textwidth
+readme.log 1 
+</list>
+<list> th
+test.sh 1 
+</list>
+<list> than
+tokenizer.c 2 
+</list>
+<list> that
+tokenizer.c 9 sorted-list.h 24 readme.tex 6 readme.md 1 
+</list>
+<list> the
+tokenizer.h 2 tokenizer.c 52 testplan.txt 5 test.sh 3 sorted-list.h 93 sorted-list.c 12 readme.tex 42 readme.md 16 readme.log 1 inverted.txt 1 Readme.md 1 LICENSE 7 3.txt 1 
+</list>
+<list> them
+tokenizer.c 3 readme.md 1 
+</list>
+<list> then
+testplan.txt 2 test.sh 15 sorted-list.h 3 readme.md 2 
+</list>
+<list> there
+sorted-list.c 3 
+</list>
+<list> they
+readme.tex 1 
+</list>
+<list> this
+tokenizer.c 12 sorted-list.h 24 readme.tex 5 inverted.txt 1 index.c 2 Readme.md 1 LICENSE 2 2.txt 1 
+</list>
+<list> thispagestyle
+readme.tex 1 
+</list>
+<list> though
+inverted.txt 1 5.txt 1 
+</list>
+<list> three
+testplan.txt 1 
+</list>
+<list> through
+tokenizer.c 4 sorted-list.h 6 readme.tex 1 
+</list>
+<list> time
+readme.tex 1 readme.md 2 
+</list>
+<list> title
+readme.tex 2 
+</list>
+<list> tk
+tokenizer.h 4 tokenizer.c 75 
+</list>
+<list> to
+tokenizer.h 2 tokenizer.c 16 testplan.txt 2 test.sh 2 sorted-list.h 69 sorted-list.c 6 readme.tex 5 readme.md 4 index.c 4 LICENSE 7 
+</list>
+<list> toc
+readme.aux 2 
+</list>
+<list> today
+readme.tex 2 
+</list>
+<list> tok
+tokenizer.c 41 
+</list>
+<list> token
+tokenizer.c 41 readme.tex 1 readme.md 5 index.c 6 
+</list>
+<list> tokenizer
+tokenizer.c 1 test.sh 16 index.c 8 Makefile 1 
+</list>
+<list> tokens
+tokenizer.c 46 readme.tex 1 
+</list>
+<list> toks
+readme.log 3 
+</list>
+<list> top
+readme.tex 1 
+</list>
+<list> topmargin
+readme.log 1 
+</list>
+<list> topskip
+readme.log 1 
+</list>
+<list> totally
+inverted.txt 1 4.txt 1 
+</list>
+<list> touched
+readme.tex 1 
+</list>
+<list> track
+tokenizer.c 3 
+</list>
+<list> transcribed
+testplan.txt 1 
+</list>
+<list> traversing
+readme.md 1 
+</list>
+<list> ts
+tokenizer.h 2 tokenizer.c 45 readme.log 1 
+</list>
+<list> turkish
+readme.log 2 
+</list>
+<list> turkmen
+readme.log 2 
+</list>
+<list> two
+tokenizer.c 4 sorted-list.h 3 
+</list>
+<list> twocolumnfalse
+readme.log 1 
+</list>
+<list> tworld
+test.sh 2 
+</list>
+<list> twosidefalse
+readme.log 1 
+</list>
+<list> txt
+readme.tex 1 inverted.txt 45 
+</list>
+<list> type
+tokenizer.h 4 sorted-list.h 18 readme.log 7 
+</list>
+<list> typedef
+tokenizer.h 2 tokenizer.c 3 sorted-list.h 12 index.h 4 
+</list>
+<list> types
+index.c 2 
+</list>
+<list> uc
+readme.pdf 1 
+</list>
+<list> ukenglish
+readme.log 2 
+</list>
+<list> ukrainian
+readme.log 2 
+</list>
+<list> ungarian
+readme.log 2 
+</list>
+<list> unless
+readme.tex 1 
+</list>
+<list> up
+readme.tex 1 
+</list>
+<list> updmap
+readme.log 2 
+</list>
+<list> upon
+testplan.txt 1 
+</list>
+<list> uppercase
+tokenizer.c 2 
+</list>
+<list> uppersorbian
+readme.log 2 
+</list>
+<list> use
+readme.tex 1 Readme.md 1 LICENSE 1 
+</list>
+<list> used
+sorted-list.h 9 readme.tex 3 readme.log 2 
+</list>
+<list> usenglishmax
+readme.log 2 
+</list>
+<list> usepackage
+readme.tex 1 
+</list>
+<list> user
+sorted-list.h 3 
+</list>
+<list> uses
+readme.tex 1 
+</list>
+<list> using
+sorted-list.h 9 readme.tex 1 
+</list>
+<list> usr
+readme.log 18 
+</list>
+<list> v
+tokenizer.c 5 test.sh 2 readme.pdf 2 readme.log 13 main.c 4 
+</list>
+<list> val
+tokenizer.c 9 
+</list>
+<list> value
+tokenizer.c 7 readme.log 1 
+</list>
+<list> var
+readme.log 2 
+</list>
+<list> variables
+readme.tex 1 
+</list>
+<list> verbose
+readme.log 1 
+</list>
+<list> vertical
+tokenizer.c 1 
+</list>
+<list> very
+testplan.txt 1 
+</list>
+<list> vlo
+test.sh 2 
+</list>
+<list> voffset
+readme.log 1 
+</list>
+<list> void
+tokenizer.h 2 tokenizer.c 3 sorted-list.h 31 sorted-list.c 38 main.c 6 index.h 8 index.c 32 
+</list>
+<list> w
+readme.pdf 1 index.c 2 
+</list>
+<list> walk
+sorted-list.h 6 
+</list>
+<list> was
+sorted-list.h 3 readme.tex 1 
+</list>
+<list> way
+sorted-list.h 3 
+</list>
+<list> wd
+readme.log 1 
+</list>
+<list> we
+readme.tex 4 inverted.txt 1 6.txt 1 
+</list>
+<list> welsh
+readme.log 2 
+</list>
+<list> what
+sorted-list.h 6 readme.tex 3 
+</list>
+<list> when
+sorted-list.h 6 
+</list>
+<list> whether
+readme.tex 1 
+</list>
+<list> which
+testplan.txt 2 
+</list>
+<list> while
+sorted-list.h 3 sorted-list.c 8 main.c 2 index.c 16 
+</list>
+<list> who
+readme.tex 1 
+</list>
+<list> whom
+LICENSE 1 
+</list>
+<list> wildcard
+Makefile 8 
+</list>
+<list> will
+tokenizer.c 1 sorted-list.h 12 readme.tex 1 
+</list>
+<list> with
+readme.tex 2 readme.md 1 Readme.md 2 
+</list>
+<list> within
+sorted-list.h 3 readme.md 1 readme.log 2 
+</list>
+<list> without
+LICENSE 2 
+</list>
+<list> wl
+index.c 8 
+</list>
+<list> wln
+index.c 24 
+</list>
+<list> wn
+index.c 14 
+</list>
+<list> word
+readme.md 3 index.h 2 index.c 30 
+</list>
+<list> wordListNode
+index.h 2 index.c 16 
+</list>
+<list> words
+readme.log 6 
+</list>
+<list> work
+readme.tex 1 
+</list>
+<list> workspace
+testplan.txt 2 
+</list>
+<list> world
+test.sh 9 
+</list>
+<list> worst
+readme.md 1 
+</list>
+<list> write
+readme.log 2 index.c 4 
+</list>
+<list> writefile
+readme.aux 2 
+</list>
+<list> writing
+readme.md 1 
+</list>
+<list> written
+readme.log 2 
+</list>
+<list> www
+Readme.md 1 
+</list>
+<list> x
+tokenizer.c 8 test.sh 5 readme.pdf 3 readme.log 4 main.c 3 
+</list>
+<list> xt
+readme.pdf 1 
+</list>
+<list> y
+readme.pdf 2 
+</list>
+<list> yJ
+readme.pdf 1 
+</list>
+<list> yo
+readme.pdf 1 
+</list>
+<list> you
+sorted-list.h 12 readme.tex 5 readme.log 2 
+</list>
+<list> your
+tokenizer.h 2 tokenizer.c 6 testplan.txt 2 sorted-list.h 33 
+</list>
+<list> z
+tokenizer.c 2 readme.pdf 3 
+</list>
+<list> zcp
+readme.pdf 1 
+</list>
+<list> zero
+readme.tex 1 
+</list>
+<list> zy
+readme.pdf 1 
+</list>
