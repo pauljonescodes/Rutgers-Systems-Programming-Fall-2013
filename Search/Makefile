@@ -1,4 +1,4 @@
-TARGET = index
+TARGET = search
 LIBS = -lm
 CC = gcc
 CFLAGS =-ansi -pedantic -Wall

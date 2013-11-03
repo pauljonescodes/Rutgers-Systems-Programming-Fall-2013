@@ -3,7 +3,13 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
+
+#ifdef __APPLE__
+#include <limits.h>
+#else
 #include <linux/limits.h>
+#endif
+
 #include <sys/stat.h>
 #include "tokenizer.h"
 #include "sorted-list.h"
@@ -25,13 +31,6 @@ int compareFileNode(void* f1, void* f2) {
     fileListNode * fl2 = f2;
     
     return strcmp(fl1->fileName, fl2->fileName);
-}
-
-int compareStrings(void *p1, void *p2) {
-	char *s1 = p1;
-	char *s2 = p2;
-    
-	return strcmp(s1, s2);
 }
 
 void printFileNode(fileListNode* fn) {
@@ -244,12 +243,13 @@ void write_to_file(char * filename) {
     fclose(file);
 }
 
+/*
 int main(int argc, char **argv) {
     sl = SLCreate(compareWordNode);
     get_files_in(argv[2]);
     write_to_file(argv[1]);
     return 0;
-}
+}*/
 
 
 

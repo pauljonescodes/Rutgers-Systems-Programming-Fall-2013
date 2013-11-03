@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "index.h"
-#include "sorted-list.h"
 #include "tokenizer.h"
+#include "sorted-list.h"
+#include "index.h"
+#include "search.h"
 
 int compareStrings(void* s1, void* s2) {
 	return strcmp((char*)s1,(char*)s2);
@@ -18,7 +19,7 @@ int search(TokenizerT* tk, SortedListPtr sl, int op) {
 	memset(wl,0,sizeof(wordListNode));
 	while(1) {
 		SortedListIteratorPtr fl;
-		t = TKNextToken(tk);
+		t = TKGetNextToken(tk);
 		if(t==0) { break; }
 		wl->word = t;
 		il = SLFind(sl,wl);
@@ -26,9 +27,9 @@ int search(TokenizerT* tk, SortedListPtr sl, int op) {
 		fl = SLCreateIterator(il->fileList);
 		while(1){
 			fileListNode* f = SLNextItem(fl);
-			wordListNode* item = SLFind(l,f->filename);
+			wordListNode* item = SLFind(l,f->fileName);
 			if(item == 0) {
-				SLInsert(l,f->filename);
+				SLInsert(l,f->fileName);
 			}
 			/* oops... should have used fileNodes for keeping track of the found. need to fix */
 		}
@@ -54,7 +55,7 @@ int loop(SortedListPtr sl) {
 			printf("Error in tokenizing input.\n");
 			return 1;
 		}
-		command = TKNextToken(tk);
+		command = TKGetNextToken(tk);
 		if(strcmp(command,"sa")==0) {
 			op = 0;
 		}else if(strcmp(command,"so")==0) {
@@ -69,14 +70,18 @@ int loop(SortedListPtr sl) {
 	}
 }
 
-int main(int argc, char* argv) {
+
+
+int main(int argc, char **argv) {
 	SortedListPtr sl;
 
 	if(argc!=2) {
 		printf("ERROR: Invalid number of arguments. Usage should be \n\t$ ./search <query>\n");
 		return 1;
-	}	
-
+	}
+    
+    
+    
 	/*add reader stuff here */
 	return loop(sl);	
 }
