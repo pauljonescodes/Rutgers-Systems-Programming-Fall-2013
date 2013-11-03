@@ -6,6 +6,8 @@
 #include "index.h"
 #include "search.h"
 
+#define VERBOSE 1
+
 int compareStrings(void* s1, void* s2) {
 	return strcmp((char*)s1,(char*)s2);
 }
@@ -70,7 +72,40 @@ int loop(SortedListPtr sl) {
 	}
 }
 
-
+void parse_index_file(char * index_file) {
+    if (VERBOSE) {
+        printf("parsing file %s\n", index_file);
+    }
+    
+    FILE* file = fopen(index_file, "r"); /* should check the result */
+    char line[1024];
+    char * pch;
+    int is_frequency = 0;
+    
+    while (fgets(line, sizeof(line), file)) {
+        if (strstr(line, "<list>") != NULL) { /* start of a new word. */
+            
+        } else if (strstr(line, "</list>") != NULL) { /* end of a new word */
+            
+        } else { /* file list */
+            pch = strtok (line," \n");
+            is_frequency = 0;
+            
+            while (pch != NULL)
+            {
+                if (is_frequency) {
+                    printf("freq: %s\n", pch);
+                    is_frequency = 0;
+                } else {
+                    printf("file: %s \n", pch);
+                    is_frequency = 1;
+                }
+                
+                pch = strtok (NULL, " \n");
+            }
+        }
+    }
+}
 
 int main(int argc, char **argv) {
 	SortedListPtr sl;
@@ -80,7 +115,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
     
-    
+    parse_index_file(argv[1]);
     
 	/*add reader stuff here */
 	return loop(sl);	
