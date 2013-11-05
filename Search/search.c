@@ -14,7 +14,7 @@ int compareStrings(void* s1, void* s2) {
 
 SortedListPtr search(TokenizerT* tk, SortedListPtr sl, int op) {
 	char* t = 0;
-	SortedListPtr l = SLCreate(compareFileNodes);
+	SortedListPtr l = SLCreate(compareFileNode);
 	wordListNode * wl = malloc(sizeof(wordListNode));
 	wordListNode * il = malloc(sizeof(wordListNode));
 	memset(il,0,sizeof(wordListNode));
@@ -43,7 +43,7 @@ int loop(SortedListPtr sl) {
 	char* input;
 	char* command;
 	int op;
-	SortedListPtr sl = SLCreate(compareStrings);
+	sl = SLCreate(compareStrings);
 	SortedListIteratorPtr si;
 	TokenizerT* tk;
 	input = malloc(1000);
@@ -51,7 +51,7 @@ int loop(SortedListPtr sl) {
 
 	while(1) {
 		SortedListPtr r;
-		fileListNode fn;
+		fileListNode * fn;
 		SortedListIteratorPtr i;
 		scanf("%[^\n]s",input);
 		if(strcmp(input,"q")==0) {
@@ -77,8 +77,8 @@ int loop(SortedListPtr sl) {
 		while(1) {
 			fn = SLNextItem(i);
 			if(fn == 0) { break; }
-			if(SLFind(sl,fn->filename) == 0) {
-				SLInsert(sl,fn->filename);
+			if(SLFind(sl,fn->fileName) == 0) {
+				SLInsert(sl,fn->fileName);
 			}
 		}
 	}
@@ -119,9 +119,9 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
             printf("word: %s", word);
             
-            wln = malloc(sizeof(*wln));
-            wln->word = word;
-            wln->fileList = SLCreate(compareFileNode);
+            //wln = malloc(sizeof(*wln));
+            //wln->word = word;
+            //wln->fileList = SLCreate(compareFileNode);
             
         } else if (strstr(line, "</list>") != NULL) { /* end of a new word */
             
@@ -135,20 +135,20 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                     printf("freq: %s \n", pch);
                     is_frequency = 0;
                     
-                    fln->count = atoi(pch);
-                    SLInsert(wln->fileList, fln);
+                    //fln->count = atoi(pch);
+                    //SLInsert(wln->fileList, fln);
                 } else {
                     printf("file: %s \n", pch);
                     is_frequency = 1;
                     
-                    fln = malloc(sizeof(*fln));
-                    fln->fileName = pch;
+                    //fln = malloc(sizeof(*fln));
+                    //fln->fileName = pch;
                 }
                 
                 pch = strtok (NULL, " \n");
             }
             
-            SLInsert(sl, wln);
+            //SLInsert(sl, wln);
         }
     }
 }
