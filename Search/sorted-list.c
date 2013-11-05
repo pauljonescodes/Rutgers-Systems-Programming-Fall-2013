@@ -7,7 +7,7 @@
 #include	<string.h>
 #include	"sorted-list.h"
 
-#define DEV 0
+#define DEV 1
 
 SortedListPtr SLCreate(CompareFuncT cf) {
 	SortedListPtr sl = malloc(sizeof(struct SortedList));
@@ -73,7 +73,7 @@ int SLInsert(SortedListPtr sl, void* o) {
 	Node* n = malloc(sizeof(Node));
     
     if (DEV) {
-        printf("SLInsert\n");
+        printf("SLInsert %p %p\n", sl, o);
     }
     
 	n->next = 0;

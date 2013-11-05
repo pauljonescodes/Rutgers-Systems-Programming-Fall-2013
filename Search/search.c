@@ -119,9 +119,9 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
             printf("word: %s", word);
             
-            //wln = malloc(sizeof(*wln));
-            //wln->word = word;
-            //wln->fileList = SLCreate(compareFileNode);
+            wln = malloc(sizeof(*wln));
+            wln->word = word;
+            wln->fileList = SLCreate(compareFileNode);
             
         } else if (strstr(line, "</list>") != NULL) { /* end of a new word */
             
@@ -134,28 +134,33 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                 if (is_frequency) {
                     printf("freq: %s \n", pch);
                     is_frequency = 0;
+                    fln->count = atoi(pch);
                     
-                    //fln->count = atoi(pch);
-                    //SLInsert(wln->fileList, fln);
+                    printf("freq: %i \n", fln->count);
+                    
+                    SLInsert(wln->fileList, fln);
                 } else {
-                    printf("file: %s \n", pch);
                     is_frequency = 1;
                     
-                    //fln = malloc(sizeof(*fln));
-                    //fln->fileName = pch;
+                    fln = malloc(sizeof(*fln));
+                    fln->fileName = pch;
+                    
+                    printf("file: %s \n", fln->fileName);
                 }
                 
                 pch = strtok (NULL, " \n");
             }
             
-            //SLInsert(sl, wln);
+            printf("\t\t\t %p %p %s", sl, wln, wln->word);
+            
+            SLInsert(sl, wln);
         }
     }
 }
 
 int main(int argc, char **argv) {
-	SortedListPtr sl;
-
+	SortedListPtr sl = SLCreate(compareWordNode);
+    
 	if(argc!=2) {
 		printf("ERROR: Invalid number of arguments. Usage should be \n\t$ ./search <query>\n");
 		return 1;
