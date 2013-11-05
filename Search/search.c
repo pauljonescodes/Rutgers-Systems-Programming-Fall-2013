@@ -12,9 +12,9 @@ int compareStrings(void* s1, void* s2) {
 	return strcmp((char*)s1,(char*)s2);
 }
 
-int search(TokenizerT* tk, SortedListPtr sl, int op) {
+SortedListPtr search(TokenizerT* tk, SortedListPtr sl, int op) {
 	char* t = 0;
-	SortedListPtr l = SLCreate(compareStrings);
+	SortedListPtr l = SLCreate(compareFileNodes);
 	wordListNode * wl = malloc(sizeof(wordListNode));
 	wordListNode * il = malloc(sizeof(wordListNode));
 	memset(il,0,sizeof(wordListNode));
@@ -29,24 +29,30 @@ int search(TokenizerT* tk, SortedListPtr sl, int op) {
 		fl = SLCreateIterator(il->fileList);
 		while(1){
 			fileListNode* f = SLNextItem(fl);
-			wordListNode* item = SLFind(l,f->fileName);
+			fileListNode* item = SLFind(l,f->fileName);
 			if(item == 0) {
 				SLInsert(l,f->fileName);
 			}
-			/* oops... should have used fileNodes for keeping track of the found. need to fix */
+			item->count++;
 		}
 	}	
+	return l;
 }
 
 int loop(SortedListPtr sl) {
 	char* input;
 	char* command;
 	int op;
+	SortedListPtr sl = SLCreate(compareStrings);
+	SortedListIteratorPtr si;
 	TokenizerT* tk;
 	input = malloc(1000);
 	memset(input,0,1000);
 
 	while(1) {
+		SortedListPtr r;
+		fileListNode fn;
+		SortedListIteratorPtr i;
 		scanf("%[^\n]s",input);
 		if(strcmp(input,"q")==0) {
 			printf("Exiting.\n");
@@ -66,10 +72,24 @@ int loop(SortedListPtr sl) {
 			printf("Error: Invalid command.\n");
 		}
 		printf("Searching for %s, op = %d\n",input,op);
-		if(search(tk,sl,op)) {
-			return 1;
+		r = search(tk,sl,op);
+		i = SLCreateIterator(r);
+		while(1) {
+			fn = SLNextItem(i);
+			if(fn == 0) { break; }
+			if(SLFind(sl,fn->filename) == 0) {
+				SLInsert(sl,fn->filename);
+			}
 		}
 	}
+	si = SLCreateIterator(sl);
+	while(1) {
+		char* s = SLNextItem(si);
+		if(s==0) {break;}
+		printf("%s ",s);
+	}
+	return 0;
+	
 }
 
 char *substring(const char* str, int beg, int n)
