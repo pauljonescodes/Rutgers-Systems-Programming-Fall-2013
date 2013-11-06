@@ -7,7 +7,7 @@
 #include	<string.h>
 #include	"sorted-list.h"
 
-#define DEV 1
+#define DEV 0
 
 SortedListPtr SLCreate(CompareFuncT cf) {
 	SortedListPtr sl = malloc(sizeof(struct SortedList));

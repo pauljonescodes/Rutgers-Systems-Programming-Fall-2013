@@ -6,63 +6,96 @@
 #include "index.h"
 #include "search.h"
 
-#define VERBOSE 1
+#define VERBOSE 0
+#define pls printf("%d\n",__LINE__);
+
+int number_of_files;
+char** file_list;
 
 int compareStrings(void* s1, void* s2) {
 	return strcmp((char*)s1,(char*)s2);
 }
 
-SortedListPtr search(TokenizerT* tk, SortedListPtr sl, int op) {
-	char* t = 0;
-	SortedListPtr l = SLCreate(compareFileNode);
-	wordListNode * wl = malloc(sizeof(wordListNode));
-	wordListNode * il = malloc(sizeof(wordListNode));
-	memset(il,0,sizeof(wordListNode));
-	memset(wl,0,sizeof(wordListNode));
-	while(1) {
-		SortedListIteratorPtr fl;
-		t = TKGetNextToken(tk);
-		if(t==0) { break; }
-		wl->word = t;
-		il = SLFind(sl,wl);
-		if(il == 0) { continue; }
-		fl = SLCreateIterator(il->fileList);
-		while(1){
-			fileListNode* f = SLNextItem(fl);
-			fileListNode* item = SLFind(l,f->fileName);
-			if(item == 0) {
-				SLInsert(l,f->fileName);
-			}
-			item->count++;
-		}
-	}	
-	return l;
+void search(TokenizerT* tk, SortedListPtr sl, int op) {
+	int number_of_words = tk->num_tok - 1;
+    char table[number_of_words][number_of_files];
+    int word_index = 0;
+    int i,j;
+    memset(table,0,number_of_files*number_of_words);
+    pls
+    while(1) {
+        pls
+        char* s = TKGetNextToken(tk);
+        wordListNode* current_word;
+        wordListNode* wn;
+        fileListNode* fn;
+        int i;
+        if(s==0) { break; }
+        pls
+        wn = malloc(sizeof(wordListNode));
+        memset(wn,0,sizeof(wordListNode));
+        fn = malloc(sizeof(wordListNode));
+        memset(fn,0,sizeof(wordListNode));
+        pls
+        wn->word = s;
+    pls
+        current_word = SLFind(sl,wn);
+        if(current_word == 0) { continue; }
+        pls
+        for(i=0;i<number_of_files;i++) {
+            fn->fileName = file_list[i];
+            if(SLFind(current_word->fileList,fn) != 0) {
+                table[word_index][i] = 1;
+            }
+        }
+        pls
+        word_index++;
+    }
+    pls
+    for(i=0;i<number_of_files;i++) {
+        int total = 0;
+        for(j=0;j<number_of_words;j++) {
+            total += table[j][i];
+        }
+        if(op) {
+            pls
+            //if(total > 0) {
+                printf("%s ",file_list[i]);
+            //}
+        }else{
+            if(total == number_of_words) {
+                printf("%s ",file_list[i]);
+            }
+        }
+    }
 }
 
 int loop(SortedListPtr sl) {
 	char* input;
 	char* command;
 	int op;
-	sl = SLCreate(compareStrings);
-	SortedListIteratorPtr si;
 	TokenizerT* tk;
 	input = malloc(1000);
 	memset(input,0,1000);
 
 	while(1) {
-		SortedListPtr r;
+        
 		fileListNode * fn;
 		SortedListIteratorPtr i;
-		scanf("%[^\n]s",input);
+        printf("Enter command: ");
+        fflush(stdin);
+		scanf(" %[^\n]s", input);
 		if(strcmp(input,"q")==0) {
 			printf("Exiting.\n");
 			return 0;
 		}
+        
 		tk = TKCreate(input);
 		if(tk==0) {
 			printf("Error in tokenizing input.\n");
 			return 1;
 		}
+        
 		command = TKGetNextToken(tk);
 		if(strcmp(command,"sa")==0) {
 			op = 0;
@@ -70,23 +103,12 @@ int loop(SortedListPtr sl) {
 			op = 1;
 		}else{
 			printf("Error: Invalid command.\n");
+            return 1;
 		}
+        
 		printf("Searching for %s, op = %d\n",input,op);
-		r = search(tk,sl,op);
-		i = SLCreateIterator(r);
-		while(1) {
-			fn = SLNextItem(i);
-			if(fn == 0) { break; }
-			if(SLFind(sl,fn->fileName) == 0) {
-				SLInsert(sl,fn->fileName);
-			}
-		}
-	}
-	si = SLCreateIterator(sl);
-	while(1) {
-		char* s = SLNextItem(si);
-		if(s==0) {break;}
-		printf("%s ",s);
+        
+		search(tk,sl,op);
 	}
 	return 0;
 	
@@ -110,14 +132,18 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
     char line[1024];
     char * pch;
     int is_frequency = 0;
-    
+    int i;
     wordListNode * wln;
     fileListNode * fln;
+    int list_index = 0;
+    
+    file_list = malloc(sizeof(char*)*10);
     
     while (fgets(line, sizeof(line), file)) {
         if (strstr(line, "<list>") != NULL) { /* start of a new word. */
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
-            printf("word: %s", word);
+            
+            printf("%s", word);
             
             wln = malloc(sizeof(*wln));
             wln->word = word;
@@ -132,12 +158,8 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
             while (pch != NULL)
             {
                 if (is_frequency) {
-                    printf("freq: %s \n", pch);
                     is_frequency = 0;
                     fln->count = atoi(pch);
-                    
-                    printf("freq: %i \n", fln->count);
-                    
                     SLInsert(wln->fileList, fln);
                 } else {
                     is_frequency = 1;
@@ -145,21 +167,26 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                     fln = malloc(sizeof(*fln));
                     fln->fileName = pch;
                     
-                    printf("file: %s \n", fln->fileName);
+                    printf("%s\n", fln->fileName);
                 }
                 
                 pch = strtok (NULL, " \n");
             }
-            
-            printf("\t\t\t %p %p %s", sl, wln, wln->word);
+          
             
             SLInsert(sl, wln);
         }
+    }
+    
+    for(i=0;i<number_of_files;i++) {
+        printf("FILE: %s\n",file_list[i]);
     }
 }
 
 int main(int argc, char **argv) {
 	SortedListPtr sl = SLCreate(compareWordNode);
+    
+    number_of_files = 0;
     
 	if(argc!=2) {
 		printf("ERROR: Invalid number of arguments. Usage should be \n\t$ ./search <query>\n");
@@ -167,6 +194,7 @@ int main(int argc, char **argv) {
 	}
     
     parse_index_file(argv[1], sl);
+    printf("\t\t\t%i\n", number_of_files);
     
 	/*add reader stuff here */
 	return loop(sl);	
