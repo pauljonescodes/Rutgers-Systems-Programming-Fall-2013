@@ -22,34 +22,21 @@ void search(TokenizerT* tk, SortedListPtr sl, int op) {
     int word_index = 0;
     int i,j;
     memset(table,0,number_of_files*number_of_words);
-    pls
-	printf("printing words:\n");
-	SortedListIteratorPtr si = SLCreateIterator(sl);
-	while(1) {
-		wordListNode* wn = SLNextItem(si);
-		if(wn == 0) { break; }
-		printf("word: \'%s\'\n",wn->word);
-	}
     while(1) {
-        pls
         char* s = TKGetNextToken(tk);
         wordListNode* current_word;
         wordListNode* wn;
         fileListNode* fn;
         int i;
         if(s==0) { break; }
-        pls
         wn = malloc(sizeof(wordListNode));
         memset(wn,0,sizeof(wordListNode));
         fn = malloc(sizeof(wordListNode));
         memset(fn,0,sizeof(wordListNode));
-        pls
         wn->word = s;
-    pls
-	printf("word = %s\n",s);
         current_word = SLFind(sl,wn);
         if(current_word == 0) { continue; }
-        printf("wordfoundn\n");
+	printf("nof = %d\n",number_of_files);
         for(i=0;i<number_of_files;i++) {
             fn->fileName = file_list[i];
 		printf("filename = %s\n",file_list[i]);
@@ -58,17 +45,14 @@ void search(TokenizerT* tk, SortedListPtr sl, int op) {
 		table[word_index][i] = 1;
             }
         }
-        pls
         word_index++;
     }
-    pls
     for(i=0;i<number_of_files;i++) {
         int total = 0;
         for(j=0;j<number_of_words;j++) {
             total += table[j][i];
         }
         if(op) {
-            pls
             /*if(total > 0) {*/
                 printf("%s ",file_list[i]);
             /*}*/
@@ -152,8 +136,7 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
     while (fgets(line, sizeof(line), file)) {
         if (strstr(line, "<list>") != NULL) { /* start of a new word. */
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
-            
-            printf("%s", word);
+            word[strlen(word)-1] = 0;
             
             wln = malloc(sizeof(*wln));
             wln->word = word;
@@ -176,7 +159,10 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                     
                     fln = malloc(sizeof(*fln));
                     fln->fileName = pch;
-                    
+                    file_list[list_index] = fln->fileName;
+			list_index++;
+			number_of_files++;
+			file_list = realloc(file_list,list_index*sizeof(char*) + 10);
                     printf("%s\n", fln->fileName);
                 }
                 
