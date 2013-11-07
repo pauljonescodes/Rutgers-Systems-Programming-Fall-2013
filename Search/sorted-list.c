@@ -72,9 +72,6 @@ void SLPrint(SortedListPtr);
 int SLInsert(SortedListPtr sl, void* o) {
 	Node* n = malloc(sizeof(Node));
     
-    if (DEV) {
-        printf("SLInsert %p %p\n", sl, o);
-    }
     
 	n->next = 0;
 	n->refCount = 1;
