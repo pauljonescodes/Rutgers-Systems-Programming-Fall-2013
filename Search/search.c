@@ -117,7 +117,42 @@ char *substring(const char* str, int beg, int n)
     return ret;
 }
 
-void parse_index_file(char * index_file, SortedListPtr sl) {
+void print_parsed(SortedListPtr sl) {
+    wordListNode * p;
+    fileListNode * f;
+    SortedListIteratorPtr si;
+    SortedListIteratorPtr sw;
+    
+    si = SLCreateIterator(sl);
+	
+    while(1) {
+		p = SLNextItem(si);
+		if(p == NULL) {
+			break;
+		}
+		
+        printf("\"%s\" -> ",p->word);
+        
+        sw = SLCreateIterator(p->fileList);
+        
+        while (1) {
+            f = SLNextItem(sw);
+            
+            if (f == NULL)
+                break;
+            
+            printf("(\"%s\", %i),", f->fileName, f->count);
+        }
+        
+        SLDestroyIterator(sw);
+        
+        printf("\n");
+	}
+    
+    SLDestroyIterator(si);
+}
+
+void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelist) {
     if (VERBOSE) {
         printf("parsing file %s\n", index_file);
     }
@@ -138,6 +173,8 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
             word[strlen(word)-1] = 0;
             
+            //printf("%s\n", word);
+            
             wln = malloc(sizeof(*wln));
             wln->word = word;
             wln->fileList = SLCreate(compareFileNode);
@@ -153,17 +190,27 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
                 if (is_frequency) {
                     is_frequency = 0;
                     fln->count = atoi(pch);
-                    SLInsert(wln->fileList, fln);
+                    
+                    if (strstr(fln->fileName, "</list>") == NULL) {
+                        SLInsert(wln->fileList, fln);
+                    }
+                    
                 } else {
                     is_frequency = 1;
                     
+                    char * file = malloc(sizeof(pch) + 1);
+                    file = pch;
+                    file[strlen(file)] = 0;
+                    
                     fln = malloc(sizeof(*fln));
-                    fln->fileName = pch;
+                    fln->fileName = file;
+                    
+                    //printf("%s\n", file);
+                    
                     file_list[list_index] = fln->fileName;
-			list_index++;
-			number_of_files++;
-			file_list = realloc(file_list,list_index*sizeof(char*) + 10);
-                    printf("%s\n", fln->fileName);
+                    list_index++;
+                    number_of_files++;
+                    file_list = realloc(file_list,list_index*sizeof(char*) + 10);
                 }
                 
                 pch = strtok (NULL, " \n");
@@ -174,13 +221,12 @@ void parse_index_file(char * index_file, SortedListPtr sl) {
         }
     }
     
-    for(i=0;i<number_of_files;i++) {
-        printf("FILE: %s\n",file_list[i]);
-    }
+    print_parsed(sl);
 }
 
 int main(int argc, char **argv) {
 	SortedListPtr sl = SLCreate(compareWordNode);
+    SortedListPtr filelist = SLCreate(compareStrings);
     
     number_of_files = 0;
     
@@ -189,7 +235,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
     
-    parse_index_file(argv[1], sl);
+    parse_index_file(argv[1], sl, filelist);
     printf("\t\t\t%i\n", number_of_files);
     
 	/*add reader stuff here */
