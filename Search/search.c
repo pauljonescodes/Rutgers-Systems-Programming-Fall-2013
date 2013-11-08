@@ -18,10 +18,10 @@ int compareStrings(void* s1, void* s2) {
 
 void search(TokenizerT* tk, SortedListPtr sl, int op) {
 	int number_of_words = tk->num_tok - 1;
-    char** table = malloc(number_of_words * number_of_files);
+    int** table = malloc(number_of_words * number_of_files*sizeof(int));
     int word_index = 0;
     int i,j;
-    memset(table,0,number_of_files*number_of_words);
+    memset(table,0,number_of_files*number_of_words*sizeof(int));
     while(1) {
         char* s = TKGetNextToken(tk);
         wordListNode* current_word;
@@ -36,13 +36,10 @@ void search(TokenizerT* tk, SortedListPtr sl, int op) {
         wn->word = s;
         current_word = SLFind(sl,wn);
         if(current_word == 0) { continue; }
-	printf("nof = %d\n",number_of_files);
         for(i=0;i<number_of_files;i++) {
             fn->fileName = file_list[i];
-		printf("filename = %s\n",file_list[i]);
             if(SLFind(current_word->fileList,fn) != 0) {
-                printf("word found file = %s\n",file_list[i]);
-		table[word_index][i] = 1;
+		table[i*number_of_words + word_index] = 1;
             }
         }
         word_index++;
@@ -50,12 +47,12 @@ void search(TokenizerT* tk, SortedListPtr sl, int op) {
     for(i=0;i<number_of_files;i++) {
         int total = 0;
         for(j=0;j<number_of_words;j++) {
-            total += table[j][i];
+		if(table[i*number_of_words + j] == 1) { total++;}
         }
         if(op) {
-            /*if(total > 0) {*/
+            if(total > 0) {
                 printf("%s ",file_list[i]);
-            /*}*/
+            }
         }else{
             if(total == number_of_words) {
                 printf("%s ",file_list[i]);
