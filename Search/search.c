@@ -152,6 +152,16 @@ void print_parsed(SortedListPtr sl) {
     SLDestroyIterator(si);
 }
 
+int StringArrayFind(char** list, char* s, int size) {
+	int i;
+	for(i=0;i<size;i++) {
+		if(strcmp(list[i],s) == 0) {
+			return i;
+		}
+	}
+	return -1;
+}
+
 void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelist) {
     if (VERBOSE) {
         printf("parsing file %s\n", index_file);
@@ -173,7 +183,7 @@ void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelis
             char* word = substring(line, strlen("<list> "), strlen(line) - 3);
             word[strlen(word)-1] = 0;
             
-            //printf("%s\n", word);
+            /*printf("%s\n", word);*/
             
             wln = malloc(sizeof(*wln));
             wln->word = word;
@@ -199,28 +209,34 @@ void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelis
                     is_frequency = 1;
                     
                     char * file = malloc(sizeof(pch) + 1);
-                    file = pch;
+                    strcpy(file,pch);
                     file[strlen(file)] = 0;
                     
                     fln = malloc(sizeof(*fln));
                     fln->fileName = file;
-                    
-                    //printf("%s\n", file);
-                    
-                    file_list[list_index] = fln->fileName;
-                    list_index++;
-                    number_of_files++;
-                    file_list = realloc(file_list,list_index*sizeof(char*) + 10);
+            
+                    	if(StringArrayFind(file_list,file, number_of_files) == -1) {
+				file_list[number_of_files] = file;
+				number_of_files++;
+				file_list = realloc(file_list,number_of_files*sizeof(char*)+10);
+				printf("%s\n", file);
+
+			}
                 }
                 
                 pch = strtok (NULL, " \n");
             }
           
-            
-            SLInsert(sl, wln);
+           SLInsert(sl,wln); 
+  
         }
     }
-    
+    	printf("file list:\n");
+	i = 0;
+	for(;i<number_of_files;i++) {
+		printf("file: %s\n",file_list[i]);
+	}
+	printf("parsed list:\n");
     print_parsed(sl);
 }
 
