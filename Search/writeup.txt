@@ -1,0 +1,69 @@
+Homework 5 Search Markup - Paul Jones and Andrew Moore
+======================================================
+
+>   Please note that this is late by virtue of extenuating
+>   circumstances, and that Prof. Russell granted us an
+>   extension in light of those,
+
+Design
+------
+
+### Good Division
+
+The code is divided into two different portions:
+
+1.  Parsing
+2.  Search-and and Search-or
+
+#### Parsing
+
+Parsing works by taking in the inputted file line-by-line
+and determining whether the information contained on the
+line is irrelevant or needed.
+
+Of the irrelevant information, there is the `<list>` tags
+and spaces. To handle the tags, string comparison happens.
+To handle the spaces, tokenization is used.
+
+While parsing the file, the program inputs the relevant
+information into a data structure live.
+
+#### Search-and and Search-or
+
+After the relevant information is gleaned from the inputted file,
+the program begins prompting the user for input.
+
+This input is on an infinite loop, waiting for a break from the
+user inputting `q`. The program gleans `sa` or `so` and produces
+an opt code, and parses in the inputted strings.
+
+The strings and an operation code are passed to a function
+which iterates over the data structure in an attempt to match
+the words to files, saving them as it goes along.
+
+Before the program terminates, it prints these out to the terminal.
+
+### Code Reuse
+
+The program makes use of code that we have previously
+written. This is a benefit because it means that the code
+is uniquely tailored to our problem.
+
+The reused code is the Sorted List structures and functions.
+
+Big-O Analysis
+--------------
+
+#### Parsing
+
+Parsing is linear relative to the inputted file.
+
+O(n)
+
+#### Searching
+
+The worst case for the algorithm is that every word
+is contained in every queried file at the end of the
+word list.
+
+O(n^2)
