@@ -59,6 +59,8 @@ void search(TokenizerT* tk, SortedListPtr sl, int op) {
             }
         }
     }
+    
+    printf("\n");
 }
 
 int loop(SortedListPtr sl) {
@@ -216,7 +218,6 @@ void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelis
 				file_list[number_of_files] = file;
 				number_of_files++;
 				file_list = realloc(file_list,number_of_files*sizeof(char*)+10);
-				printf("%s\n", file);
 
 			}
                 }
@@ -228,13 +229,6 @@ void parse_index_file(char * index_file, SortedListPtr sl, SortedListPtr filelis
   
         }
     }
-    	printf("file list:\n");
-	i = 0;
-	for(;i<number_of_files;i++) {
-		printf("file: %s\n",file_list[i]);
-	}
-	printf("parsed list:\n");
-    print_parsed(sl);
 }
 
 int main(int argc, char **argv) {
@@ -249,9 +243,7 @@ int main(int argc, char **argv) {
 	}
     
     parse_index_file(argv[1], sl, filelist);
-    printf("\t\t\t%i\n", number_of_files);
     
-	/*add reader stuff here */
 	return loop(sl);	
 }
 

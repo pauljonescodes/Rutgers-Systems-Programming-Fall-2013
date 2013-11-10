@@ -1,0 +1,78 @@
+Homework 5 Test Cases by Paul Jones and Andrew Moore
+====================================================
+
+>   Please note that all test cases are provided from
+>   the `index.txt` file. 
+>
+>   This should be loaded in like so:
+>
+>       $ ./search index.text
+>
+>   This is a good file as it draws from my actual whole
+>   workspace filesystem for this course.
+
+My methodology for testing this was deciding on my example
+and then using Mac OS X's Spotlight feature on my actual
+workspace to get the answers. 
+
+Then I tested my program to compare against this.
+
+-   Example 1: Here is an example where nothing
+    is expected.
+    -   Input:  sa Readme red meet
+    -   Output: (nothing)
+
+-   Example 2: Here is an example of a query that
+    should only be found in one file under the more
+    restrictive sa.
+    -   Input:  sa PROVIDED PURPOSE
+    -   Output: LICENSE
+
+-   Example 3: Here is an edge case input that should
+    be found in a lot of file.
+    -   Input:  so a
+    -   Output: tokenizer.c test.sh LICENSE readme.tex 
+        readme.md testplan.txt Makefile sorted-list.h inverted.txt 
+        6.txt
+
+-   Example 4: Here is an example of an input which will
+    limit the expected output by a great deal.
+    -   Input:  sa a all
+    -   Output: tokenizer.c LICENSE readme.tex Makefile 
+        sorted-list.h 
+
+-   Example 5: And here is that same one as a superset.
+    -   Input:  so a all
+    -   Output: tokenizer.c test.sh LICENSE readme.tex readme.md 
+        testplan.txt Makefile sorted-list.h readme.aux main.c 
+        inverted.txt 6.txt 8.txt 7.txt 3.txt
+
+-   Example 6: Here is a big or example.
+    -   Input:  so a b c d e f g h i j k
+    -   Output: tokenizer.c test.sh readme.pdf LICENSE readme.tex 
+        readme.md testplan.txt readme.log Makefile sorted-list.h 
+        sorted-list.c index.c index.h tokenizer.h main.c inverted.txt 
+        6.txt 5.txt 
+
+-   Example 7: Here is an medium sized or example.
+    -   Input:  
+    -   Output: 
+
+-   Example 8: A very inclusive or example based on common
+    english words.
+    -   Input:  so the a this while
+    -   Output: tokenizer.c test.sh LICENSE Readme.md readme.tex readme.md 
+        testplan.txt readme.log Makefile sorted-list.h sorted-list.c index.c 
+        main.c inverted.txt 6.txt 2.txt 3.txt
+
+-   Example 9: There is, however, only one file that contains
+    all of these terms.
+    -   Input:  sa the a this while
+    -   Output: sorted-list.h 
+
+-   Example 10: Very large example.
+    -   Input:  so a b c d e f g h i j k l m n o p q r s t u v w x y z
+    -   Output: tokenizer.c test.sh readme.pdf LICENSE readme.tex 
+        readme.md testplan.txt readme.log Makefile sorted-list.h 
+        sorted-list.c index.c index.h tokenizer.h main.c inverted.txt 
+        6.txt 8.txt 5.txt 
