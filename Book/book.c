@@ -29,17 +29,29 @@ typedef struct order_t_
 	double		cost;		/* The cost of the book. */
 	char*		title;		/* The book's title */
 	int 		customerId;	/* The ID of the ordering customer */
-	catagory_t 	catagory;	/* The catagory listed for this book */
+	int	 	catagory;	/* The catagory listed for this book */
 }order_t;
 
 /* Function prototypes */
 int 		processCatagories(catagory_t*, char*);			/* processes the catagory input list into an array */
 int 		processDatabase(FILE*, consumer_t*);			/* parses the database file into a list of consumers */
-int 		processOrders(FILE*, order_t*, catagory_t*);		/* parses the order file into a list of orders to be executed */
+int 		processOrders(FILE*, order_t*, catagory_t*, size_t);	/* parses the order file into a list of orders to be executed */
 int 		getFileLength(FILE*);					/* returns the length of the passed file */
 void* 		cleanMalloc(size_t);					/* returns allocated memory of all 0's */
 char*		trim(char*);						/* trims first and last characters */
 char* 		clean(char*); 						/* trims leading and tailing whitespace */
+int 		sArraySearch(char**, char*, size_t); 			/* searches in a string array, returns subscript */
+
+int sArraySearch(char** a, char* s, size_t size) {
+	int 		i;		/* iterator */
+	
+	for(i=0;i<size;i++) {
+		if(strcmp(a[i], s) == 0) {
+			return i;
+		}
+	}
+	return -1;
+}
 
 char* trim(char* s) {
 	s++;
@@ -80,9 +92,12 @@ int processCatagories(catagory_t* catList, char* s) {
 	TokenizerT* 	tk;		/* Tokenizer used to split the input string */
 	
 	tk = TKCreate(s, 0, NULL);
-	if(tk == 0) { return FAIL; }
+	if(tk == 0) { 
+		error("ERROR: Cannot tokenize catagory list.\n");
+		return 0; 
+	}
 	catList = (catagory_t*) tk->tokens;
-	return SUCCESS;
+	return tk->num_tok;
 }
 
 int processDatabase(FILE* DATABASE, consumer_t* consumerData) {
@@ -107,7 +122,10 @@ int processDatabase(FILE* DATABASE, consumer_t* consumerData) {
 	for(i=0;i<numlines;i++) {
 		tk = TKCreate(lines[i], 1, "|");
 		items = tk->tokens;
-		if(tk->num_tok != 6) { return FAIL; }
+		if(tk->num_tok != 6) { 
+			error("ERROR: Invalid line number %d in database file.\n", i);
+			return FAIL; 
+		}
 		consumerData[i].name 	= trim(clean(items[0]));
 		consumerData[i].id   	= atoi(clean(items[1]));
 		consumerData[i].credit 	= atof(clean(items[2]));
@@ -119,37 +137,41 @@ int processDatabase(FILE* DATABASE, consumer_t* consumerData) {
 	return SUCCESS;
 }
 
-int processOrders(FILE* ORDER, order_t* orderData, catagory_t* catList) {
+int processOrders(FILE* ORDER, order_t* orderData, catagory_t* catList, size_t numCat) {
 	char* 		file_string;	/* string containing all the contents of the database */
-	int 		database_size;	/* size (number of characters) of the database */
+	int 		order_size;	/* size (number of characters) of the database */
 	TokenizerT* 	tk;		/* tokenizer for the database */
 	char** 		lines;		/* list of lines in the database */
 	char** 		items;		/* reused array for each line; the properties of each consumer */
 	int 		numlines;	/* number of lines */
 	int 		i;		/* iterator */
 	
-	database_size = getFileLength(DATABASE);
-	file_string = cleanMalloc(database_size + 1);
-	fread(file_string, 1, database_size, DATABASE);
-	fclose(DATABASE);
+	order_size = getFileLength(ORDER);
+	file_string = cleanMalloc(order_size + 1);
+	fread(file_string, 1, order_size, ORDER);
+	fclose(ORDER);
 	
 	tk = TKCreate(file_string, 1, "\n");
 	lines = tk->tokens;
 	numlines = tk->num_tok;
-	consumerData = cleanMalloc(numlines * sizeof(consumer_t));
+	orderData = cleanMalloc(numlines * sizeof(order_t));
 	
 	for(i=0;i<numlines;i++) {
 		tk = TKCreate(lines[i], 1, "|");
 		items = tk->tokens;
-		if(tk->num_tok != 6) { return FAIL; }
-		orderData[i].name 	= trim(clean(items[0]));
-		orderData[i].id   	= atoi(clean(items[1]));
-		orderData[i].credit 	= atof(clean(items[2]));
-		orderData[i].address 	= trim(clean(items[3]));
-		orderData[i].state 	= trim(clean(items[4]));
-		orderData[i].zip	= trim(clean(items[5]));
+		if(tk->num_tok != 6) { 
+			error("ERROR: Invalid line number %d in order file.\n", i);
+			return FAIL; 
+		}
+		orderData[i].title 	= trim(clean(items[0]));
+		orderData[i].cost   	= atof(clean(items[1]));
+		orderData[i].consumerId	= atoi(clean(items[2]));
+		orderData[i].catagory 	= sArraySearch(catList, clean(items[3]), numCat);
+		if(orderData[i].catagory == -1) {
+			error("ERROR: Invalid catagory \'%s\' on line %d of order file.\n", clean(items[3]), i);
+			return FAIL;
+		}
 	}
-
 	return SUCCESS;
 
 }
@@ -161,7 +183,8 @@ int main(int argc, char** argv) {
 	consumer_t* 	consumerData;	/* Data held about consumers, parsed from the database file */
 	order_t*	orderData; 	/* List of all book orders, parsed from the order list file */
 	catagory_t* 	catList;	/* List of catagories. */
-	
+	int 		numCat		/* number of catagories */
+		
 	if(argc != 4) {
 		error("ERROR: Invalid number of arguments.\n\tPlease see readme for usage information.\n");
 		return FAIL;
@@ -178,9 +201,13 @@ int main(int argc, char** argv) {
 		return FAIL;
 	}
 	
-	if(processCatagories(catList)) 			{ return FAIL; }
-	if(processDatabase(DATABASE, consumerData)) 	{ return FAIL; }
-	if(processOrders(ORDER, orderData, catList)) 	{ return FAIL; }
+	numCat = processCatagories(catList);
+	if(numCat == 0) {
+		error("ERROR: Invalid list of catagories.\n");
+		return FAIL;
+	}
+	if(processDatabase(DATABASE, consumerData)) 		{ return FAIL; }
+	if(processOrders(ORDER, orderData, catList, numCat)) 	{ return FAIL; }
 	
 	return SUCCESS;
 }
