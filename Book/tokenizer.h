@@ -20,7 +20,7 @@ typedef struct TokenizerT_ {
 	int num_tok;     /* number of tokens */
 }TokenizerT;
 
-TokenizerT *TKCreate(char *ts);
+TokenizerT *TKCreate(char *ts, int, char*);
 void TKDestroy(TokenizerT *tk);
 char *TKGetNextToken(TokenizerT *tk);
 
