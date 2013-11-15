@@ -21,11 +21,15 @@ void printData(consumer_t* consumerData, order_t* orderData, catagory_t* catList
 int sArraySearch(char** a, char* s, size_t size) {
 	int 		i;		/* iterator */
 	
+	printf("searching for :%s:\n",s);
 	for(i=0;i<size;i++) {
 		if(strcmp(a[i], s) == 0) {
+			printf("found %d\n",i);
 			return i;
 		}
 	}
+	printf("not found\n");
+
 	return -1;
 }
 
@@ -146,7 +150,7 @@ int processOrders(FILE* ORDER, order_t* orderData, catagory_t* catList, size_t n
 		orderData[i].customerId	= atoi(clean(items[2]));
 		orderData[i].catagory 	= sArraySearch(catList, clean(items[3]), numCat);
 		if(orderData[i].catagory == -1) {
-			fprintf(stderr,"ERROR: Invalid catagory \'%s\' on line %d of order file.\n", clean(items[3]), i);
+			fprintf(stderr,"ERROR: Invalid catagory \'%s\' on line %d of order file.\n", items[3], i);
 			return FAIL;
 		}
 	}
