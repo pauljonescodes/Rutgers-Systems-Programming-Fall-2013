@@ -6,6 +6,9 @@
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
 
 #include "tokenizer.h"
 
@@ -33,6 +36,18 @@ typedef struct order_t_ {
 	int 		customerId;	/* The ID of the ordering customer */
 	int	 	catagory;	/* The catagory listed for this book */
 }order_t;
+
+/* Struct with information about the shared memory segment. */
+typedef struct shmdata_t_ {
+	int 		SHMID;
+	int 		numConsumers;
+	
+	int		POS_START;
+	int 		POS_doneFlag;
+	int 		POS_transmitCode;
+	int		POS_transmitData;
+	int		POS_queue;
+}shmdata_t;
 
 /* Function prototypes */
 catagory_t* 	processCatagories(int*, char*);				/* processes the catagory input list into an array */
