@@ -20,6 +20,7 @@ typedef struct TokenizerT_ {
 	int num_tok;     /* number of tokens */
 }TokenizerT;
 
+int isAlphanumeric(char i);
 TokenizerT *TKCreate(char *ts, int, char*);
 void TKDestroy(TokenizerT *tk);
 char *TKGetNextToken(TokenizerT *tk);

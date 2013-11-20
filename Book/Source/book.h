@@ -40,19 +40,20 @@ typedef struct order_t_ {
 /* Struct with information about the shared memory segment. */
 typedef struct shmdata_t_ {
 	int 		SHMID;
-	int 		numConsumers;
-	
-	int		POS_START;
+	int 		NC;
+	int 		NO;
+	int		size;
+		
+	int		POS_readyFlag;
 	int 		POS_doneFlag;
-	int 		POS_transmitCode;
-	int		POS_transmitData;
+	int 		POS_errorFlag;
 	int		POS_queue;
 }shmdata_t;
 
 /* Function prototypes */
 catagory_t* 	processCatagories(int*, char*);				/* processes the catagory input list into an array */
-int 		processDatabase(FILE*, consumer_t*);			/* parses the database file into a list of consumers */
-int 		processOrders(FILE*, order_t*, catagory_t*, size_t);	/* parses the order file into a list of orders to be executed */
+consumer_t*	processDatabase(FILE*, int*);				/* parses the database file into a list of consumers */
+order_t* 	processOrders(FILE*, catagory_t*, size_t, int*);	/* parses the order file into a list of orders to be executed */
 int 		getFileLength(FILE*);					/* returns the length of the passed file */
 void* 		cleanMalloc(size_t);					/* returns allocated memory of all 0's */
 char*		trim(char*);						/* trims first and last characters */
