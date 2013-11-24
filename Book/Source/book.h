@@ -15,6 +15,8 @@
 #define debug printf("LINE = %d\n",__LINE__);
 #define FAIL 1
 #define SUCCESS 0
+#define CY "\e[33m"
+#define CR "\e[0m"
 
 /* A pseudo-type to hold catagory values. */
 typedef char* catagory_t;
@@ -48,6 +50,7 @@ typedef struct shmdata_t_ {
 	int 		POS_doneFlag;
 	int 		POS_errorFlag;
 	int		POS_queue;
+	int		POS_money;
 }shmdata_t;
 
 /* Function prototypes */

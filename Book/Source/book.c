@@ -162,11 +162,12 @@ order_t* processOrders(FILE* ORDER, catagory_t* catList, size_t numCat, int* NO)
 		orderData[i].title 	= trim(clean(items[0]));
 		orderData[i].cost   	= atof(clean(items[1]));
 		orderData[i].customerId	= atoi(clean(items[2]));
-		orderData[i].catagory 	= (catagory_t) catList[sArraySearch(catList, clean(items[3]), numCat)];
+		orderData[i].catagory 	= sArraySearch(catList, clean(items[3]), numCat);
 		if(orderData[i].catagory == -1) {
-			fprintf(stderr,"\e[31mERROR: Invalid catagory \'%s\' on line %d of order file.\e[0m\n", items[3], i);
+			fprintf(stderr,"\e[31mERROR: Invalid catagory \'%s\' on line %d of order file.\e[0m\n", clean(items[3]), i);
 			return 0;
 		}
+		orderData[i].catagory 	= catList[orderData[i].catagory];
 	}
 	return orderData;
 
@@ -181,7 +182,8 @@ shmdata_t* setup_shm(consumer_t* consumerData, order_t* orderData, int NUMCONSUM
 	char*		LOCKNAME;
 	int 		startingKey;
 	int 		req_size;
-	
+	int 		tries;
+		
 	LOCKNAME = "shmlock";	
 	CHECK = fopen(LOCKNAME,"r");
 	if(CHECK == 0) {
@@ -190,7 +192,6 @@ shmdata_t* setup_shm(consumer_t* consumerData, order_t* orderData, int NUMCONSUM
 	}
 	fclose(CHECK);
 	printf("File lock found.\n");
-	printf("nc = %d no = %d\n",NUMCONSUMER, NUMORDER);	
 	shmdata = cleanMalloc(sizeof(shmdata_t));
 	
 	/* RESERVED:
@@ -201,28 +202,29 @@ shmdata_t* setup_shm(consumer_t* consumerData, order_t* orderData, int NUMCONSUM
 	shmdata->NC = NUMCONSUMER;
 	shmdata->NO = NUMORDER;
 	shmdata->POS_readyFlag = 2;	
-	shmdata->POS_doneFlag = shmdata->POS_readyFlag + NUMCONSUMER;
-	shmdata->POS_errorFlag = shmdata->POS_doneFlag + NUMCONSUMER;
-	shmdata->POS_queue = shmdata->POS_errorFlag + NUMCONSUMER;
+	shmdata->POS_doneFlag = shmdata->POS_readyFlag + 1;
+	shmdata->POS_errorFlag = shmdata->POS_doneFlag + 1;
+	shmdata->POS_queue = shmdata->POS_errorFlag + 1;
+	shmdata->POS_money = shmdata->POS_queue;
 	
-	req_size = shmdata->POS_queue + NUMORDER*4 + 10;
+	req_size = shmdata->POS_queue + NUMORDER*4 + NUMCONSUMER*sizeof(double) + 10;
 	shmdata->size = req_size;
 
 	printf("Initialized positions in shared memory data struct.\n");
-	printf("Required size of shared memory: %d (%x) bytes\n", req_size, req_size);
+	printf("Required size of shared memory: %d (0x%X) bytes\n", req_size, req_size);
 	SHMID = -1;
 	startingKey = 0;
+	tries = 0;
 	while(SHMID == -1) {
 		SHM_KEY = -1;
 		for(KEY_ID = startingKey; SHM_KEY == -1; KEY_ID++) {
 			SHM_KEY = ftok(LOCKNAME, KEY_ID);
-			printf("Tried key ID %d, got back key %d.\n", KEY_ID, SHM_KEY);
 		}
 		startingKey = KEY_ID + 1;
 		SHMID = shmget(SHM_KEY, req_size, 0700 | IPC_CREAT | IPC_EXCL);
-		printf("Tried key %d, got shmid %d\n",SHM_KEY,SHMID);
+		tries++;
 	}
-	
+	printf("Acquired SHMID %d after %d tries.\n",SHMID,tries);
 	shmdata->SHMID = SHMID;
 	printf("Shared memory fully initilized.\n");
 	return shmdata;	
@@ -234,69 +236,107 @@ void produce(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData) {
 	int 		NUMORDERS;
 	int 		NUMCONSUMERS;
 	
-	printf("<ProducerBot> Producer has risen!\n");
-	
-	SHM = shmat(shmdata->SHMID, NULL, 0);
-	
+	printf("<\e[34mProducerBot\e[0m> Producer has arrived.\n");
+		
 	NUMCONSUMERS = shmdata->NC;
 	NUMORDERS = shmdata->NO;
-	*((char*)SHM) = 1;
-	printf("<ProducerBot> Ready for duty, sir.\n");
 	
-	/* wait for overseer to send the start signal */
+	SHM = shmat(shmdata->SHMID, NULL, 0);
+	memset(SHM,0,shmdata->size); /* EXTREMELY HACKY FIX... PATCH THIS UP LATER? */
+	
+	sleep(2);
+		
+	*((int*)SHM +  shmdata->POS_queue) = -1;
+	printf("<\e[34mProducerBot\e[0m> Signaled ready. Waiting for start.\n");
 	while(*((char*)SHM) == 0) { }
-	
-	printf("<ProducerBot> Beginning production.\n");
+		
+	printf("<\e[34mProducerBot\e[0m> Starting production.\n");
 	
 	for(i=0;i<NUMORDERS;i++) {
 		/* add to queue */
-	}
-	
-	printf("<ProducerBot> All done.\n");
-	/* wait for the consumers to finish */ /*
-	while(1) {
-		int	j;	
-		int 	done = 1;
-		for(j=shmdata->POS_doneFlag;j<shmdata->POS_transmitCode;j++) {
-			if(*((char*)SHM + j) == 0) {
-				done = 0;
-			}
-		}
-		if(done) {
+		if(i == NUMORDERS) {
 			break;
 		}
-	}*/
+		*((int*)SHM + shmdata->POS_queue + 4 + 4*i) = i;	
+		if(*((int*)SHM +  shmdata->POS_queue) == -1) {
+			*((int*)SHM +  shmdata->POS_queue) = 0;
+		}
+			
+	}
+
 	
-	printf("<ProducerBot> Committing sepechu in the name of memory management!\n");
+	printf("<\e[34mProducerBot\e[0m> All done!.\n");
+
+	while(*((char*)SHM + 1)	== 0) { } /* wait for stop flag */
+	
 	shmdt(SHM);
 	_exit(0);
 }
 
-void consume(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData, int ID) {
+void consume(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData, int ID, int trueID) {
 	void*		SHM;
 	int 		i;
-
+	int		current_order;
+	double		credit;
+	
 	/* init etc */	
 	printf("<\e[36m%s\e[0m> Consumer %d reporting for duty, sir.\n", consumerData[ID].name, ID);
 	
+	credit = consumerData[ID].credit;
 	SHM = shmat(shmdata->SHMID, NULL, 0);
 	memset(SHM,0,shmdata->size); /* EXTREMELY HACKY FIX... PATCH THIS UP LATER? */
-	for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHM+ i));
-	}	printf("\n");
-
-	*((char*)SHM + shmdata->POS_readyFlag + ID) = 1;
+	
+	sleep(2);
+	
+	*((char*)SHM + shmdata->POS_readyFlag) += 1;
 	printf("<\e[36m%s\e[0m> Signaled ready. Waiting for start.\n", consumerData[ID].name);
 	while(*((char*)SHM) == 0) { }
 		
 	printf("<\e[36m%s\e[0m> Starting.\n", consumerData[ID].name);
-	/* do funny consumer stuff here... weird people, those consumers */
 	
-	*((char*)SHM + shmdata->POS_doneFlag + ID) = 1;
+	/* wait for the producer to start producing, prevents a false start */
+	while(*((int*)SHM +  shmdata->POS_queue) == -1) {};
+	while(1) {
+		if(*((int*)SHM + shmdata->POS_queue) == shmdata->NO) {
+			break;
+		}
+		
+		current_order = *((int*)SHM + shmdata->POS_queue + *((int*)SHM + shmdata->POS_queue)*4 + 4);
+		if(current_order < 0) {
+			break;
+		}
+		/* HEY PAUL!
+ 		 * YOU SEE THOSE LINES MARKED "SUCCESS" AND "FAILIURE"?
+ 		 * WELL THEY SET NUMBERS IN SHARED MEMORY TO RESPOND THAT THEY SUCCEEDED OR FAILED THE ORDER
+ 		 * AND THOSE ARENT GETTING KEPT CORRECTLY TO THE FINAL REPORT
+ 		 * ITS IMPORTANT, FIX THAT PLEASE!
+ 		 */
+		if(orderData[current_order].customerId == trueID) {
+			if(orderData[current_order].cost <= credit){	
+				*((int*)SHM +  shmdata->POS_queue) += 1;
+			 	*((int*)SHM + current_order*4 + 4) = -1; /* success */
+				printf("<\e[32m%s\e[0m> Successfully ordered order %d.\n",consumerData[ID].name,current_order);
+				credit -= orderData[current_order].cost;
+				*((double*)SHM + shmdata->POS_money + ID*sizeof(double)) = credit;
+				if(current_order == shmdata->NO-1) { break; }
+			}else{
+				
+				*((int*)SHM +  shmdata->POS_queue) += 1;
+				printf("<\e[32m%s\e[0m> Failed ordering order %d!\n",consumerData[ID].name,current_order);
+			 	*((int*)SHM + current_order*4 + 4) = -2; /* failiure */
+				if(current_order == shmdata->NO-1) { break; }
+			}
+		}
+		if(shmdata->NO-1 == current_order) {
+			break;
+		}
+	}
+	printf("<\e[36m%s\e[0m> Done.\n", consumerData[ID].name);	
+
+	
+	*((char*)SHM + shmdata->POS_doneFlag) += 1;
 	
 	while(*((char*)SHM + 1)	== 0) { } /* wait for stop flag */
-	printf("<\e[36m%s\e[0m> Stopping.\n", consumerData[ID].name);
-	
 	shmdt(SHM);
 
 	_exit(0);
@@ -320,7 +360,7 @@ int spawnChildren(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderDa
 		/* we are now in the child process! */
 		produce(shmdata,consumerData,orderData);
 	}else{
-		printf("<OVERSEER> Spawned child process \"ProducerBot\" with id %d.\n", PID_producer);
+		printf("<%sOVERSEER%s> Spawned child process \"ProducerBot\" with id %d.\n",CY, CR,PID_producer);
 	}
 	/* now spawn all child processes. */
 	for(i=0;i<NUMCONSUMERS;i++) {
@@ -331,9 +371,9 @@ int spawnChildren(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderDa
 		}
 		if(PID_consumers[i] == 0) {
 			/* child process for this consumer */
-			consume(shmdata,consumerData,orderData,i);
+			consume(shmdata,consumerData,orderData,i,consumerData[i].id);
 		}else{
-			printf("<OVERSEER> Spawned child process \"%s\" with id %d.\n", consumerData[i].name, PID_consumers[i]);
+			printf("<%sOVERSEER%s> Spawned child process \"%s\" with id %d.\n", CY,CR,consumerData[i].name, PID_consumers[i]);
 		}
 		
 	}
@@ -346,38 +386,64 @@ void stopAll(shmdata_t* shmdata, void* SHM) {
 
 int ready(shmdata_t* shmdata, void* SHM) {
 	int		i;
+	i = *((char*)SHM + shmdata->POS_readyFlag);
 	
-	for(i = shmdata->POS_readyFlag; i < shmdata->POS_doneFlag; i++) {
-		if(*((char*)SHM + i) == 0) {
-			return 0;
-		}
-	}
-	
-	return 1;
+	return i == shmdata->NC ? 1 : 0;
 }
 
 int done(shmdata_t* shmdata, void* SHM) {
 	int		i;
 	
-	for(i = shmdata->POS_doneFlag; i < shmdata->POS_errorFlag; i++) {
-		if(*((char*)SHM + i) == 0) {
-			return 0;
-		}
-	}
-	
-	return 1;
+	return *((char*)SHM + shmdata->POS_doneFlag) == (char)shmdata->NC ? 1 : 0;	
 }
 
 int error(shmdata_t* shmdata, void* SHM) {
 	int		i;
+
+	return *((char*)SHM + shmdata->POS_errorFlag) > 0 ? 1 : 0;	
+}
+
+void finalReport(shmdata_t* data, consumer_t* consumerData, order_t* orderData, void* SHM) {
+	int 		i;
+	int		j;
+	double		sim;
+	FILE*		f;
 	
-	for(i = shmdata->POS_errorFlag; i < shmdata->POS_queue; i++) {
-		if(*((char*)SHM + i) == 1) {
-			return FAIL;
+	f = fopen("finalreport.txt", "r+");	
+	for(i=0;i<data->NC;i++) {
+		sim = consumerData[i].credit;
+		fprintf(f,"=== BEGIN CUSTOMER INFO ===\n");
+		fprintf(f,"### BALANCE ###\n");
+		fprintf(f,"Customer name: %s\n",consumerData[i].name);
+		fprintf(f,"Customer id number: %d\n",consumerData[i].id);
+		fprintf(f,"Remaining credit balance after all purchases (a dollar amount): %.2f\n", *((double*)SHM + data->POS_money + i*sizeof(double)));
+		/* HEY PAUL
+		 * YOU MIGHT NOTICE THAT THE FINAL REPORT IS BLANK ON THE ORDERS LISTS
+		 * WELL THIS IS THE PROBELM
+		 * THE RESPONSES FROM THE CONSUMERS ARE BEING OVERWRITTEN OR SOMETHING
+		 * FIX IT UP PLS!
+		 */
+		fprintf(f,"### SUCCESSFUL ORDERS ###\n");
+		for(j=0;j<data->NO;j++) {
+			if(orderData[j].customerId == consumerData[i].id) {
+				if(*((int*)SHM + data->POS_queue + 4 + j*4) == -1) {
+					sim -= orderData[j].cost;
+					fprintf(f,"\"%s\"| %.2f| %.2f\n",orderData[j].title, orderData[j].cost, sim);
+				}
+			}
 		}
+		fprintf(f,"### REJECTED ORDERS ###\n"); 
+		for(j=0;j<data->NO;j++) {
+			if(orderData[j].customerId == consumerData[i].id) {
+				if(*((int*)SHM + data->POS_queue + 4 + j*4) == -2) {
+					fprintf(f,"\"%s\"| %.2f\n",orderData[j].title, orderData[j].cost);
+				}
+			}
+		}
+		fprintf(f,"=== END CUSTOMER INFO ===\n\n");
+
 	}
-	
-	return SUCCESS;
+	fclose(f);
 }
 
 int main(int argc, char** argv) {
@@ -431,63 +497,32 @@ int main(int argc, char** argv) {
 	if(shmdata == 0) { return FAIL; }
 	SHMCHUNK = shmat(shmdata->SHMID, NULL, 0);
 	
-	for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
 	
-	printf("<OVERSEER> Arise, my minions!\n");
+	printf("<%sOVERSEER%s> Arise, my minions!\n",CY,CR);
 	if(spawnChildren(shmdata, consumerData, orderData)) {
-		printf("<OVERSEER> A miscarrige occured :(\n");
+		printf("\e[31m<OVERSEER> A miscarrige occured :(\e[0m\n");
 		return 0;
 	}
-	for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
 	sleep(1); /* artificially wait for all processes to initialize, will cause problems if your machine is horrificly slow. */
 		
 	
-	printf("<OVERSEER> All initialization completed successfully.\n");
-	printf("<OVERSEER> Starting processes...\n");
-	for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
-	sleep(1);
+	printf("<%sOVERSEER%s> All initialization completed successfully.\n",CY,CR);
+	printf("<%sOVERSEER%s> Starting processes...\n",CY,CR);
 	while(!ready(shmdata,SHMCHUNK));
-	printf("ALL ARE READY!\n");	
 	/* THE ALL IMPORTANT HOLY GOD LINE */
 	*((char*)SHMCHUNK) = 1;
 	/* END ALL IMPORTANT HOLY GOD LINE */
-for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
-
-	sleep(1); /* wait for the processes to run a bit... give em a chance! */
-	for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
+	
 
 	while(1) {
 		if(done(shmdata, SHMCHUNK)) {
-			printf("<OVERSEER> All done!\n");
+			printf("<%sOVERSEER%s> All done!\n",CY,CR);
 			break;
 		}
-		if(error(shmdata, SHMCHUNK)) {
-			fprintf(stderr,"\e[31m<OVERSEER> ERROR: One of the consumers signaled an error, stop the presses!\e[0m\n");
-			stopAll(shmdata, SHMCHUNK);
-			shmdt(SHMCHUNK);	
-			return FAIL;
-		}
 	}
-for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
-
+	finalReport(shmdata, consumerData, orderData, SHMCHUNK);
 	stopAll(shmdata, SHMCHUNK);
-for(i=0;i<shmdata->size;i++) {
-		printf("%d ",*((char*)SHMCHUNK + i));
-	}	printf("\n");
-
-	sleep(1); /* wait for all children to die, and remove the memory chunk */
 	shmdt(SHMCHUNK);
+	shmctl(shmdata->SHMID, IPC_RMID, 0); /* remove the segment */
 	return SUCCESS;
 }
