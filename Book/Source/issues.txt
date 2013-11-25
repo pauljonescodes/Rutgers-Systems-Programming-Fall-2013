@@ -1,5 +1,0 @@
-[ ] If order's customer is not in database, print warning
-[ ] Warning if customer's balance is 0 (bad parse) or negative (disallowed, error)
-[ ] If customer number is 0/neg error (0 = ill format?)
-[ ] Fix parsing of strings for imput files
-[ ] Diff the final report

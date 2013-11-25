@@ -10,13 +10,10 @@ typedef struct TokenizerT_ {
 }TokenizerT;
 
 int isAlphanumeric(char c) {
-	if('A'<=c && 'Z'>=c) {
-		return 1;
+	if('\"' == c) {
+		return 0;	
 	}
-	if('a'<=c && 'z'>=c) {
-		return 1;
-	}
-	if('0'<=c && '9'>=c) {
+	if('!'<=c && '~'>=c) {
 		return 1;
 	}
 	return 0;
