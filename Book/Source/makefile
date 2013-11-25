@@ -5,3 +5,4 @@ all:
 
 clean:
 	rm book
+	rm finalreport.txt

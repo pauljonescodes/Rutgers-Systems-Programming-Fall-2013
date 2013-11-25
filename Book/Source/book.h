@@ -51,17 +51,18 @@ typedef struct shmdata_t_ {
 	int 		POS_errorFlag;
 	int		POS_queue;
 	int		POS_money;
+	int		POS_response;
 }shmdata_t;
 
 /* Function prototypes */
-catagory_t* 	processCatagories(int*, char*);				/* processes the catagory input list into an array */
-consumer_t*	processDatabase(FILE*, int*);				/* parses the database file into a list of consumers */
-order_t* 	processOrders(FILE*, catagory_t*, size_t, int*);	/* parses the order file into a list of orders to be executed */
-int 		getFileLength(FILE*);					/* returns the length of the passed file */
-void* 		cleanMalloc(size_t);					/* returns allocated memory of all 0's */
-char*		trim(char*);						/* trims first and last characters */
-char* 		clean(char*); 						/* trims leading and tailing whitespace */
-int 		sArraySearch(char**, char*, size_t); 			/* searches in a string array, returns subscript */
-void 		printData(consumer_t*, order_t*, catagory_t*, size_t);	/* prints out parsed data */
+catagory_t* 	processCatagories(int*, char*);					/* processes the catagory input list into an array */
+consumer_t*	processDatabase(FILE*, int*);					/* parses the database file into a list of consumers */
+order_t* 	processOrders(FILE*, consumer_t*,catagory_t*, size_t,int*,int);	/* parses the order file into a list of orders to be executed */
+int 		getFileLength(FILE*);						/* returns the length of the passed file */
+void* 		cleanMalloc(size_t);						/* returns allocated memory of all 0's */
+char*		trim(char*);							/* trims first and last characters */
+char* 		clean(char*); 							/* trims leading and tailing whitespace */
+int 		sArraySearch(char**, char*, size_t); 				/* searches in a string array, returns subscript */
+void 		printData(consumer_t*, order_t*, catagory_t*, size_t);		/* prints out parsed data */
 
 #endif

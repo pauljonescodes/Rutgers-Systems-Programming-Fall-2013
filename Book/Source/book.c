@@ -86,6 +86,7 @@ consumer_t* processDatabase(FILE* DATABASE, int* NC) {
 	int 		numlines;	/* number of lines */
 	int 		i;		/* iterator */
 	consumer_t* 	consumerData;
+	int		j;
 	
 	database_size = getFileLength(DATABASE);
 	file_string = cleanMalloc(database_size + 1);
@@ -98,19 +99,45 @@ consumer_t* processDatabase(FILE* DATABASE, int* NC) {
 	*NC = numlines;
 	consumerData = cleanMalloc((numlines + 1) * sizeof(consumer_t));
 	
+	j=0;	
 	for(i=0;i<numlines;i++) {
 		tk = TKCreate(lines[i], 1, "|");
 		items = tk->tokens;
+		if(tk->num_tok == 0) {
+			fprintf(stderr,"\e[33mWARNING: Blank/contentless line %d of database file.\e[0m\n", i);
+			continue;
+		}
 		if(tk->num_tok != 6) { 
 			fprintf(stderr,"\e[31mERROR: Invalid line number %d in database file.\e[0m\n", i);
 			return 0; 
 		}
-		consumerData[i].name 	= trim(clean(items[0]));
-		consumerData[i].id   	= atoi(clean(items[1]));
-		consumerData[i].credit 	= atof(clean(items[2]));
-		consumerData[i].address = trim(clean(items[3]));
-		consumerData[i].state 	= trim(clean(items[4]));
-		consumerData[i].zip	= trim(clean(items[5]));
+		consumerData[j].name 	= trim(clean(items[0]));
+		consumerData[j].id   	= atoi(clean(items[1]));
+		consumerData[j].credit 	= atof(clean(items[2]));
+		consumerData[j].address = trim(clean(items[3]));
+		consumerData[j].state 	= trim(clean(items[4]));
+		consumerData[j].zip	= trim(clean(items[5]));
+			
+		if(consumerData[j].id == 0) {
+			printf("\e[33mWARNING: Customer id on line %d of database file has id 0. Possibly an invalid integer.\e[0m\n", i);
+		}
+		if(consumerData[j].id < 0) {
+			fprintf(stderr,"\e[31mERROR: Customer id one line %d of database file is negative.\e[0m\n", i);
+			return 0;
+		}
+		
+		if(consumerData[j].credit == 0) {
+			printf("\e[33mWARNING: Customer's credit balance on line %d of order file (%s) is $ 0.00. Possibly a parse error.\e[0m\n",i,consumerData[j].name);	
+		}
+		if(consumerData[j].credit < 0) {
+			fprintf(stderr,"\e[31mERROR: Customer %s's credit balance (line %d) is negative.\e[0m\n",consumerData[j].name,i);
+			return 0;
+		}
+
+
+
+
+		j++;
 	}
 	
 	return consumerData;
@@ -130,7 +157,7 @@ void dump_string(char* s) {
 	return;
 }
 
-order_t* processOrders(FILE* ORDER, catagory_t* catList, size_t numCat, int* NO) {
+order_t* processOrders(FILE* ORDER, consumer_t* consumerData, catagory_t* catList, size_t numCat, int* NO, int NC) {
 	char* 		file_string;	/* string containing all the contents of the database */
 	int 		order_size;	/* size (number of characters) of the database */
 	TokenizerT* 	tk;		/* tokenizer for the database */
@@ -139,7 +166,10 @@ order_t* processOrders(FILE* ORDER, catagory_t* catList, size_t numCat, int* NO)
 	int 		numlines;	/* number of lines */
 	int 		i;		/* iterator */
 	order_t*	orderData;
-	
+	int		j;
+	int		c;
+	int 		fail;
+			
 	order_size = getFileLength(ORDER);
 	file_string = cleanMalloc(order_size + 1);
 	fread(file_string, 1, order_size, ORDER);
@@ -151,23 +181,49 @@ order_t* processOrders(FILE* ORDER, catagory_t* catList, size_t numCat, int* NO)
 	*NO = numlines;
 	orderData = cleanMalloc((numlines + 1) * sizeof(order_t));
 	
+	j = 0;
 	for(i=0;i<numlines;i++) {
 		tk = TKCreate(lines[i], 1, "|");
 		items = tk->tokens;
+		if(tk->num_tok == 1) {
+			fprintf(stderr,"\e[33mWARNING: Blank/contentless line %d of order file.\e[0m\n", i);
+			continue;
+		}
 		if(tk->num_tok != 4) { 
 			fprintf(stderr,"\e[31mERROR: Invalid line number %d in order file.\e[0m\n", i);
-			fprintf(stderr,"LINE = %s\n",lines[i]);
 			return 0; 
 		}
-		orderData[i].title 	= trim(clean(items[0]));
-		orderData[i].cost   	= atof(clean(items[1]));
-		orderData[i].customerId	= atoi(clean(items[2]));
-		orderData[i].catagory 	= sArraySearch(catList, clean(items[3]), numCat);
-		if(orderData[i].catagory == -1) {
+		orderData[j].title 	= trim(clean(items[0]));
+		orderData[j].cost   	= atof(clean(items[1]));
+		orderData[j].customerId	= atoi(clean(items[2]));
+		orderData[j].catagory 	= sArraySearch(catList, clean(items[3]), numCat);
+		if(orderData[j].catagory == -1) {
 			fprintf(stderr,"\e[31mERROR: Invalid catagory \'%s\' on line %d of order file.\e[0m\n", clean(items[3]), i);
 			return 0;
 		}
-		orderData[i].catagory 	= catList[orderData[i].catagory];
+		orderData[j].catagory 	= catList[orderData[j].catagory];
+		
+		if(orderData[j].cost == 0) {
+			printf("\e[33mWARNING: The order on line %d is $ 0.00. Check for bad formatting.\e[0m\n", i);
+		}
+		if(orderData[j].cost < 0) {
+			fprintf(stderr,"\e[31mERROR: The order on line %d has a negative dollar value.\e[0m\n",i);
+			return 0;
+		}
+		/*check to make sure that customer is in database */
+		fail = 1;
+		for(c=0;c<NC;c++) {
+			if(consumerData[c].id == orderData[j].customerId) {
+				fail = 0;
+				break;
+			}
+		}	
+		if(fail) {
+			fprintf(stderr,"\e[31mERROR: The order on line %d of the order file is for a customer \'%d\' that does not exist.\e[0m\n",i,orderData[j].customerId);
+			return 0;
+		}
+
+		j++;
 	}
 	return orderData;
 
@@ -187,8 +243,8 @@ shmdata_t* setup_shm(consumer_t* consumerData, order_t* orderData, int NUMCONSUM
 	LOCKNAME = "shmlock";	
 	CHECK = fopen(LOCKNAME,"r");
 	if(CHECK == 0) {
-		fprintf(stderr,"\e[31mERROR: file \"%s\" used to lock shared memory is not present. Please create.\e[0m\n", LOCKNAME);
-		return 0;
+		fprintf(stderr,"\e[33mWARNING: File \"%s\" used to anchor shared memory is not present (creating).\e[0m\n", LOCKNAME);
+		CHECK = fopen(LOCKNAME,"w+");
 	}
 	fclose(CHECK);
 	printf("File lock found.\n");
@@ -202,12 +258,12 @@ shmdata_t* setup_shm(consumer_t* consumerData, order_t* orderData, int NUMCONSUM
 	shmdata->NC = NUMCONSUMER;
 	shmdata->NO = NUMORDER;
 	shmdata->POS_readyFlag = 2;	
-	shmdata->POS_doneFlag = shmdata->POS_readyFlag + 1;
+	shmdata->POS_doneFlag = shmdata->POS_readyFlag + 1 + NUMCONSUMER + 1;
 	shmdata->POS_errorFlag = shmdata->POS_doneFlag + 1;
 	shmdata->POS_queue = shmdata->POS_errorFlag + 1;
-	shmdata->POS_money = shmdata->POS_queue;
-	
-	req_size = shmdata->POS_queue + NUMORDER*4 + NUMCONSUMER*sizeof(double) + 10;
+	shmdata->POS_money = shmdata->POS_queue + 4 + NUMORDER*sizeof(int) + 10;
+	shmdata->POS_response = shmdata->POS_money + NUMCONSUMER*sizeof(double) + 5;	
+	req_size = shmdata->POS_response + NUMORDER + 10;
 	shmdata->size = req_size;
 
 	printf("Initialized positions in shared memory data struct.\n");
@@ -244,13 +300,16 @@ void produce(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData) {
 	SHM = shmat(shmdata->SHMID, NULL, 0);
 	memset(SHM,0,shmdata->size); /* EXTREMELY HACKY FIX... PATCH THIS UP LATER? */
 	
-	sleep(2);
 		
-	*((int*)SHM +  shmdata->POS_queue) = -1;
 	printf("<\e[34mProducerBot\e[0m> Signaled ready. Waiting for start.\n");
-	while(*((char*)SHM) == 0) { }
-		
+	while(*((char*)SHM) == 0) { 
+		*((char*)SHM + shmdata->POS_readyFlag) = 1;	
+		*((int*)SHM +  shmdata->POS_queue) = -1;
+	}	
+	
 	printf("<\e[34mProducerBot\e[0m> Starting production.\n");
+	
+	*((int*)SHM +  shmdata->POS_queue) = -1;
 	
 	for(i=0;i<NUMORDERS;i++) {
 		/* add to queue */
@@ -286,18 +345,20 @@ void consume(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData, i
 	SHM = shmat(shmdata->SHMID, NULL, 0);
 	memset(SHM,0,shmdata->size); /* EXTREMELY HACKY FIX... PATCH THIS UP LATER? */
 	
-	sleep(2);
 	
 	*((char*)SHM + shmdata->POS_readyFlag) += 1;
 	printf("<\e[36m%s\e[0m> Signaled ready. Waiting for start.\n", consumerData[ID].name);
-	while(*((char*)SHM) == 0) { }
+	while(*((char*)SHM) == 0) {
+		*((char*)SHM + shmdata->POS_readyFlag + ID + 1) = 1;
+	}
 		
 	printf("<\e[36m%s\e[0m> Starting.\n", consumerData[ID].name);
 	
 	/* wait for the producer to start producing, prevents a false start */
-	while(*((int*)SHM +  shmdata->POS_queue) == -1) {};
+	while(*((int*)SHM + shmdata->POS_queue) == -1) {
+	}
 	while(1) {
-		if(*((int*)SHM + shmdata->POS_queue) == shmdata->NO) {
+		if(*((int*)SHM + shmdata->POS_queue) >= shmdata->NO) {
 			break;
 		}
 		
@@ -305,29 +366,23 @@ void consume(shmdata_t* shmdata, consumer_t* consumerData, order_t* orderData, i
 		if(current_order < 0) {
 			break;
 		}
-		/* HEY PAUL!
- 		 * YOU SEE THOSE LINES MARKED "SUCCESS" AND "FAILIURE"?
- 		 * WELL THEY SET NUMBERS IN SHARED MEMORY TO RESPOND THAT THEY SUCCEEDED OR FAILED THE ORDER
- 		 * AND THOSE ARENT GETTING KEPT CORRECTLY TO THE FINAL REPORT
- 		 * ITS IMPORTANT, FIX THAT PLEASE!
- 		 */
 		if(orderData[current_order].customerId == trueID) {
 			if(orderData[current_order].cost <= credit){	
 				*((int*)SHM +  shmdata->POS_queue) += 1;
-			 	*((int*)SHM + current_order*4 + 4) = -1; /* success */
+			 	*((int*)SHM + shmdata->POS_response + current_order) = -1; /* success */
 				printf("<\e[32m%s\e[0m> Successfully ordered order %d.\n",consumerData[ID].name,current_order);
 				credit -= orderData[current_order].cost;
 				*((double*)SHM + shmdata->POS_money + ID*sizeof(double)) = credit;
-				if(current_order == shmdata->NO-1) { break; }
+				if(current_order >= shmdata->NO-1) { break; }
 			}else{
 				
 				*((int*)SHM +  shmdata->POS_queue) += 1;
 				printf("<\e[32m%s\e[0m> Failed ordering order %d!\n",consumerData[ID].name,current_order);
-			 	*((int*)SHM + current_order*4 + 4) = -2; /* failiure */
-				if(current_order == shmdata->NO-1) { break; }
+			 	*((int*)SHM + shmdata->POS_response + current_order) = -2; /* failiure */
+				if(current_order >= shmdata->NO-1) { break; }
 			}
 		}
-		if(shmdata->NO-1 == current_order) {
+		if(shmdata->NO-1 <= current_order) {
 			break;
 		}
 	}
@@ -386,21 +441,25 @@ void stopAll(shmdata_t* shmdata, void* SHM) {
 
 int ready(shmdata_t* shmdata, void* SHM) {
 	int		i;
-	i = *((char*)SHM + shmdata->POS_readyFlag);
+	int		t;
 	
-	return i == shmdata->NC ? 1 : 0;
+	t = 0;
+	for(i=shmdata->POS_readyFlag;i<shmdata->POS_doneFlag;i++) {
+		t += *((char*)SHM + i);
+	}
+	return t >= shmdata->NC + 1 ? 1 : 0;
 }
 
 int done(shmdata_t* shmdata, void* SHM) {
 	int		i;
 	
-	return *((char*)SHM + shmdata->POS_doneFlag) == (char)shmdata->NC ? 1 : 0;	
+	return *((unsigned char*)SHM + shmdata->POS_doneFlag) >= (char)shmdata->NC ? 1 : 0;	
 }
 
 int error(shmdata_t* shmdata, void* SHM) {
 	int		i;
 
-	return *((char*)SHM + shmdata->POS_errorFlag) > 0 ? 1 : 0;	
+	return *((unsigned char*)SHM + shmdata->POS_errorFlag) > 0 ? 1 : 0;	
 }
 
 void finalReport(shmdata_t* data, consumer_t* consumerData, order_t* orderData, void* SHM) {
@@ -409,7 +468,7 @@ void finalReport(shmdata_t* data, consumer_t* consumerData, order_t* orderData, 
 	double		sim;
 	FILE*		f;
 	
-	f = fopen("finalreport.txt", "r+");	
+	f = fopen("finalreport.txt", "w");	
 	for(i=0;i<data->NC;i++) {
 		sim = consumerData[i].credit;
 		fprintf(f,"=== BEGIN CUSTOMER INFO ===\n");
@@ -426,7 +485,7 @@ void finalReport(shmdata_t* data, consumer_t* consumerData, order_t* orderData, 
 		fprintf(f,"### SUCCESSFUL ORDERS ###\n");
 		for(j=0;j<data->NO;j++) {
 			if(orderData[j].customerId == consumerData[i].id) {
-				if(*((int*)SHM + data->POS_queue + 4 + j*4) == -1) {
+				if(*((int*)SHM + data->POS_response + j) == -1) {
 					sim -= orderData[j].cost;
 					fprintf(f,"\"%s\"| %.2f| %.2f\n",orderData[j].title, orderData[j].cost, sim);
 				}
@@ -435,7 +494,7 @@ void finalReport(shmdata_t* data, consumer_t* consumerData, order_t* orderData, 
 		fprintf(f,"### REJECTED ORDERS ###\n"); 
 		for(j=0;j<data->NO;j++) {
 			if(orderData[j].customerId == consumerData[i].id) {
-				if(*((int*)SHM + data->POS_queue + 4 + j*4) == -2) {
+				if(*((int*)SHM + data->POS_response + j) == -2) {
 					fprintf(f,"\"%s\"| %.2f\n",orderData[j].title, orderData[j].cost);
 				}
 			}
@@ -489,10 +548,10 @@ int main(int argc, char** argv) {
 	consumerData = processDatabase(DATABASE, &NUMCONSUMER);
 	if(consumerData == 0) { return FAIL; }
 
-	orderData = processOrders(ORDER, catList, numCat, &NUMORDER);
+	orderData = processOrders(ORDER, consumerData, catList, numCat, &NUMORDER, NUMCONSUMER);
 	if(orderData == 0) { return FAIL; }
 	
-	printData(consumerData, orderData, catList, numCat);
+	/*printData(consumerData, orderData, catList, numCat);*/
 	shmdata = setup_shm(consumerData, orderData, NUMCONSUMER, NUMORDER);
 	if(shmdata == 0) { return FAIL; }
 	SHMCHUNK = shmat(shmdata->SHMID, NULL, 0);
@@ -503,12 +562,13 @@ int main(int argc, char** argv) {
 		printf("\e[31m<OVERSEER> A miscarrige occured :(\e[0m\n");
 		return 0;
 	}
-	sleep(1); /* artificially wait for all processes to initialize, will cause problems if your machine is horrificly slow. */
 		
 	
 	printf("<%sOVERSEER%s> All initialization completed successfully.\n",CY,CR);
-	printf("<%sOVERSEER%s> Starting processes...\n",CY,CR);
+	printf("<%sOVERSEER%s> Waiting for ready...\n",CY,CR);
 	while(!ready(shmdata,SHMCHUNK));
+	printf("<%sOVERSEER%s> Starting processes...\n",CY,CR);
+	*((int*)SHMCHUNK + shmdata->POS_queue) = -1;
 	/* THE ALL IMPORTANT HOLY GOD LINE */
 	*((char*)SHMCHUNK) = 1;
 	/* END ALL IMPORTANT HOLY GOD LINE */
