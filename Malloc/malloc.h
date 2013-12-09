@@ -4,10 +4,12 @@
 #define BLOCKSIZE 5000
 #define TINYBLOCK 500
 
-/*#define malloc( x ) mymalloc( x, __FILE__ , __LINE__ )
-#define free( x ) myfree( x, __FILE__, __LINE__ )*/
+#include "stdbool.h"
 
-void * mymalloc( unsigned int size );
-void myfree( void * p );
+//#define malloc( x ) my_malloc( x, __FILE__ , __LINE__ )
+//#define free( x ) my_free( x, __FILE__, __LINE__ )
+
+//void * my_malloc( unsigned int size, char * file, int line );
+//void my_free( void * p, char * file, int line );
 
 #endif

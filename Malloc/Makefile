@@ -1,4 +1,4 @@
-TARGET = index
+TARGET = malloc
 LIBS = -lm
 CC = gcc
 CFLAGS =-ansi -pedantic -Wall

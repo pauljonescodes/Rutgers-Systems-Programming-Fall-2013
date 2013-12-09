@@ -1,75 +1,168 @@
-#include <stdio.h>
-#include "malloc.h"
+/*
+ *  testprog.c
+ *
+ *  testprog
+ *
+ *  Created by Sujish Patel on 12/8/13.
+ *  Copyright (c) 2013 Sujish Patel. All rights reserved.
+ */
 
-static char memory_big_block[BLOCKSIZE];
-static char memory_lil_block[BLOCKSIZE];
-static bool initialized = false;
+//#include	"malloc.h"
+#include	<unistd.h>
+#include	<stdio.h>
+#include	<string.h>
+#include	<errno.h>
 
-struct MemoryChunk {
+#define MEM_SIZE 5000
+
+static char block[MEM_SIZE];
+
+// Full-scale malloc() implementation using sbrk().
+
+struct MemEntry {
     unsigned int size;
-    bool is_free;
-    struct MemoryChunk *prev, *next;
+    unsigned int isfree;
+    struct MemEntry *succ, *prev;
 };
 
-void * mymalloc( unsigned int requested_size )
+void *
+my_malloc( unsigned int size )
 {
-    if (requested_size > BLOCKSIZE || requested_size == 0)
-        return;
+	static struct MemEntry *	root = 0;
+	static struct MemEntry *	last = 0;
+	struct MemEntry *		p;
+	struct MemEntry *		succ;
     
-    static struct MemoryChunk * memory_big_root;
-    static struct MemoryChunk * memory_lil_root;
-    struct        MemoryChunk * current_mem_chk;
-    struct        MemoryChunk * succ;
-    
-    if (!initialized) {
-        memory_big_root          = (struct MemoryChunk*) memory_big_block;
-        memory_lil_root          = (struct MemoryChunk*) memory_lil_block;
-        
-        memory_big_root->next    = memory_lil_root->next    = 0;
-        memory_big_root->prev    = memory_lil_root->next    = 0;
-        memory_big_root->size    = memory_lil_root->size    = BLOCKSIZE - sizeof(struct MemoryChunk);
-        memory_big_root->is_free = memory_lil_root->is_free = true;
-        
-        initialized              = true;
-    }
-    
-    if (size > TINYBLOCK) {
-        current_mem_chk = memory_big_block;
-    } else {
-        current_mem_chk = memory_lil_block;
-    }
-    
-    do {
-        if (current_mem_chk->size < requested_size) {
-            // this chunk is too small, so move on
-            
-            current_mem_chk = current_mem_chk->next;
-        } else if (!current_mem_chk->is_free) {
-            // this chunk was taken, so move on
-            
-            current_mem_chk = current_mem_chk->next;
-        } else if(current_mem_chk->size < (requested_size + sizeof(struct MemoryChunk))) {
-            // this chunk can hold, but there can be no more chunks
-            
-        } else {
-            //  this chunk can hold, and there can be more chunk
-            
-            current_mem_chk = current_mem_chk->next;
-        }
-    } while(current_mem_chk != 0);
+	p = root;
+	while ( p != 0 )
+	{
+		if ( p->size < size )
+		{
+			p = p->succ;					// too small
+		}
+		else if ( !p->isfree )
+		{
+			p = p->succ;					// in use
+		}
+		else if ( p->size < (size + sizeof(struct MemEntry)) )
+		{
+			p->isfree = 0;					// too small to chop up
+			return (char *)p + sizeof(struct MemEntry);
+		}
+		else
+		{
+			succ = (struct MemEntry *)((char *)p + sizeof(struct MemEntry) + size);
+			succ->prev = p;
+			succ->succ = p->succ;
+			//p->succ->prev = succ;
+			//begin add
+			if(p->succ != 0)
+				p->succ->prev = succ;
+			//end add
+			p->succ = succ;
+			succ->size = p->size - sizeof(struct MemEntry) - size;
+			succ->isfree = 1;
+			p->size = size;
+			p->isfree = 0;
+			last = (p == last) ? succ : last;
+			return (char *)p + sizeof(struct MemEntry);
+		}
+	}
+	if ( (p = (struct MemEntry *)sbrk( sizeof(struct MemEntry) + size )) == (void *)-1 )
+	{
+		return 0;
+	}
+	else if ( last == 0 )				// first block created
+	{
+		printf( "BKR making first chunk size %d\n", size );
+		p->prev = 0;
+		p->succ = 0;
+		p->size = size;
+		p->isfree = 0;
+		root = last = p;
+		return (char *)p + sizeof(struct MemEntry);
+	}
+	else						// other blocks appended
+	{
+		printf( "BKR making another chunk size %d\n", size );
+		p->prev = last;
+		p->succ = last->succ;
+		p->size = size;
+		p->isfree = 0;
+		last->succ = p;
+		last = p;
+		return (char *)p + sizeof(struct MemEntry);
+	}
+	return 0;
 }
 
-void myfree( void * p )
+void
+my_free( void * p )
 {
-    /* free()ing pointers that were never allocated. */
+	struct MemEntry *		ptr;
+	struct MemEntry *		pred;
+	struct MemEntry *		succ;
     
+    if((struct MemEntry*) p == NULL) {
+        printf("This memory was never malloced\n");
+        return;
+    }
     
+	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
+	if ( (pred = ptr->prev) != 0 && pred->isfree )
+	{
+		pred->size += sizeof(struct MemEntry) + ptr->size;	// merge with predecessor
+		
+		pred->succ = ptr->succ;
+		//begin added
+		ptr->isfree=1;
+		pred->succ = ptr->succ;
+		if(ptr->succ != 0)
+			ptr->succ->prev = pred;
+		//end added
+		printf( "BKR freeing block %#x merging with predecessor new size is %d.\n", p, pred->size );
+	}
+	else
+	{
+		printf( "BKR freeing block %#x.\n", p );
+		ptr->isfree = 1;
+		pred = ptr;
+	}
+	if ( (succ = ptr->succ) != 0 && succ->isfree )
+	{
+		pred->size += sizeof(struct MemEntry) + succ->size;	// merge with successor
+		pred->succ = succ->succ;
+		//begin added
+		pred->isfree = 1;
+        
+		if(succ->succ != 0)
+			succ->succ->prev=pred;
+		//end added
+		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
+	}
+}
+
+int main() {
     
-    /* free()ing pointers to dynamic memory that were not returned from malloc(). */
+    char *p;
+     int x = 0;
+     int *xp;
+     
+     p = (char*)my_malloc (50);
+     p[0] = 'c';
+     p[1] = '\0';
+     
+     xp = (int*)my_malloc(50);
+     
+     printf("%s\n", p);
+     my_free(x);
+     my_free(xp);
+     my_free(p);
+     p = (char*)my_malloc (100);
+     my_free(p);
+     my_free(p);
+     p = (char*)my_malloc (50);
+     my_free(p);
     
-    
-    
-    /* redundant free()ing of the same pointer. */
-    
-    
+    return 0;
 }
