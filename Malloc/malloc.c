@@ -113,8 +113,11 @@ void my_free( void * p, char * file, int line )
 	else
 	{
 		printf( "BKR freeing block %#x.\n", p );
-		ptr->isfree = 1;
-		pred = ptr;
+        
+        if (ptr->isfree == 0) {
+            ptr->isfree = 1;
+            pred = ptr;
+        } else printf("BKR you're double freeing.\n");
 	}
 	if ( (succ = ptr->succ) != 0 && succ->isfree )
 	{
