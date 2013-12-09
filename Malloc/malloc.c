@@ -1,13 +1,30 @@
-#ifndef MALLOC_H
-#define MALLOC_H
+#include <stdio.h>
+#include "malloc.h"
 
-#define BLOCKSIZE 5000
-#define CHUNKTHRESHOLD 200
+static char memory_big_block[BLOCKSIZE];
+static char memory_lil_block[BLOCKSIZE];
+static bool initialized = false;
 
-#define malloc( x ) mymalloc( x, __FILE__ , __LINE__ )
-#define free( x ) myfree( x, __FILE__, __LINE__ )
+struct MemoryChunk {
+    unsigned int size;
+    bool is_free;
+    struct MemoryChunk *prev, *succ;
+};
 
-void * mymalloc( unsigned int size );
-void myfree( void * p );
+void * mymalloc( unsigned int size )
+{
+    static struct MemoryChunk * memory_big_root;
+    static struct MemoryChunk * memory_lil_root;
+    struct        MemoryChunk * this;
+    struct        MemoryChunk * succ;
+    
+    if (!initialized)
+    {
+        
+    }
+}
 
-#endif
+void myfree( void * p )
+{
+    
+}
