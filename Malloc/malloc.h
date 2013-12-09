@@ -3,9 +3,6 @@
 
 #include "stdbool.h"
 
-#define malloc( x ) my_malloc( x, __FILE__ , __LINE__ )
-#define free( x ) my_free( x, __FILE__, __LINE__ )
-
 #define MEM_SIZE 5000
 
 struct MemEntry {

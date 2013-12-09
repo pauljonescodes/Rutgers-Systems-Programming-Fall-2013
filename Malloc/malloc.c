@@ -8,12 +8,23 @@
  */
 
 #include	"malloc.h"
+#include    "sorted-list.h"
 #include	<unistd.h>
 #include	<stdio.h>
 #include	<string.h>
 #include	<errno.h>
 
+#define malloc( x ) my_malloc( x, __FILE__ , __LINE__ )
+#define free( x ) my_free( x, __FILE__, __LINE__ )
+
 static char block[MEM_SIZE];
+struct SortedList * sl;
+
+int compare_pointers(void * p1, void * p2) 
+{
+	printf("%i\n", p1 - p2);
+	return p1 - p2;
+}
 
 void * my_malloc( unsigned int size, char * file, int line )
 {
@@ -21,6 +32,7 @@ void * my_malloc( unsigned int size, char * file, int line )
 	static struct MemEntry *	last = 0;
 	struct MemEntry *		p;
 	struct MemEntry *		succ;
+	void *                  ret;
     
 	p = root;
 	while ( p != 0 )
@@ -36,7 +48,9 @@ void * my_malloc( unsigned int size, char * file, int line )
 		else if ( p->size < (size + sizeof(struct MemEntry)) )
 		{
 			p->isfree = 0;					// too small to chop up
-			return (char *)p + sizeof(struct MemEntry);
+			ret = (char *)p + sizeof(struct MemEntry);
+			SLInsert(sl, ret);
+			return ret;
 		}
 		else
 		{
@@ -54,7 +68,9 @@ void * my_malloc( unsigned int size, char * file, int line )
 			p->size = size;
 			p->isfree = 0;
 			last = (p == last) ? succ : last;
-			return (char *)p + sizeof(struct MemEntry);
+			ret = (char *)p + sizeof(struct MemEntry);
+			SLInsert(sl, ret);
+			return ret;
 		}
 	}
 	if ( (p = (struct MemEntry *)sbrk( sizeof(struct MemEntry) + size )) == (void *)-1 )
@@ -69,7 +85,10 @@ void * my_malloc( unsigned int size, char * file, int line )
 		p->size = size;
 		p->isfree = 0;
 		root = last = p;
-		return (char *)p + sizeof(struct MemEntry);
+		ret = (char *)p + sizeof(struct MemEntry);
+		sl = SLCreate(compare_pointers);
+		SLInsert(sl, ret);
+		return ret;
 	}
 	else						// other blocks appended
 	{
@@ -80,7 +99,9 @@ void * my_malloc( unsigned int size, char * file, int line )
 		p->isfree = 0;
 		last->succ = p;
 		last = p;
-		return (char *)p + sizeof(struct MemEntry);
+		ret = (char *)p + sizeof(struct MemEntry);
+		SLInsert(sl, ret);
+		return ret;
 	}
 	return 0;
 }
@@ -91,7 +112,12 @@ void my_free( void * p, char * file, int line )
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;
     
-    if((struct MemEntry*) p == NULL) {
+	if (sl == NULL) {
+		printf("No memory was ever malloced. \n");
+		return;
+	}
+
+    if(SLFind(sl, p) == NULL) {
         printf("This memory was never malloced\n");
         return;
     }
@@ -108,16 +134,17 @@ void my_free( void * p, char * file, int line )
 		if(ptr->succ != 0)
 			ptr->succ->prev = pred;
 		//end added
+		SLRemove(sl, p);
 		printf( "BKR freeing block %#x merging with predecessor new size is %d.\n", p, pred->size );
 	}
 	else
-	{
-		printf( "BKR freeing block %#x.\n", p );
-        
+	{   
         if (ptr->isfree == 0) {
+        	printf( "BKR freeing block %#x.\n", p );
+        	SLRemove(sl, p);
             ptr->isfree = 1;
             pred = ptr;
-        } else printf("BKR you're double freeing.\n");
+        } else printf("BKR you're double freeing. denied. \n");
 	}
 	if ( (succ = ptr->succ) != 0 && succ->isfree )
 	{
@@ -129,30 +156,17 @@ void my_free( void * p, char * file, int line )
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
 		//end added
+
+		SLRemove(sl, p);
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
 }
 
 int main() {
     
-    char *p;
-    int x = 0;
-    int *xp;
-    
-    p = (char*)malloc (50);
-    p[0] = 'c';
-    p[1] = '\0';
-    
-    xp = (int*)malloc(50);
-    
-    printf("%s\n", p);
-    free(x);
-    free(xp);
+    char * p;
+
     free(p);
-    p = (char*)malloc(100);
-    free(p);
-    free(p);
-    p = (char*)malloc(50);
     free(p);
     
     return 0;
