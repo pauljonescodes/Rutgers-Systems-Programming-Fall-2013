@@ -1,12 +1,3 @@
-/*
- *  testprog.c
- *
- *  testprog
- *
- *  Created by Sujish Patel on 12/8/13.
- *  Copyright (c) 2013 Sujish Patel. All rights reserved.
- */
-
 #include	"malloc.h"
 #include    "sorted-list.h"
 #include	<unistd.h>
@@ -14,15 +5,12 @@
 #include	<string.h>
 #include	<errno.h>
 
-#define malloc( x ) my_malloc( x, __FILE__ , __LINE__ )
-#define free( x ) my_free( x, __FILE__, __LINE__ )
-
-static char block[MEM_SIZE];
 struct SortedList * sl;
+
+#define BUG printf("%i\n", __LINE__);
 
 int compare_pointers(void * p1, void * p2) 
 {
-	printf("%i\n", p1 - p2);
 	return p1 - p2;
 }
 
@@ -106,22 +94,13 @@ void * my_malloc( unsigned int size, char * file, int line )
 	return 0;
 }
 
-void my_free( void * p, char * file, int line )
+void
+my_free( void * p, char * file, int line  )
 {
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
 	struct MemEntry *		succ;
-    
-	if (sl == NULL) {
-		printf("No memory was ever malloced. \n");
-		return;
-	}
 
-    if(SLFind(sl, p) == NULL) {
-        printf("This memory was never malloced\n");
-        return;
-    }
-    
 	ptr = (struct MemEntry *)((char *)p - sizeof(struct MemEntry));
 	if ( (pred = ptr->prev) != 0 && pred->isfree )
 	{
@@ -134,17 +113,13 @@ void my_free( void * p, char * file, int line )
 		if(ptr->succ != 0)
 			ptr->succ->prev = pred;
 		//end added
-		SLRemove(sl, p);
 		printf( "BKR freeing block %#x merging with predecessor new size is %d.\n", p, pred->size );
 	}
 	else
-	{   
-        if (ptr->isfree == 0) {
-        	printf( "BKR freeing block %#x.\n", p );
-        	SLRemove(sl, p);
-            ptr->isfree = 1;
-            pred = ptr;
-        } else printf("BKR you're double freeing. denied. \n");
+	{
+		printf( "BKR freeing block %#x.\n", p );
+		ptr->isfree = 1;
+		pred = ptr;
 	}
 	if ( (succ = ptr->succ) != 0 && succ->isfree )
 	{
@@ -152,22 +127,10 @@ void my_free( void * p, char * file, int line )
 		pred->succ = succ->succ;
 		//begin added
 		pred->isfree = 1;
-        
+
 		if(succ->succ != 0)
 			succ->succ->prev=pred;
 		//end added
-
-		SLRemove(sl, p);
 		printf( "BKR freeing block %#x merging with successor new size is %d.\n", p, pred->size );
 	}
-}
-
-int main() {
-    
-    char * p;
-
-    free(p);
-    free(p);
-    
-    return 0;
 }

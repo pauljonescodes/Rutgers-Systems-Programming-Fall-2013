@@ -3,8 +3,6 @@
 
 #include "stdbool.h"
 
-#define MEM_SIZE 5000
-
 struct MemEntry {
     unsigned int size;
     unsigned int isfree;
