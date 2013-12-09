@@ -2,7 +2,7 @@
 #define MALLOC_H
 
 #define BLOCKSIZE 5000
-#define TINYBLOCK 200
+#define TINYBLOCK 500
 
 /*#define malloc( x ) mymalloc( x, __FILE__ , __LINE__ )
 #define free( x ) myfree( x, __FILE__, __LINE__ )*/
