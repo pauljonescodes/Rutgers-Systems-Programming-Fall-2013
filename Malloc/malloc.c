@@ -20,7 +20,14 @@ void * mymalloc( unsigned int size )
     
     if (!initialized)
     {
+        memory_big_root = (struct MemoryChunk*) memory_big_block;
+        memory_big_root->size = BLOCKSIZE - sizeof(struct MemoryChunk);
+        memory_big_root->is_free = true;
         
+        memory_lil_root = (struct MemoryChunk*) memory_lil_block;
+        memory_lil_root->size = BLOCKSIZE - sizeof(struct MemoryChunk);
+        memory_lil_root->is_free = true;
+        initialized = true;
     }
 }
 
