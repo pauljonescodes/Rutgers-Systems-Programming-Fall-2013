@@ -7,7 +7,7 @@
  *  Copyright (c) 2013 Sujish Patel. All rights reserved.
  */
 
-//#include	"malloc.h"
+#include	"malloc.h"
 #include	<unistd.h>
 #include	<stdio.h>
 #include	<string.h>
@@ -26,7 +26,7 @@ struct MemEntry {
 };
 
 void *
-my_malloc( unsigned int size )
+my_malloc( unsigned int size, char * file, int line )
 {
 	static struct MemEntry *	root = 0;
 	static struct MemEntry *	last = 0;
@@ -97,7 +97,7 @@ my_malloc( unsigned int size )
 }
 
 void
-my_free( void * p )
+my_free( void * p, char * file, int line )
 {
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
@@ -145,24 +145,24 @@ my_free( void * p )
 int main() {
     
     char *p;
-     int x = 0;
-     int *xp;
-     
-     p = (char*)my_malloc (50);
-     p[0] = 'c';
-     p[1] = '\0';
-     
-     xp = (int*)my_malloc(50);
-     
-     printf("%s\n", p);
-     my_free(x);
-     my_free(xp);
-     my_free(p);
-     p = (char*)my_malloc (100);
-     my_free(p);
-     my_free(p);
-     p = (char*)my_malloc (50);
-     my_free(p);
+    int x = 0;
+    int *xp;
+    
+    p = (char*)malloc (50);
+    p[0] = 'c';
+    p[1] = '\0';
+    
+    xp = (int*)malloc(50);
+    
+    printf("%s\n", p);
+    free(x);
+    free(xp);
+    free(p);
+    p = (char*)malloc(100);
+    free(p);
+    free(p);
+    p = (char*)malloc(50);
+    free(p);
     
     return 0;
 }
