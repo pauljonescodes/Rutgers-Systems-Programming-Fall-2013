@@ -13,20 +13,9 @@
 #include	<string.h>
 #include	<errno.h>
 
-#define MEM_SIZE 5000
-
 static char block[MEM_SIZE];
 
-// Full-scale malloc() implementation using sbrk().
-
-struct MemEntry {
-    unsigned int size;
-    unsigned int isfree;
-    struct MemEntry *succ, *prev;
-};
-
-void *
-my_malloc( unsigned int size, char * file, int line )
+void * my_malloc( unsigned int size, char * file, int line )
 {
 	static struct MemEntry *	root = 0;
 	static struct MemEntry *	last = 0;
@@ -96,8 +85,7 @@ my_malloc( unsigned int size, char * file, int line )
 	return 0;
 }
 
-void
-my_free( void * p, char * file, int line )
+void my_free( void * p, char * file, int line )
 {
 	struct MemEntry *		ptr;
 	struct MemEntry *		pred;
