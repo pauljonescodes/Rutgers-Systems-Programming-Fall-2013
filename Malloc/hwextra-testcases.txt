@@ -1,0 +1,31 @@
+Test Cases
+==========
+
+> Please see testcases.c for these in action.
+
+Freeing unallocated
+-------------------
+
+	int x;
+	free( x );
+
+Freeing pointers not malloced
+-----------------------------
+
+	int p = (char *)malloc( 200 );
+	free( p + 10 );
+
+Redundant freeing of the same pointer
+-------------------------------------
+
+	char * p= (char *)malloc( 200 );
+	free( p );
+	free( p );
+
+Perfectly valid
+---------------
+
+	char * p = (char *)malloc( 100 ); 
+	free( p );
+	p = (char *) malloc( 100 ); 
+	free( p );

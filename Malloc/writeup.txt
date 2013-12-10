@@ -1,0 +1,37 @@
+Write Up
+========
+
+The design of this program is fairly simple.
+
+It uses the provided code from `prevs_malloc.c` and adds the requested features.
+
+The way it does this is either with extra checks or a data structure.
+
+Getting Started
+---------------
+
+Add these lines:
+
+	#include "malloc.c"
+
+	#define malloc( x ) my_malloc( x, __FILE__ , __LINE__ )
+	#define free( x ) my_free( x, __FILE__, __LINE__ )
+
+Freeing unallocated
+-------------------
+
+To avoid freeing unallocated memory, I check my sorted list for
+a given entry before freeing it.
+
+Freeing pointers not malloced
+-----------------------------
+
+To avoid freeing pointers not malloced, I make sure a given entry
+is in my list of malloced pointers.
+
+Redundant freeing of the same pointer
+-------------------------------------
+
+To avoid freeing pointers already freed, I check my mementry to assure
+that an object is not free before freeing it. 
+
