@@ -1,7 +1,7 @@
 TARGET = malloc
 LIBS = -lm
 CC = gcc
-CFLAGS =-ansi -pedantic -Wall
+CFLAGS =
 
 default: $(TARGET)
 all: default
