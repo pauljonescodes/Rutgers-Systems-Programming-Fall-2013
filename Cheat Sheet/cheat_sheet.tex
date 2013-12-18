@@ -5,11 +5,24 @@
 \usepackage{ifthen}
 \usepackage[landscape]{geometry}
 \usepackage{graphicx}
+\usepackage{listings}
 
 \geometry{top=.2in,left=.2in,right=.2in,bottom=.2in} 
+\usepackage{lmodern}
+\usepackage{listings}
+\lstset{language=C,
+numberstyle=\footnotesize,
+basicstyle=\footnotesize,
+stepnumber=1,
+breaklines=true}
+%\usepackage[subsection]{placeins}
+\usepackage{float}
 
 \pagestyle{empty}
- 
+
+\lstset{basicstyle=\footnotesizev,breaklines=true}
+\lstset{framextopmargin=50pt}
+
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
                                 {-1ex plus -.5ex minus -.2ex}%
@@ -33,7 +46,37 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
 
+\newcommand{\mysinglespacing}{%
+  \setstretch{1}% no correction afterwards
+}
+
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         numberstyle=\tiny,          
+         numbersep=2pt,             
+         tabsize=2,                
+         extendedchars=true,      
+         breaklines=true,        
+         showspaces=false,      
+         showtabs=false,       
+         xleftmargin=0pt,
+         framexleftmargin=0pt,
+         framexrightmargin=0pt,
+         framexbottommargin=0pt,
+         showstringspaces=false 
+         basicstyle=\tiny
+ }
+
+\lstloadlanguages{
+         C
+ }
+
 \begin{document}
+
+
+
+% Using Courier font
+\renewcommand{\ttdefault}{cmtt}
 
 \raggedright
 \footnotesize
@@ -49,8 +92,24 @@
 \end{center}
 
 \section{Mutex locks}
+
+A \emph{mutex} is a lock that we set before using a shared resource and release after using it. 
+When the lock is set, \emph{no other thread can access the locked region of code}. 
+So we see that even if thread 2 is scheduled while thread 1 was not done accessing 
+the shared resource and the code is locked by thread 1 using mutexes then thread 2 
+cannot even access that region of code. So this \emph{ensures a synchronized access of shared resources in the code}.
+
+\lstinputlisting[language=C]{snippets/mutex.c}
+
 \section{Signal locks}
 \section{Signal handling}
+
+A {\bf signal} is a condition that may be reported during program execution, 
+and can be ignored, handled specially, or, as is the default, 
+used to terminate the program.
+
+\lstinputlisting[language=C]{snippets/signal.c}
+
 \section{Multiprogramming}
 
 \subsection{Fork}
@@ -60,8 +119,19 @@
 \section{Shell scripting}
 \section{Shared memory}
 \section{Pointers to functions}
+
+\lstinputlisting[language=C]{snippets/funcpoint.c}
+
 \section{Deadlock}
+
+
+
 \section{Semaphores}
+
+A \emph{semaphore} is a special type of variable that can be incremented or decremented, 
+but \emph{crucial access to the variable is guaranteed to be atomic}, even in a multi-threaded program.
+If two or more threads in a program attempt to change the value of a semaphore, 
+the system guarantees that all the operations will in fact \emph{take place in sequence}.
 
 \end{multicols}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 DEC 2013 18:11
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 DEC 2013 14:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -150,22 +150,99 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen121
 \Gin@req@width=\dimen122
 )
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count103
+\lst@gtempboxa=\box52
+\lst@token=\toks16
+\lst@length=\count104
+\lst@currlwidth=\dimen123
+\lst@column=\count105
+\lst@pos=\count106
+\lst@lostspace=\dimen124
+\lst@width=\dimen125
+\lst@newlines=\count107
+\lst@lineno=\count108
+\lst@maxwidth=\dimen126
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count109
+\lst@skipnumbers=\count110
+\lst@framebox=\box53
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2007/02/22 1.4 listings configuration
+))
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count111
+\float@exts=\toks17
+\float@box=\box54
+\@float@everytoks=\toks18
+\@floatcapt=\box55
+)
 (./cheat_sheet.aux)
 \openout1 = `cheat_sheet.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
-LaTeX Font Info:    ... okay on input line 36.
-
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 74.
+ (/usr/local/texlive/2013/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -202,17 +279,17 @@ LaTeX Font Info:    ... okay on input line 36.
 
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count103
-\scratchdimen=\dimen123
-\scratchbox=\box52
-\nofMPsegments=\count104
-\nofMParguments=\count105
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count106
-\MPscratchDim=\dimen124
-\MPnumerator=\count107
-\makeMPintoPDFobject=\count108
-\everyMPtoPDFconversion=\toks17
+\scratchcounter=\count112
+\scratchdimen=\dimen127
+\scratchbox=\box56
+\nofMPsegments=\count113
+\nofMParguments=\count114
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen128
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
+\everyMPtoPDFconversion=\toks20
 ) (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -257,391 +334,34 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Overfull \vbox (109.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (148.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (147.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (146.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (145.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (144.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (143.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (142.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (141.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (140.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (139.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (138.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (137.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (136.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (135.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (134.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (133.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (132.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (131.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (130.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (129.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (128.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (127.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (126.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (125.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (124.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (123.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (122.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (121.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (120.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (119.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (118.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (117.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (116.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (115.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (114.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (113.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (112.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (111.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (110.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (109.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (108.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (107.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (106.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (105.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (104.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (103.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (102.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (101.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (100.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (99.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (98.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (97.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (96.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (95.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (94.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (93.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (92.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (91.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (90.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (89.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (88.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (87.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (86.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (85.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (84.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (83.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (82.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (81.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (80.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (79.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (78.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (77.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (76.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (75.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (74.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (73.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (72.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (71.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (70.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (69.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (68.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (67.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (66.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (65.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (64.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (63.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (62.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (61.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (60.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (59.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (58.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (57.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (56.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (55.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (54.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (53.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (52.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (51.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (50.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (49.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (48.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (47.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (46.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (45.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (44.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (43.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (42.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (41.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (40.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (39.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (38.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (37.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (36.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (35.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (34.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (33.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (32.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (31.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (30.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (29.94435pt too high) has occurred while \output is active []
-
-
-Overfull \vbox (28.94435pt too high) has occurred while \output is active []
-
-
-[1
+\c@lstlisting=\count118
+
+(./snippets/mutex.c
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
+) (./snippets/signal.c) (./snippets/funcpoint.c) [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (./cheat_sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 2194 strings out of 493315
- 31918 string characters out of 6137904
- 97833 words of memory out of 5000000
- 5640 multiletter control sequences out of 15000+600000
- 5457 words of font info for 20 fonts, out of 8000000 for 9000
+ 3693 strings out of 493315
+ 54189 string characters out of 6137904
+ 431091 words of memory out of 5000000
+ 7095 multiletter control sequences out of 15000+600000
+ 31590 words of font info for 24 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,4n,23p,237b,204s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb>
-Output written on cheat_sheet.pdf (1 page, 24028 bytes).
+ 38i,4n,49p,244b,1159s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/lm/lm-
+rm.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8
+.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2013/t
+exmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fo
+nts/type1/public/lm/lmri8.pfb>
+Output written on cheat_sheet.pdf (1 page, 127245 bytes).
 PDF statistics:
- 16 PDF objects out of 1000 (max. 8388607)
- 10 compressed objects within 1 object stream
+ 33 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
