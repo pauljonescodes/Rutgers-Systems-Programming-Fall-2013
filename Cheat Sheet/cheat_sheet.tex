@@ -1,4 +1,4 @@
-\documentclass[10pt,landscape]{article}
+\documentclass[10pt,landscape, a4paper]{article}
 \usepackage{multicol}
 \usepackage{calc}
 \usepackage{setspace}
@@ -101,7 +101,6 @@ cannot even access that region of code. So this \emph{ensures a synchronized acc
 
 \lstinputlisting[language=C]{snippets/mutex.c}
 
-\section{Signal locks}
 \section{Signal handling}
 
 A {\bf signal} is a condition that may be reported during program execution, 
@@ -113,14 +112,62 @@ used to terminate the program.
 \section{Multiprogramming}
 
 \subsection{Fork}
+
+The \texttt{fork()} system call will spawn a new child process which is an 
+identical process to the parent except that has a new system process ID. 
+The process is copied in memory from the parent and a new process structure 
+is assigned by the kernel. The return value of the function is which 
+discriminates the two threads of execution. A zero is returned by the 
+fork function in the child's process.
+
+The environment, resource limits, umask, controlling terminal, 
+current working directory, root directory, signal masks and other 
+process resources are also duplicated from the parent in the forked 
+child process.
+
+\lstinputlisting[language=C]{snippets/fork.c}
+
 \subsection{Exec}
+
+The \texttt{exec()} family of functions will initiate a program from within a program. 
+They are also various front-end functions to \texttt{execve()}.
+
+The functions return an integer error code.
+
+The function call \texttt{execl()} initiates a new program in the same environment 
+in which it is operating. An executable (with fully qualified path. i.e. \texttt{/bin/ls}) 
+and arguments are passed to the function. Note that \texttt{arg0} is the command/file 
+name to execute.
+
+\lstinputlisting[language=C]{snippets/exec.c}
+
 \subsection{Wait}
+
+\texttt{wait()}: Blocks calling process \emph{until the child process terminates}. 
+If child process has already terminated, the wait() call returns immediately. 
+if the calling process has multiple child processes, the function returns when one returns.
+
+\texttt{waitpid()}: Options available to block calling process for a particular 
+child process not the first one.
 
 \section{Shell scripting}
 \section{Shared memory}
 \section{Pointers to functions}
 
 \lstinputlisting[language=C]{snippets/funcpoint.c}
+
+\section{Condition variables}
+\emph{Condition variables} provide yet another way for threads to synchronize. 
+While mutexes implement synchronization by controlling thread access to data, 
+condition variables \emph{allow threads to synchronize based upon the actual value of data}.
+
+Without condition variables, the programmer would need to have threads 
+continually polling (possibly in a critical section), to check if the 
+condition is met. This can be very resource consuming since the thread 
+would be continuously busy in this activity. \emph{A condition variable is a 
+way to achieve the same goal without polling.}
+
+A condition variable is \emph{always used in conjunction with a mutex lock}.
 
 \section{Deadlock}
 
