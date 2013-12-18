@@ -1,7 +1,5 @@
 char * message; int n;
-
 pid_t pid = fork();
-
 switch (pid) {
     case -1:
         perror("fork failed\n");
@@ -13,10 +11,7 @@ switch (pid) {
     default:
         message = "This is the parent";
         n = 3;
-        break;
-}
-
+        break; }
 for(; n > 0; n--) {
     puts(message);
-    sleep(1);
-}
+    sleep(1); }

@@ -1,5 +1,4 @@
 FILE *temp_file;
-
 void leave(int sig) {
 	fprintf(temp_file,"\nInterrupted..\n");
 	fclose(temp_file);

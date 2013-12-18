@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 DEC 2013 17:07
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 DEC 2013 18:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -227,19 +227,19 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 (./cheat_sheet.aux)
 \openout1 = `cheat_sheet.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 74.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 76.
  (/usr/local/texlive/2013/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -251,14 +251,14 @@ File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: landscape 
-* h-part:(L,W,R)=(14.45377pt, 816.13931pt, 14.45377pt)
+* h-part:(L,W,R)=(36.135pt, 772.77686pt, 36.135pt)
 * v-part:(T,H,B)=(14.45377pt, 568.60034pt, 14.45377pt)
 * \paperwidth=845.04684pt
 * \paperheight=597.50787pt
-* \textwidth=816.13931pt
+* \textwidth=772.77686pt
 * \textheight=568.60034pt
-* \oddsidemargin=-57.81622pt
-* \evensidemargin=-57.81622pt
+* \oddsidemargin=-36.135pt
+* \evensidemargin=-36.135pt
 * \topmargin=-94.81622pt
 * \headheight=12.0pt
 * \headsep=25.0pt
@@ -342,27 +342,27 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 ) (./snippets/signal.c) (./snippets/fork.c)
 (./snippets/exec.c) (./snippets/funcpoint.c) [1
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./chea
-t_sheet.aux) ) 
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (./
+cheat_sheet.aux) ) 
 Here is how much of TeX's memory you used:
  3722 strings out of 493315
  54482 string characters out of 6137904
- 570032 words of memory out of 5000000
+ 291028 words of memory out of 5000000
  7118 multiletter control sequences out of 15000+600000
  31590 words of font info for 24 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,4n,49p,244b,1159s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
-13/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2013/texmf-di
-st/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
-e1/public/lm/lmri8.pfb>
-Output written on cheat_sheet.pdf (1 page, 133636 bytes).
+ 38i,5n,49p,721b,1159s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/lm/lm-rm.
+enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pf
+b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/lo
+cal/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texliv
+e/2013/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2013/texm
+f-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts
+/type1/public/lm/lmri8.pfb>
+Output written on cheat_sheet.pdf (2 pages, 140143 bytes).
 PDF statistics:
- 33 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 36 PDF objects out of 1000 (max. 8388607)
+ 25 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
