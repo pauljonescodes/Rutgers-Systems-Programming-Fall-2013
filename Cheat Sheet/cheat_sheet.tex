@@ -26,11 +26,11 @@ breaklines=true}
 \lstset{framextopmargin=50pt}
 
 \makeatletter
-\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+\renewcommand{\subsection}{\@startsection{section}{1}{0mm}%
                                 {-1ex plus -.5ex minus -.2ex}%
                                 {0.5ex plus .2ex}%x
                                 {\normalfont\large\bfseries}}
-\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+\renewcommand{\subsubsection}{\@startsection{subsection}{2}{0mm}%
                                 {-1explus -.5ex minus -.2ex}%
                                 {0.5ex plus .2ex}%
                                 {\normalfont\normalsize\bfseries}}
@@ -55,8 +55,8 @@ breaklines=true}
 \lstset{
          basicstyle=\footnotesize\ttfamily, 
          numberstyle=\tiny,          
-         numbersep=2pt,             
-         tabsize=2,                
+         numbersep=1pt,             
+         tabsize=1,                
          extendedchars=true,      
          breaklines=true,        
          showspaces=false,      
@@ -89,11 +89,7 @@ breaklines=true}
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
-\begin{center}
-     \Large{\textbf{Systems Programming Cheat Sheet}} \\
-\end{center}
-
-\section{Mutex locks}
+\subsection{Mutex locks}
 
 A \emph{mutex} is a lock that we set before using a shared resource and release after using it. 
 When the lock is set, \emph{no other thread can access the locked region of code}. 
@@ -107,7 +103,7 @@ A mutex contains three things: A flag which is a 0 or a 1 (locked or unlocked),
 Owner which is a thread ID, Queue which holds suspended threads. 
 It can only be unlocked by what has locked it.
 
-\section{Signal handling}
+\subsection{Signal handling}
 
 A {\bf signal} is a condition that may be reported during program execution, 
 and can be ignored, handled specially, or, as is the default, 
@@ -115,7 +111,7 @@ used to terminate the program.
 
 \lstinputlisting[language=C]{snippets/signal.c}
 
-\section{Threads}
+\subsection{Threads}
 
 Threads are cheaper than new processes.
 All threads in the process share the same address space.
@@ -125,14 +121,34 @@ things even if a thread is blocked by IO and shared resources.
 
 \lstinputlisting[language=C]{snippets/thread.c}
 
-\section{Multiprogramming}
+\textbf{Advantages}:
+Make a program do a few things at once.
+Logically is not multicore.
+Physically if multicore.
+A program can mix input, calculation, and output efficiently.
+Accelerate processing on proper multi-core processors.
+Switching between threads requires less work than switching between processes.
+\textbf{Disadvantages}:
+Requires careful design.
+Debugguging hell (using IDE the job is largely mitigated).
+A program that split a large calculation into two and the 
+the two parts a different threads will not necessarily 
+run more quickly on a single processor machine.
 
-Forking returns the ID of the new process. The child process gets its
-very own process ID. One process calls fork, and if the return is negative
-one, the fork failed, if it's zero, you're in the child, and if it's anything
-larger than 0, you have the process ID of the child.
+\subsection{Multiprogramming}
 
-\subsection{Fork}
+A \textbf{process} is a\emph{n address space
+with one or more threads executing} within that address space, 
+and the required system resources for those threads. \emph{Each instance of a running 
+\textbf{program} constitutes a process}. A process has its own stack space, used for local 
+variables in functions and for controlling function calls and returns. 
+It also has its own environment space, containing environment variables 
+that may be established solely for this process to use. \emph{A process must 
+also maintain} its own \textbf{program counter}, a record of where it has gotten 
+to in its execution, which is the execution thread. Processes have their
+own: Process ID (\textbf{PID}), Parent process ID (\textbf{PPID}), \textbf{Signal mask},\textbf{ Signal dispositions}, 
+and \textbf{file descriptors}.
+
 
 The \texttt{fork()} system call will spawn a new child process which is an 
 identical process to the parent except that has a new system process ID. 
@@ -140,14 +156,27 @@ The process is copied in memory from the parent and a new process structure
 is assigned by the kernel. The return value of the function is which 
 discriminates the two threads of execution. A zero is returned by the 
 fork function in the child's process.
-The environment, resource limits, umask, controlling terminal, 
+The environment \textbf{shares} resource limits, umask, controlling terminal, 
 current working directory, root directory, signal masks and other 
-process resources are also duplicated from the parent in the forked 
-child process.
+process resources between parent and child.
+A parent process \textbf{does not share} the following with's children:
+A parent must wait on a child,
+\texttt{fork != 0} for parent (\texttt{-1} for error),
+\texttt{fork == 0} for child,
+Execute asynchrously.
+\textbf{Advantages} (compared to threads):
+Development is much easier.
+Fork based code a more maintainable.
+Forking is much safer and more secure because each forked process runs in its own virtual address space.
+Fork are more portable than threads.
+Forking is faster than threading on single cpu as there are no locking over-heads or context switching.
+\textbf{Disadvantages} (compared to threads):
+In fork, longer startup and stopping time.
+Inter-process communication is really costly.
+When the parent exits before the forked child, you will get a ghost process.
+In-sufficient storage space could lead the fork system to fail.
 
 \lstinputlisting[language=C]{snippets/fork.c}
-
-\subsection{Exec}
 
 The \texttt{exec()} family of functions will initiate a program from within a program. 
 They are also various front-end functions to \texttt{execve()}.
@@ -166,23 +195,21 @@ between a parent and child process. Caught signals return default values.
 
 \lstinputlisting[language=C]{snippets/exec.c}
 
-\subsection{Wait}
-
 \texttt{wait()}: Blocks calling process \emph{until the child process terminates}. 
 If child process has already terminated, the wait() call returns immediately. 
 if the calling process has multiple child processes, the function returns when one returns.
 \texttt{waitpid()}: Options available to block calling process for a particular 
 child process not the first one.
 
-\section{Shell scripting}
+\subsection{Shell scripting}
 
 (\texttt{command >> file} appends to file)
 (\texttt{command < file} content of file to stdin)
 (\texttt{||} if left succeeds do not do right)
 
-\lstinputlisting[language=C]{snippets/bash.sh}
+\lstinputlisting[language=bash]{snippets/bash.sh}
 
-\section{Shared memory}
+\subsection{Shared memory}
 
 Possible for multiple processes to share segments of memory, 
 not full memory. Beneficial for better speed. Access by multiple processes.
@@ -190,9 +217,6 @@ Still need mutexes and semaphore for synchronizations.
 Lifetime is independent of any process. All shared memory segments 
 exist in a single list. Identified by a key, generated by the metainfo of 
 files and directories. Processes attach and detach to shared memory segments.
-
-\subsection{Attach and detach}
-
 Used in data structures for shared memory, \texttt{shmat} maps shared memory.
 \texttt{shmdt} unmaps shared memory. When using data structures, use shared offsets such as
 \texttt{(struct something) shmat(...)} or use semaphores where second argument isn't
@@ -200,7 +224,7 @@ zero.
 
 \lstinputlisting[language=C]{snippets/shmat.c}
 
-\section{Pointers to functions}
+\subsection{Pointers to functions}
 
 \lstinputlisting[language=C]{snippets/funcpoint.c}
 
@@ -209,7 +233,7 @@ how to do something. You can write flexible functions and libraries
 that allow the programmer to choose behavior by passing function pointers 
 as arguments.
 
-\section{Condition variables}
+\subsection{Condition variables}
 \emph{Condition variables} provide yet another way for threads to synchronize. 
 While mutexes implement synchronization by controlling thread access to data, 
 condition variables \emph{allow threads to synchronize based upon the actual value of data}.
@@ -225,7 +249,7 @@ thread has it start again.
 
 \lstinputlisting[language=C]{snippets/condvar.c}
 
-\section{Deadlock}
+\subsection{Deadlock}
 
 Four conditions for deadlock: \textbf{mutual exclusion} (At least one 
 resource must be held in a non-sharable mode. Only one process can use 
@@ -240,7 +264,7 @@ additional resources which are being held by other processes.).
 
 \lstinputlisting[language=C]{snippets/deadlock.c}
 
-\section{Semaphores}
+\subsection{Semaphores}
 
 A \emph{semaphore} is a special type of variable that can be incremented or decremented, 
 but \emph{crucial access to the variable is guaranteed to be atomic}, even in a multi-threaded program.
@@ -249,11 +273,12 @@ the system guarantees that all the operations will in fact \emph{take place in s
 Contains a counter,not an owner. The counter is anything that is non-negative and can be 
 posted by anything. Wait has two checks: if counter is not zero, decrement and return 
 immediately, but if it is zero then suspend the calling thread and put it in the 
-semaphore queue. 
+semaphore queue. \emph{A mutex only allows you to wait until the lock is available; 
+a condition variable allows you to wait until some application-defined condition has changed. }
 
 \lstinputlisting[language=C]{snippets/semaphore.c}
 
-\section{Libraries}
+\subsection{Libraries}
 \textbf{Static}: Precompiled with all functions.
 \emph{Advantages}: Simple, reliable.
 \emph{Disadvantages}: Large, poor security.
@@ -261,7 +286,11 @@ semaphore queue.
 \emph{Advantages}: Typically smaller, good for security.
 \emph{Disadvantages}: Hard to test and implement.
 
-\lstinputlisting[language=C]{snippets/lib.sh}
+\lstinputlisting[language=bash]{snippets/lib.sh}
+
+\subsection{Pointers}
+
+\lstinputlisting[language=C]{snippets/pointers.c}
 
 \end{multicols}
 \end{document}

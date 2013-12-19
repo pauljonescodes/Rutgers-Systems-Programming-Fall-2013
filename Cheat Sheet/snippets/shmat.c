@@ -1,3 +1,9 @@
-if (errno = 0, (key = ftok("/grad/users/morbius", 42) == -1 )
-else if (errno = 0, (shmid = shmget(key, size O666, | IPC_REAT | IPC_EXCL)) != -1)
-else if (errno = 0, (shmid = shmget(key, 0, O666) ) != -1)
+key_t key; /* key to be passed to shmget() */ 
+int shmflg; /* shmflg to be passed to shmget() */ 
+int shmid; /* return value from shmget() */ 
+int size; /* size to be passed to shmget() */ 
+char *shm; /* data to be passed */
+
+if ((shmid=shmget (key, size, shmflg)) == -1){}
+if ((shm=shmat(shmid, NULL, 0))==(char *) -1){}
+if (shmdt(shmid) == -1){}

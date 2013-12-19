@@ -1,1 +1,1 @@
-execl("/bin/ls", "/bin/ls", "-r", "-t", "-l", (char *) 0);
+execl("/bin/ls","/bin/ls","-r","-t",(char*)0);
