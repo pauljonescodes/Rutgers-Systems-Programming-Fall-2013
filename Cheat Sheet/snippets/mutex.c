@@ -1,9 +1,7 @@
-pthread_t tid[2];
-int counter;
-pthread_mutex_t lock;
+pthread_t tid[2];int count;pthread_mutex_t lock;
 void* doSomeThing(void *arg) {
 	pthread_mutex_lock(&lock);
-	unsigned long i = 0; counter += 1;
+	unsigned long i = 0; count += 1;
 	for(i=0; i<(0xFFFFFFFF);i++);
 	pthread_mutex_unlock(&lock);
 	return NULL;

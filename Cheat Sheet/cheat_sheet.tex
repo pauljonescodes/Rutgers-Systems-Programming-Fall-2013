@@ -100,14 +100,13 @@ When the lock is set, \emph{no other thread can access the locked region of code
 So we see that even if thread 2 is scheduled while thread 1 was not done accessing 
 the shared resource and the code is locked by thread 1 using mutexes then thread 2 
 cannot even access that region of code. So this \emph{ensures a synchronized access of shared resources in the code}.
-
-\lstinputlisting[language=C]{snippets/mutex.c}
-
 A mutex contains three things: A flag which is a 0 or a 1 (locked or unlocked), 
 Owner which is a thread ID, Queue which holds suspended threads. 
 It can only be unlocked by what has locked it.
 \textbf{Disadvantages}: A resource of high priority should not lock the other 
 processes by blocking an already running task in the following situation.
+
+\lstinputlisting[language=C]{snippets/mutex.c}
 
 \subsection{Signal handling}
 
@@ -135,12 +134,8 @@ since it will put data in inconsistent state and don't unlock another mutex.
 Threads are cheaper than new processes.
 All threads in the process share the same address space.
 Every thread has its own: set of registers, call stack, errno,
-and threadID. Advantages: Programs can keep going and doing other
+and threadID. \textbf{Advantages}: Programs can keep going and doing other
 things even if a thread is blocked by IO and shared resources.
-
-\lstinputlisting[language=C]{snippets/thread.c}
-
-\textbf{Advantages}:
 Make a program do a few things at once.
 Logically is not multicore.
 Physically is multicore.
@@ -153,6 +148,9 @@ Debugguging hell (using IDE the job is largely mitigated).
 A program that split a large calculation into two and the 
 the two parts a different threads will not necessarily 
 run more quickly on a single processor machine.
+
+
+\lstinputlisting[language=C]{snippets/thread.c}
 
 \subsection{Thread Scheduling}
 Thread scheduling can be handled by the process or by the kernel.  These are
@@ -265,7 +263,9 @@ files and directories. Processes attach and detach to shared memory segments.
 Used in data structures for shared memory, \texttt{shmat} maps shared memory.
 \texttt{shmdt} unmaps shared memory. When using data structures, use shared offsets such as
 \texttt{(struct something) shmat(...)} or use semaphores where second argument isn't
-zero.
+zero. \textbf{Advantages}: Potential advantages include efficiency (elimination of unnecessary data copying) 
+and reduced complexity (single-step updates rather than the read, modify buffer, write cycle).
+\textbf{Disadvantages}: Synchronizing access is tough, security (accidental overwrite, malicious overwrite).
 
 \lstinputlisting[language=C]{snippets/shmat.c}
 
