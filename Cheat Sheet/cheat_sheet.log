@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 DEC 2013 11:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 DEC 2013 13:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -340,30 +340,32 @@ e
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
 ) (./snippets/signal.c) (./snippets/thread.c)
-(./snippets/fork.c) (./snippets/exec.c) (./snippets/bash.sh [1
+(./snippets/fork.c) (./snippets/exec.c) (./snippets/bash.sh) [1
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./sni
-ppets/shmat.c)
-(./snippets/funcpoint.c) [2] (./cheat_sheet.aux) ) 
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./snip
+pets/shmat.c)
+(./snippets/funcpoint.c) (./snippets/condvar.c) (./snippets/deadlock.c)
+(./snippets/semaphore.c) (./snippets/lib.sh) [2] (./cheat_sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 3833 strings out of 493315
- 55602 string characters out of 6137904
- 372028 words of memory out of 5000000
- 7220 multiletter control sequences out of 15000+600000
- 31590 words of font info for 24 fonts, out of 8000000 for 9000
+ 3942 strings out of 493315
+ 57014 string characters out of 6137904
+ 692028 words of memory out of 5000000
+ 7316 multiletter control sequences out of 15000+600000
+ 31758 words of font info for 25 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,5n,49p,721b,1637s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texm
-f-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2013/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
-e1/public/lm/lmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/
-lm/lmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmbx8.p
-fb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/loc
-al/texlive/2013/texmf-dist/fonts/type1/public/lm/lmri8.pfb>
-Output written on cheat_sheet.pdf (2 pages, 147591 bytes).
+ 38i,4n,49p,244b,1159s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/loc
+al/texlive/2013/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/201
+3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2013/texmf-dist
+/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
+e1/public/lm/lmbx8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/l
+m/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmri8.pfb>
+Output written on cheat_sheet.pdf (2 pages, 154782 bytes).
 PDF statistics:
- 36 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 40 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
