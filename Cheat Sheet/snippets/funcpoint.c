@@ -6,5 +6,4 @@ main() {
     fp(2);
     exit(EXIT_SUCCESS); }
 void func(int arg){
-    printf("%d\n", arg);
-}
+    printf("%d\n", arg); }
