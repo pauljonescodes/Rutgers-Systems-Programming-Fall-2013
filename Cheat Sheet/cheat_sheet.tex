@@ -26,7 +26,7 @@ breaklines=true}
 \lstset{framextopmargin=50pt}
 
 \makeatletter
-\renewcommand{\subsection}{\@startsection{section}{1}{0mm}%
+\renewcommand{\subsubsection}{\@startsection{section}{1}{0mm}%
                                 {-1ex plus -.5ex minus -.2ex}%
                                 {0.5ex plus .2ex}%x
                                 {\normalfont\large\bfseries}}
@@ -89,7 +89,7 @@ breaklines=true}
 \setlength{\multicolsep}{1pt}
 \setlength{\columnsep}{2pt}
 
-\subsection{Mutex locks}
+\subsubsection{Mutex locks}
 
 A \emph{mutex} is a lock that we set before using a shared resource and release after using it. 
 When the lock is set, \emph{no other thread can access the locked region of code}. 
@@ -103,7 +103,7 @@ A mutex contains three things: A flag which is a 0 or a 1 (locked or unlocked),
 Owner which is a thread ID, Queue which holds suspended threads. 
 It can only be unlocked by what has locked it.
 
-\subsection{Signal handling}
+\subsubsection{Signal handling}
 
 A {\bf signal} is a condition that may be reported during program execution, 
 and can be ignored, handled specially, or, as is the default, 
@@ -111,7 +111,7 @@ used to terminate the program.
 
 \lstinputlisting[language=C]{snippets/signal.c}
 
-\subsection{Threads}
+\subsubsection{Threads}
 
 Threads are cheaper than new processes.
 All threads in the process share the same address space.
@@ -124,7 +124,7 @@ things even if a thread is blocked by IO and shared resources.
 \textbf{Advantages}:
 Make a program do a few things at once.
 Logically is not multicore.
-Physically if multicore.
+Physically is multicore.
 A program can mix input, calculation, and output efficiently.
 Accelerate processing on proper multi-core processors.
 Switching between threads requires less work than switching between processes.
@@ -135,7 +135,24 @@ A program that split a large calculation into two and the
 the two parts a different threads will not necessarily 
 run more quickly on a single processor machine.
 
-\subsection{Multiprogramming}
+\subsubsection{Thread Scheduling}
+Thread scheduling can be handled by the process or by the kernel.  These are
+called kernel-level and user-level threads.
+\textbf{User-level threads} run in user code.  The mechanics of thread creation,
+destruction, scheduling (changing from thread to thread), etc run as (library)
+code in the user program without kernel support.
+\textbf{Advantages}: Faster than kernel threads for CPU-intensive threads.
+\textbf{Disadvantages}: Kernel is unaware of multiple user threads. 
+If one user thread gets blocked, all user thread stops. 
+Can't schedule user-level threads on different processors.
+\textbf{Kernel-level threads} run the mechanics in the kernel, not the user program.
+All thread operations, including creation, destruction, scheduling involve
+system calls to the kernel.
+\textbf{Advantages}: One blocked kernel-level thread does not block other kernel-level threads. 
+Faster for I/O-intensive threads. Can schedule kernel-level threads on different processors.
+\textbf{Disadvantages}: Slower to create and manage than user-level threads (but not a lot slower).
+
+\subsubsection{Multiprogramming}
 
 A \textbf{process} is a\emph{n address space
 with one or more threads executing} within that address space, 
@@ -153,9 +170,7 @@ and \textbf{file descriptors}.
 The \texttt{fork()} system call will spawn a new child process which is an 
 identical process to the parent except that has a new system process ID. 
 The process is copied in memory from the parent and a new process structure 
-is assigned by the kernel. The return value of the function is which 
-discriminates the two threads of execution. A zero is returned by the 
-fork function in the child's process.
+is assigned by the kernel. 
 The environment \textbf{shares} resource limits, umask, controlling terminal, 
 current working directory, root directory, signal masks and other 
 process resources between parent and child.
@@ -201,7 +216,7 @@ if the calling process has multiple child processes, the function returns when o
 \texttt{waitpid()}: Options available to block calling process for a particular 
 child process not the first one.
 
-\subsection{Shell scripting}
+\subsubsection{Shell scripting}
 
 (\texttt{command >> file} appends to file)
 (\texttt{command < file} content of file to stdin)
@@ -209,7 +224,7 @@ child process not the first one.
 
 \lstinputlisting[language=bash]{snippets/bash.sh}
 
-\subsection{Shared memory}
+\subsubsection{Shared memory}
 
 Possible for multiple processes to share segments of memory, 
 not full memory. Beneficial for better speed. Access by multiple processes.
@@ -224,7 +239,7 @@ zero.
 
 \lstinputlisting[language=C]{snippets/shmat.c}
 
-\subsection{Pointers to functions}
+\subsubsection{Pointers to functions}
 
 \lstinputlisting[language=C]{snippets/funcpoint.c}
 
@@ -233,7 +248,7 @@ how to do something. You can write flexible functions and libraries
 that allow the programmer to choose behavior by passing function pointers 
 as arguments.
 
-\subsection{Condition variables}
+\subsubsection{Condition variables}
 \emph{Condition variables} provide yet another way for threads to synchronize. 
 While mutexes implement synchronization by controlling thread access to data, 
 condition variables \emph{allow threads to synchronize based upon the actual value of data}.
@@ -245,11 +260,12 @@ way to achieve the same goal without polling.}
 A condition variable is \emph{always used in conjunction with a mutex lock}.
 Used for waiting. Contains 3 basic operations: wait, signal, broadcast. 
 Wait atomically does unlock and block. Signal atomically does re-locks a 
-thread has it start again.
+thread has it start again. \emph{A mutex only allows you to wait until the lock is available; 
+a condition variable allows you to wait until some application-defined condition has changed. }
 
 \lstinputlisting[language=C]{snippets/condvar.c}
 
-\subsection{Deadlock}
+\subsubsection{Deadlock}
 
 Four conditions for deadlock: \textbf{mutual exclusion} (At least one 
 resource must be held in a non-sharable mode. Only one process can use 
@@ -264,7 +280,7 @@ additional resources which are being held by other processes.).
 
 \lstinputlisting[language=C]{snippets/deadlock.c}
 
-\subsection{Semaphores}
+\subsubsection{Semaphores}
 
 A \emph{semaphore} is a special type of variable that can be incremented or decremented, 
 but \emph{crucial access to the variable is guaranteed to be atomic}, even in a multi-threaded program.
@@ -273,12 +289,11 @@ the system guarantees that all the operations will in fact \emph{take place in s
 Contains a counter,not an owner. The counter is anything that is non-negative and can be 
 posted by anything. Wait has two checks: if counter is not zero, decrement and return 
 immediately, but if it is zero then suspend the calling thread and put it in the 
-semaphore queue. \emph{A mutex only allows you to wait until the lock is available; 
-a condition variable allows you to wait until some application-defined condition has changed. }
+semaphore queue.
 
 \lstinputlisting[language=C]{snippets/semaphore.c}
 
-\subsection{Libraries}
+\subsubsection{Libraries}
 \textbf{Static}: Precompiled with all functions.
 \emph{Advantages}: Simple, reliable.
 \emph{Disadvantages}: Large, poor security.
@@ -288,7 +303,7 @@ a condition variable allows you to wait until some application-defined condition
 
 \lstinputlisting[language=bash]{snippets/lib.sh}
 
-\subsection{Pointers}
+\subsubsection{Pointers}
 
 \lstinputlisting[language=C]{snippets/pointers.c}
 

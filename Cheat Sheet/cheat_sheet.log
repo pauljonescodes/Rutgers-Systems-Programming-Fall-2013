@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 DEC 2013 16:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  19 DEC 2013 16:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -354,22 +354,22 @@ pets/shmat.c) (./snippets/funcpoint.c)
 (./snippets/condvar.c) (./snippets/deadlock.c) (./snippets/semaphore.c)
 (./snippets/lib.sh) (./snippets/pointers.c) [2] (./cheat_sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 3983 strings out of 493315
- 57496 string characters out of 6137904
- 729383 words of memory out of 5000000
- 7350 multiletter control sequences out of 15000+600000
- 27144 words of font info for 23 fonts, out of 8000000 for 9000
+ 3975 strings out of 493315
+ 57418 string characters out of 6137904
+ 838204 words of memory out of 5000000
+ 7342 multiletter control sequences out of 15000+600000
+ 27141 words of font info for 23 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,4n,49p,244b,1161s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/loca
 l/texlive/2013/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2013
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/local/texlive/2013
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2013/texmf-dist/
-fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1
-/public/lm/lmbxi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/l
-m/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmri8.pfb>
-Output written on cheat_sheet.pdf (2 pages, 151891 bytes).
+exmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texlive/2013/texmf-dist/f
+onts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/
+public/lm/lmbxi10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm
+/lmr8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/lm/lmri8.pfb>
+Output written on cheat_sheet.pdf (2 pages, 155294 bytes).
 PDF statistics:
  40 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream
